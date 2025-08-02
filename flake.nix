@@ -37,6 +37,12 @@
     let
       # 各マシンごとに設定（system, path, username, homeDirectory）を指定
       userMachines = {
+        m75q = {
+          path = ./home/m75q.nix;
+          system = "x86_64-linux";
+          username = "user";
+          homeDirectory = "/home/user";
+        };
         nixos = {
           path = ./home/nixos.nix;
           system = "x86_64-linux";

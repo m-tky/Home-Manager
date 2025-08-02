@@ -31,6 +31,7 @@
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-media-tags-plugin
+    vdhcoapp
 
     (pkgs.makeDesktopItem {
       name = "Messenger";

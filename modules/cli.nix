@@ -102,8 +102,14 @@
         la = "ea";
         ll = "ee";
         l = "clear && ls";
-        hms = "home-manager switch --flake '/home/user/hm#user@nixos'";
       };
+
+      initExtra = ''
+        hms() {
+          local host=$(hostname | cut -d. -f1)
+          home-manager switch --flake "/home/user/hm#user@$host"
+        }
+      '';
 
       # zinitの代わりにHome Managerのプラグイン機能を使う
       plugins = [
