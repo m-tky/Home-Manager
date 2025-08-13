@@ -14,5 +14,6 @@
     ../modules/wayland/hypr/monitor/hyprland-monitor-m75q.nix
     ../modules/rustdesk.nix
     ../modules/systemd/m75q-home-manager.nix
+    ../modules/cad/default.nix
   ];
 }

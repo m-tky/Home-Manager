@@ -13,14 +13,14 @@
     wf-recorder
     wl-clipboard
     helvum
-    slurp
-    swappy
     nwg-drawer
-    grim
+    flameshot
     foot
     wdisplays
   ];
-  services.copyq.enable = true;
+  services = {
+    copyq.enable = true;
+  };
   home.file.".config/foot" = {
     source = ../config/foot;
     recursive = true;

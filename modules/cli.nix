@@ -104,13 +104,6 @@
         l = "clear && ls";
       };
 
-      initExtra = ''
-        hms() {
-          local host=$(hostname | cut -d. -f1)
-          home-manager switch --flake "/home/user/hm#user@$host"
-        }
-      '';
-
       # zinitの代わりにHome Managerのプラグイン機能を使う
       plugins = [
         # zsh-users のプラグイン
@@ -135,6 +128,10 @@
       # その他のカスタム設定
       initContent = ''
         # compinstallによる設定 (多くはデフォルトですが明示的に記述)
+        hms() {
+          local host=$(hostname | cut -d. -f1)
+          home-manager switch --flake "/home/user/hm#user@$host"
+        }
         autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'l:|=* r:|=*'
         zstyle ':completion:*' menu select=1

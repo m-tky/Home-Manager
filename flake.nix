@@ -86,7 +86,7 @@
                 };
                 extraSpecialArgs = { inherit inputs; };
                 modules = [
-                  inputs.nixvim.homeManagerModules.nixvim
+                  inputs.nixvim.homeModules.nixvim
                   cfg.path
                   {
                     home.username = cfg.username;

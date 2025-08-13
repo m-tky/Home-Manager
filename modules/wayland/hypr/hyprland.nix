@@ -169,6 +169,7 @@
 
       # キーバインド
       bind = [
+        "$mainMod CTRL, P, exec, flameshot gui"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"

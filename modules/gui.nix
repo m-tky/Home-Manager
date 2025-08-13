@@ -2,6 +2,12 @@
 { config, pkgs, inputs, ... }:
 {
   programs.chromium.enable = true;
+  services = {
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
+  };
   home.packages = with pkgs; [
     obsidian
     inputs.zen-browser.packages.${system}.specific
@@ -32,6 +38,7 @@
     xfce.thunar-archive-plugin
     xfce.thunar-media-tags-plugin
     vdhcoapp
+    scrcpy
 
     (pkgs.makeDesktopItem {
       name = "Messenger";
