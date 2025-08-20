@@ -6,11 +6,6 @@
     pure-prompt
     tree
     tesseract
-    # tesseract.data.eng
-    # tesseract.data.jpn
-    # tesseract.data.jpn_vert
-    # tesseract.data.ell
-    # tesseract.data.tha
     gemini-cli
     neofetch
     delta
@@ -84,6 +79,11 @@
       enableZshIntegration = true;
     };
     # Zshの設定 (両OS共通)
+    direnv = {
+      enableZshIntegration = true;
+      enable = true;
+      nix-direnv.enable = true;
+    };
     zsh = {
       enable = true;
       history = {
@@ -166,6 +166,8 @@
       BROWSER = "zen"; # zen-browserは別途インストールが必要
       EDITOR = "nvim";
       TERMINAL = "foot"; # footは別途インストールが必要
+      TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
+      DIRENV_LOG_FORMAT="direnv: %s";
     };
     sessionPath = [
       "$HOME/.local/bin"

@@ -9,21 +9,24 @@ if [ -z "$FIFO_PATH" ]; then
     exit 1
 fi
 
-# あなたのスクリプトから抜粋した言語選択部分
+# 言語選択表示
 echo "1) Japanese (ja)"
 echo "2) English  (en)"
 echo "3) Thai     (th)"
-read -p "Enter number (Default=1): " CHOICE
+
+# zsh 互換の安全な入力
+read -r "CHOICE?Enter number (Default=1): "
 
 case "$CHOICE" in
-    1) SELECTED_LANG="ja" ;;
     2) SELECTED_LANG="en" ;;
     3) SELECTED_LANG="th" ;;
-    *)
-      echo "Invalid choice. Defaulting to Japanese (ja)." > /dev/stderr
-        SELECTED_LANG="ja" # 無効な場合は空を返す
-        ;;
+    1|""|*) 
+        if [ -n "$CHOICE" ] && [[ "$CHOICE" != 1 ]]; then
+            echo "Invalid choice. Defaulting to Japanese (ja)." > /dev/stderr
+        fi
+        SELECTED_LANG="ja" ;;
 esac
 
-echo "$SELECTED_LANG" > "$FIFO_PATH" # 選択された言語をFIFOに書き込む
+# FIFO に書き込む
+echo "$SELECTED_LANG" > "$FIFO_PATH"
 exit 0

@@ -1,5 +1,19 @@
 # install obsidian and chromium with home-manager
 { config, pkgs, inputs, ... }:
+let
+  myObsidian = pkgs.symlinkJoin {
+    name = "obsidian-with-flags";
+    paths = [ pkgs.obsidian ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/obsidian \
+        --add-flags "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,UseOzonePlatform" \
+        --add-flags "--ozone-platform=wayland" \
+        --add-flags "--wayland-text-input-version=3" \
+        --add-flags "--enable-wayland-ime"
+    '';
+  };
+in
 {
   programs.chromium.enable = true;
   services = {
@@ -9,7 +23,7 @@
     };
   };
   home.packages = with pkgs; [
-    obsidian
+    myObsidian
     inputs.zen-browser.packages.${system}.specific
     anki-bin
     spotify

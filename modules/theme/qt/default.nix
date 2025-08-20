@@ -5,6 +5,7 @@
     libsForQt5.qt5ct
     kdePackages.qtwayland
     kdePackages.qtstyleplugin-kvantum
+    catppuccin-kvantum
     # kdePackages.breeze-icons
   ];
   qt = {

@@ -28,4 +28,12 @@
   typst-preview = import ./typst-preview.nix;
   surround = import ./surround.nix;
   lualine = import ./lualine.nix;
+
+  # jupyter plugins
+  molten = import ./molten.nix;
+  quarto = import ./quarto.nix;
+  jupytext = import ./jupytext.nix;
+  treesitter-textobjects = import ./treesitter-textobjects.nix;
+  hydra = import ./hydra.nix;
+  image = import ./image.nix;
 }

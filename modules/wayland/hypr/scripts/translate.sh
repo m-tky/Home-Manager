@@ -31,7 +31,7 @@ elif [[ "$MIMETYPE" == "image/png" || "$MIMETYPE" == "image/jpeg" || "$MIMETYPE"
   if [[ -s "$IMAGE_TMPFILE" ]]; then
     # Tesseract で OCR 処理
     # 出力は標準出力に、日本語と英語を認識
-    OCR_RAW_OUTPUT=$(tesseract "$IMAGE_TMPFILE" stdout -l jpn+eng+tha+ell 2>/dev/null)
+    OCR_RAW_OUTPUT=$(tesseract --tessdata-dir "$TESSDATA_PREFIX" "$IMAGE_TMPFILE" stdout -l jpn+eng+tha+ell 2>/dev/null)
 
     if [[ -n "$OCR_RAW_OUTPUT" ]]; then
 
@@ -86,7 +86,7 @@ echo "Opening new terminal window for language selection..."
 # 3. 別のkittyウィンドウを開き、言語選択スクリプトを実行
 # select_language.sh に FIFO_PATH を引数として渡す
 foot -a=select_language \
-  bash -c "$HOME/.config/hypr/scripts/select_language.sh \"$FIFO_PATH\"" &
+  zsh -c "select_language.sh \"$FIFO_PATH\"" &
 
 # 4. メインスクリプトはFIFOからの言語入力を待機
 echo "Waiting for language selection from the other terminal window..."
@@ -141,4 +141,4 @@ temp_file=$(mktemp)
 echo -e "$display_text" > "$temp_file"
 
 # terminal起動（app-id指定、永続するためにcat）
-foot -a=translation_kitty -e bash -c "cat $temp_file; echo -e '\n\nPress Enter to close'; read"
+foot -a=translation_kitty -e zsh -c "cat $temp_file; echo -e '\n\nPress Enter to close'; read"

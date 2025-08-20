@@ -1,10 +1,15 @@
-{ inputs, pkgs, ... }:
 {
   programs.hyprlock.enable = true;
   services = {
     hypridle.enable = true;
     hyprpaper.enable = true;
     hyprpolkitagent.enable = true;
+  };
+  home.file = {
+    ".local/bin/translate.sh".source = ./scripts/translate.sh;
+    ".local/bin/select_language.sh".source = ./scripts/select_language.sh;
+    ".local/bin/wayvnc_server.sh".source = ./scripts/wayvnc_server.sh;
+    ".local/bin/wiki.sh".source = ./scripts/wiki.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -30,17 +35,15 @@
       # 自動起動
       exec-once = [
         "hyprpaper"
-        "${../../config/hypr/scripts/desktop-portal.sh}"
         "udiskie"
         "fcitx5"
         "copyq"
         "workstyle &> /tmp/workstyle.log"
         "systemctl --user start hyprpolkitagent"
-        "${../../config/hypr/scripts/optimize4ExitNode.sh}"
         "nm-applet --sm-disable &"
         "nextcloud --background"
-        "${../../config/hypr/scripts/wayvnc_server.sh}"
-        "${../../config/hypr/scripts/start.sh}"
+        "wayvnc_server.sh"
+        "start.sh"
         # NOTE: プラグインは`programs.hyprland.plugins`で指定するため、以下の行は不要です。
         # "hyprctl plugin load \"$HYPR_PLUGIN_DIR/lib/libhyprfocus.so\""
       ];
@@ -169,25 +172,36 @@
 
       # キーバインド
       bind = [
-        "$mainMod CTRL, P, exec, flameshot gui"
-        "$mainMod, Q, exec, $terminal"
+        "$mainMod CTRL, Q, exec, $terminal"
+        "$mainMod, W, exec, $browser"
         "$mainMod, C, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo,"
         "$mainMod, T, togglesplit,"
-        "$mainMod CTRL, L, exec, hyprlock"
-        "$mainMod, W, exec, $browser"
         "$mainMod, F, fullscreen"
         "$mainMod, H, movefocus, l"
         "$mainMod, L, movefocus, r"
         "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
+
+        # my custom keybings
+        "$mainMod, O, exec, zsh -c 'if pgrep -f obsidian > /dev/null; then hyprctl dispatch togglespecialworkspace obsidian; else obsidian &; fi'"
+        "$mainMod, Q, exec, pgrep -f 'foot --title specialfoot' && hyprctl dispatch togglespecialworkspace foot || foot --title specialfoot &"
+        # screenshot
+        "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
+        "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
+        # toggle copyq
+        "$mainMod CTRL, V, exec, copyq toggle"
+        # lock
+        "$mainMod CTRL, L, exec, hyprlock"
+
         "$mainMod SHIFT, H, movewindow, l"
         "$mainMod SHIFT, L, movewindow, r"
         "$mainMod SHIFT, K, movewindow, u"
         "$mainMod SHIFT, J, movewindow, d"
+
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
         "$mainMod, 3, workspace, 3"
@@ -198,6 +212,7 @@
         "$mainMod, 8, workspace, 8"
         "$mainMod, 9, workspace, 9"
         "$mainMod, 0, workspace, 10"
+
         "$mainMod SHIFT, 1, movetoworkspace, 1"
         "$mainMod SHIFT, 2, movetoworkspace, 2"
         "$mainMod SHIFT, 3, movetoworkspace, 3"
@@ -212,8 +227,8 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        "$mainMod SHIFT, T, exec, ${../../config/hypr/scripts/translate.sh}"
-        "$mainMod SHIFT, W, exec, ${../../config/hypr/scripts/wiki.sh}"
+        "$mainMod SHIFT, T, exec, translate.sh"
+        "$mainMod SHIFT, W, exec, wiki.sh"
         # "$mainMod, E, overview:toggle"
       ];
 
@@ -257,7 +272,10 @@
         "float, class:^(blueman-manager)$"
         "float, class:^(pavucontrol)$"
         "move 70% 0%, class:^(pavucontrol)$"
-        "workspace special, class:^(obsidian)$"
+        "workspace special:foot, title:specialfoot"
+        "opacity 0.87 0.8,class:^(specialfoot)$"
+        "noblur, class:^(specialfoot)$"
+        "workspace special:obsidian, class:^(obsidian)$"
         "float, title:^(pop-up)$"
         "float, title:^(bubble)$"
         "float, title:^(dialog)$"
@@ -291,7 +309,7 @@
         "center, title:^(launcher)$"
         "float, class:^(com.github.hluk.copyq)$"
         "float, initialClass:^(=terminal-btop)$"
-        "opacity 0.9 0.8,class:^(foot)$"
+        "opacity 0.87 0.8,class:^(foot)$"
       ];
     };
   };

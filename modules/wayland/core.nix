@@ -4,6 +4,7 @@
 {
   home.packages = with pkgs; [
     # inputs.quickshell.packages.x86_64-linux.default
+    hyprshot
     walker
     wlvncc
     nwg-displays
@@ -16,13 +17,21 @@
     nwg-drawer
     flameshot
     foot
+    kitty
     wdisplays
+    libnotify
+    translate-shell
+    wiki-tui
   ];
   services = {
     copyq.enable = true;
   };
   home.file.".config/foot" = {
     source = ../config/foot;
+    recursive = true;
+  };
+  home.file.".config/kitty" = {
+    source = ../config/kitty;
     recursive = true;
   };
   # home.file."sherlock" = {
