@@ -31,11 +31,10 @@
         };
       };
     };
-    extraConfigLua = ''
-      local ok, quarto = pcall(require, 'quarto')
-      if ok then 
-        quarto.activate()
-      end
-    '';
   };
+  xdg.configFile."nvim/ftplugin/markdown.lua".text = ''
+    if package.loaded["quarto"] then
+      require("quarto").activate()
+    end
+  '';
 }

@@ -9,6 +9,7 @@
     gemini-cli
     neofetch
     delta
+    python3Packages.jupytext
   ];
 
   programs = {

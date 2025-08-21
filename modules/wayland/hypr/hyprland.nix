@@ -22,7 +22,7 @@
     ];
     settings = {
       # 変数定義
-      "$terminal" = "foot";
+      "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$menu" = "walker";
       "$browser" = "zen";

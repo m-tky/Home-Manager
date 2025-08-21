@@ -35,7 +35,7 @@ in
       swapfile          = false;
       whichwrap         = "b,s,<,>,[,]";
       pumblend          = 20;
-      winblend          = 20;
+      winblend          = 0;
       showmode          = false;
       conceallevel      = 1;
       hlsearch          = true;

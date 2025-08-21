@@ -7,6 +7,7 @@
   lsp = import ./lsp.nix;
   lspkind = import ./lspkind.nix;
   none-ls = import ./none-ls.nix;
+  # nvim-lint = import ./nvim-lint.nix;
   trouble = import ./trouble.nix;
   nav = import ./nav.nix;
   telescope = import ./telescope.nix;
@@ -29,6 +30,9 @@
   surround = import ./surround.nix;
   lualine = import ./lualine.nix;
 
+  # markdown
+  render-markdown = import ./render-markdown.nix;
+
   # jupyter plugins
   molten = import ./molten.nix;
   quarto = import ./quarto.nix;
@@ -36,4 +40,5 @@
   treesitter-textobjects = import ./treesitter-textobjects.nix;
   hydra = import ./hydra.nix;
   image = import ./image.nix;
+  otter = import ./otter.nix;
 }
