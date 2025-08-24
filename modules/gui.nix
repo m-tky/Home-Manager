@@ -29,7 +29,6 @@ in
     spotify
     webcord
     slack
-    # rustdesk
     freetube
     bitwarden-cli
     calibre

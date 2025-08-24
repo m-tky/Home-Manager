@@ -1,5 +1,4 @@
-{ config, pkgs, ...}:
-
+{ config, pkgs, ... }:
 {
   i18n.inputMethod = {
     enable = true;
@@ -7,19 +6,21 @@
     fcitx5 = {
       addons = with pkgs; [
         fcitx5-skk
-        kdePackages.fcitx5-qt
-	libsForQt5.fcitx5-qt
         libskk
-        fcitx5-tokyonight
+        fcitx5-mozc
+        fcitx5-gtk
+        kdePackages.fcitx5-qt
+        libsForQt5.fcitx5-qt
+        catppuccin-fcitx5
       ];
       waylandFrontend = true;
     };
   };
   home.sessionVariables = {
-    GTK_IM_MODULE= "fcitx";
-    QT_IM_MODULE= "fcitx";
-    XMODIFIERS= "@im=fcitx";
-    INPUT_METHOD= "fcitx";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    INPUT_METHOD = "fcitx";
     DefaultIMModule = "fcitx";
   };
   home.file = {
