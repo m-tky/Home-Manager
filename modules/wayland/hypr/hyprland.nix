@@ -15,6 +15,13 @@
     enable = true;
     package = null;
     portalPackage = null;
+    # extraConfig = ''
+    #   # Tablets
+    #   input:tablet:wacom-intuos-s-2-pen {
+    #       output = HDMI-A-1
+    #       transform = -1
+    #   }
+    # '';
     plugins = [
       # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo

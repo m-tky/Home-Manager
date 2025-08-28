@@ -23,6 +23,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    zoom-us
     myObsidian
     inputs.zen-browser.packages.${system}.specific
     anki-bin
@@ -50,6 +51,7 @@ in
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-media-tags-plugin
+    xournalpp
     vdhcoapp
     scrcpy
 
