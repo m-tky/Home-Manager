@@ -29,16 +29,19 @@
   typst-preview = import ./typst-preview.nix;
   surround = import ./surround.nix;
   lualine = import ./lualine.nix;
+  smear-cursor = import ./smear-cursor.nix;
 
   # markdown
   render-markdown = import ./render-markdown.nix;
 
+  # repl
+  # iron = import ./iron.nix;
   # jupyter plugins
-  molten = import ./molten.nix;
-  quarto = import ./quarto.nix;
-  jupytext = import ./jupytext.nix;
-  treesitter-textobjects = import ./treesitter-textobjects.nix;
-  hydra = import ./hydra.nix;
-  image = import ./image.nix;
-  otter = import ./otter.nix;
+  # molten = import ./molten.nix;
+  # quarto = import ./quarto.nix;
+  # jupytext = import ./jupytext.nix;
+  # treesitter-textobjects = import ./treesitter-textobjects.nix;
+  # hydra = import ./hydra.nix;
+  # image = import ./image.nix;
+  # otter = import ./otter.nix;
 }

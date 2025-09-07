@@ -1,9 +1,0 @@
-Specify language(s) used for OCR.
-st occur before any configfile.
-
-Show this help message.
-Show extra help for advanced users.
-
-Show version information.
-
-List available languages for tesseract engine.

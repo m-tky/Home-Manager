@@ -2,4 +2,3 @@
 {
   home.packages = [ pkgs.rustdesk ];
 }
-

@@ -9,7 +9,8 @@
     gemini-cli
     neofetch
     delta
-    python3Packages.jupytext
+    python313Packages.jupytext
+    rclone
   ];
 
   programs = {
@@ -155,8 +156,13 @@
           rm -f -- "$tmp"
         }
 
+        if [[ "$TOGGLETERM_IS_ACTIVE" == "1" ]]; then
+          bindkey -e
+        else
+          bindkey -v
+        fi
+
         # history-substring-searchのキーバインド
-        bindkey -v
         bindkey -M vicmd 'k' history-substring-search-up
         bindkey -M vicmd 'j' history-substring-search-down
       '';

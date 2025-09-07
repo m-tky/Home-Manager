@@ -67,6 +67,9 @@
 
       --trouble
       { "<leader>x", group = "Trouble" },
+
+      --iron.nvim
+      { "<leader>i", group = "Iron" },
     })
   '';
 }

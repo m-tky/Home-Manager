@@ -29,7 +29,7 @@
     ];
     settings = {
       # 変数定義
-      "$terminal" = "kitty";
+      "$terminal" = "wezterm";
       "$fileManager" = "thunar";
       "$menu" = "walker";
       "$browser" = "zen";
@@ -268,6 +268,7 @@
 
       windowrulev2 = [
         "opacity 0.95, class:^(kitty)$"
+        "opacity 0.95, title:^(wezterm)$"
         "float, title:^(Network Connection)$"
         "center, title:^(Network Connection)$"
         "float, title:^(Floating Window - Show Me The Key)$"

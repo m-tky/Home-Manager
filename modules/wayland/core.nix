@@ -20,16 +20,11 @@
     enableZshIntegration = true;
     extraConfig = "local config = wezterm.config_builder()
 config.color_scheme = 'Catppuccin Mocha'
-config.font_size = 11.5
+config.font_size = 11
 
-config.font = wezterm.font_with_fallback{'Moralerspace Argon NF'}
+config.font = wezterm.font_with_fallback({'Moralerspace Argon NF'}, { weight = 'Regular', style = 'Normal'})
 
 config.font_rules = {
-  {
-    intensity = 'Normal',
-    italic = false,
-    font = wezterm.font(\"Moralerspace Argon NF\", { weight = \"Bold\" }),
-  },
   -- Bold
   {
     intensity = \"Bold\",
