@@ -89,9 +89,11 @@
                   inputs.nixvim.homeModules.nixvim
                   cfg.path
                   {
-                    home.username = cfg.username;
-                    home.homeDirectory = cfg.homeDirectory;
-                    home.stateVersion = "25.05";
+                    home = {
+                      username = cfg.username;
+                      homeDirectory = cfg.homeDirectory;
+                      stateVersion = "25.05";
+                    };
                   }
                 ];
               };
