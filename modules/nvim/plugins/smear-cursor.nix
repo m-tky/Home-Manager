@@ -14,5 +14,27 @@
         settings.events = [ "VimEnter" ];
       };
     };
+    extraConfigLua = ''
+      -- Noiceウィンドウに入ったときに、SmearCursorを無効化する
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "^Noice*" },
+        callback = function()
+          if require("smear_cursor").enabled then
+            require("smear_cursor").toggle()
+          end
+        end,
+      })
+
+      -- Noiceウィンドウから離れるときに、SmearCursorを有効化する
+      vim.api.nvim_create_autocmd("BufLeave", {
+        pattern = { "^Noice*" },
+        callback = function()
+          -- smear_cursorが無効であれば有効化
+          if not require("smear_cursor").enabled then
+            require("smear_cursor").toggle()
+          end
+        end,
+      })
+    '';
   };
 }

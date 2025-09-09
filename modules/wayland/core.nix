@@ -21,9 +21,7 @@
     extraConfig = "local config = wezterm.config_builder()
 config.color_scheme = 'Catppuccin Mocha'
 config.font_size = 11
-
 config.font = wezterm.font_with_fallback({'Moralerspace Argon NF'}, { weight = 'Regular', style = 'Normal'})
-
 config.font_rules = {
   -- Bold
   {
@@ -44,6 +42,10 @@ config.font_rules = {
     font = wezterm.font(\"Moralerspace Radon NF\", { weight = \"Bold\", italic = true }),
   },
 }
+
+-- about tabbar
+config.hide_tab_bar_if_only_one_tab = true
+
 return config";
   };
   home = {
@@ -55,7 +57,7 @@ return config";
       nwg-displays
       pavucontrol
       wayvnc
-      libsForQt5.xwaylandvideobridge
+      kdePackages.xwaylandvideobridge
       wf-recorder
       wl-clipboard
       helvum

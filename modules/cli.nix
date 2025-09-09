@@ -72,8 +72,14 @@
       };
       initLua = ./config/yazi/init.lua;
     };
+
     zellij = {
       enable = true;
+      enableZshIntegration = true;
+      settings = {
+        theme = "catppuccin-mocha";
+        pane_frames = false;
+      };
     };
 
     starship = {
@@ -156,9 +162,7 @@
           rm -f -- "$tmp"
         }
 
-        if [[ "$TOGGLETERM_IS_ACTIVE" == "1" ]]; then
-          bindkey -e
-        else
+        if [[ "$TOGGLETERM_IS_ACTIVE" != "1" ]]; then
           bindkey -v
         fi
 
@@ -186,7 +190,6 @@
   xdg.configFile = {
     "lazygit/config.yml".source = ./config/lazygit/config.yml;
     "btop/themes/catppuccin_mocha.theme".source = ./config/btop/themes/catppuccin_mocha.theme;
-    "zellij/config.kdl".source = ./config/zellij/config.kdl;
   };
   # PATHの追加
 }
