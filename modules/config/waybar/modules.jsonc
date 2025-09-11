@@ -66,7 +66,7 @@
 
     "disk": {
       "interval": 30,
-      "format": " <span color=\"#cba6f7\"> </span>{percentage_free}%",
+      "format": " <span color=\"#cba6f7\"> </span>{percentage_used}%",
       "tooltip-format": "{used}/{total}",
       "tooltip": true,
     },
@@ -109,41 +109,33 @@
       }
     },
     "network": {
-        "format-wifi": "<span color=\"#74c7ec\"> </span>{signalStrength}%",
-        "format-ethernet": "<span color=\"#94e2d5\"> </span> ",
-        "tooltip-format-wifi": "{essid}\r{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
-        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
-        "format-linked": " <span color=\"#94e2d5\"> </span> ",
-        "format-disconnected": " <span color=\"#f9e2af\"> </span> ",
-        //"format-alt": " {ifname}: {ipaddr}/{cidr} ",
-        "on-click":"nm-connection-editor",
+      "format-wifi": "<span color=\"#74c7ec\"> </span>{signalStrength}%",
+      "format-ethernet": "<span color=\"#94e2d5\"> </span> ",
+      "tooltip-format-wifi": "{essid}\r{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
+      "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
+      "format-linked": " <span color=\"#94e2d5\"> </span> ",
+      "format-disconnected": " <span color=\"#f9e2af\"> </span> ",
+      //"format-alt": " {ifname}: {ipaddr}/{cidr} ",
+      "on-click":"nm-connection-editor",
     },
-    //"pulseaudio": {
-    //     "scroll-step": 1, // %, can be a float
-    //    //"format": "{volume}% {icon} {format_source}",
-    //    "format": "<span color=\"#cba6f7\">{icon} </span>{volume}%  {format_source}",
-    //    "format-bluetooth": "<span color=\"#cba6f7\">{icon} <span color=\"#89b4fa\"></span>{volume}%  {format_source}",
-    //    "format-bluetooth-muted": "<span color=\"#cba6f7\"> {icon}</span>  {format_source}",
-    //    "format-muted": "<span color= \"#cba6f7\"> </span>{format_source}",
-    //    "format-source": "<span color=\"#cba6f7\"></span> {volume}% ",
-    //    "format-source-muted": "<span color=\"#cba6f7\"> </span>",
-    //    "format-icons": {
-    //        "headphone": "<span color=\"#cba6f7\"> </span>",
-    //        "hands-free": "<span color=\"#cba6f7\"> </span>",
-    //        "headset": "<span color=\"#cba6f7\"> </span>",
-    //        "phone": "<span color=\"#cba6f7\"> </span>",
-    //        "portable": "<span color=\"#cba6f7\"> </span>",
-    //        "car": "<span color=\"#cba6f7\"> </span>",
-    //        "default": [" ", " ", "  "]
-    //    },
-    //    "on-click": "pavucontrol"
-    //},
-    "wireplumber": {
-      "format": "{icon}{volume}%",
-      "format-muted": "<span color= \"#bac2de\"> </span>",
-      "on-click": "easyeffects",
-      "format-icons": ["<span color= \"#89b4fa\">  </span>", "<span color= \"#89b4fa\">  </span>", "<span color= \"#a6e3a1\">  </span>"],
-      "recerse-scrolling": 1,
+    "pulseaudio": {
+      "scroll-step": 1, // %, can be a float
+      "on-click": "pavucontrol",
+      "ignored-sinks": ["Easy Effects Sink"],
+      "format": "<span color=\"#eba0ac\">{icon}</span>{volume}%",
+      "format-bluetooth": "<span color=\"#eba0ac\">{icon}</span><span color=\"#89b4fa\">󰂰 </span>{volume}%",
+      "format-muted": "<span color= \"#b4befe\"></span>",
+      "format-icons": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+        "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+        "headphone": "<span color=\"#eba0ac\"> </span>",
+        "hands-free": "<span color=\"#eba0ac\">󰋎 </span>",
+        "headset": "<span color=\"#eba0ac\">󰋎 </span>",
+        "phone": "<span color=\"#eba0ac\"> </span>",
+        "portable": "<span color=\"#eba0ac\"> </span>",
+        "car": "<span color=\"#eba0ac\"> </span>",
+        "default": [" ", " "],
+      },
     },
     "custom/nix-updates": {
         "exec": "update-checker", // <--- path to script
@@ -161,20 +153,6 @@
             "error": "<span color= \"#fab387\"> </span>" // icon when errot occurs
         },
     },
-    // "custom/spotify": {
-    //   "format": "{icon} {}",
-    //   "escape": true,
-    //   "return-type": "json",
-    //   "max-length": 40,
-    //   "interval": 30, // Remove this if your script is endless and write in loop
-    //   "on-click": "playerctl -p spotify play-pause",
-    //   "on-click-right": "killall spotify",
-    //   "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-    //   "on-scroll-up" : "playerctl -p spotify next",
-    //   "on-scroll-down" : "playerctl -p spotify previous",
-    //   "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-    //   "exec-if": "pgrep spotify"
-    // },
 
     "tray": {
       "icon-size": 14,
@@ -189,14 +167,14 @@
       "tooltip": false,
       "format": "{icon}",
       "format-icons": {
-        "notification": "<span color=\"#f9e2af\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
-        "none": "<span color=\"#f9e2af\"> </span>",
-        "dnd-notification": "<span color=\"#cba6f7\"></span></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
+        "notification": "<span color=\"#f9e2af\"></span><span foreground=\"#f38ba8\"><sup></sup></span>",
+        "none": "<span color=\"#f9e2af\"></span>",
+        "dnd-notification": "<span color=\"#cba6f7\"></span><span foreground=\"#f38ba8\"><sup></sup></span>",
         "dnd-none": "<span color=\"#cba6f7\"> </span>",
-        "inhibited-notification": "<span color=\"#fab387\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
-        "inhibited-none": "<span color=\"#fab387\"> </span>",
-        "dnd-inhibited-notification": "<span color=\"#bac2de\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
-        "dnd-inhibited-none": "<span color=\"#bac2de\"> </span>"
+        "inhibited-notification": "<span color=\"#fab387\"></span><span foreground=\"#f38ba8\"><sup></sup></span>",
+        "inhibited-none": "<span color=\"#fab387\"></span>",
+        "dnd-inhibited-notification": "<span color=\"#bac2de\"></span><span foreground=\"#f38ba8\"><sup></sup></span>",
+        "dnd-inhibited-none": "<span color=\"#bac2de\"></span>"
       },
       "return-type": "json",
       "exec-if": "which swaync-client",

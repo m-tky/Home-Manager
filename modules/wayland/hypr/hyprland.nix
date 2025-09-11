@@ -316,6 +316,7 @@
         "opacity 0.87 0.8,class:^(foot)$"
         "float, class:^(nm-connection-editor)$"
         "float, class:^(thunar)$"
+        "float,class: ^(org.pulseaudio.pavucontrol)$"
       ];
     };
   };

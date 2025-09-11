@@ -58,7 +58,6 @@ return config";
       workstyle
       power-profiles-daemon
       killall
-      easyeffects
       hyprshot
       walker
       wlvncc

@@ -19,9 +19,9 @@
   "modules-right": [
       //"mpd",
       "power-profiles-daemon",
-      //"pulseaudio",
+      "pulseaudio",
       // "custom/waybar-media",
-      "wireplumber",
+      // "wireplumber",
       "group/pcinfo",
       //"custom/power",
       "network",
