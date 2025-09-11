@@ -1,0 +1,254 @@
+// -*- mode: jsonc -*-
+{
+    // Modules configuration
+    // "sway/workspaces": {
+    //     "disable-scroll": true,
+    //     "all-outputs": true,
+    //     "warp-on-scroll": false,
+    //     "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
+    // },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 15,
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+      "format": "<span color=\"#f5c2e7\"> </span>{:%H:%M}",
+      "interval": 60,
+      "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+      "tooltip-format": "{calendar}",
+      "calendar": {
+                  "mode"          : "year",
+                  "mode-mon-col"  : 3,
+                  "weeks-pos"     : "right",
+                  "on-scroll"     : 1,
+                  "format": {
+                            "months":     "<span color='#f2cdcd'><b>{}</b></span>",
+                            "days":       "<span color='#cdd6f4'><b>{}</b></span>",
+                            "weeks":      "<span color='#89b4fa'><b>W{}</b></span>",
+                            "weekdays":   "<span color='#fab387'><b>{}</b></span>",
+                            "today":      "<span color='#f38ba8'><b><u>{}</u></b></span>"
+                            }
+                  },
+      "actions":  {
+                  "on-click-right": "mode",
+                  "on-scroll-up": "tz_up",
+                  "on-scroll-down": "tz_down",
+                  },
+      "timezones": [
+          "Asia/Tokyo",
+          "Asia/Bangkok",
+          "Etc/UTC",
+      ]
+    },
+
+    "disk": {
+      "interval": 30,
+      "format": " <span color=\"#cba6f7\"> </span>{percentage_free}%",
+      "tooltip-format": "{used}/{total}",
+      "tooltip": true,
+    },
+    "cpu": {
+        "format": "<span color=\"#eba0ac\"> </span>{usage}%",
+        "on-click": "foot -a=terminal-bottom bottom"
+    },
+    "memory": {
+        "format": "<span color=\"#a6e3a1\"> </span>{used}GiB",
+        "tooltip": true,
+        "on-click": "foot -a=terminal-btop btop"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format": "<span color=\"#89b4fa\"></span>{temperatureC}°C",
+        "format-critical": "<span color=\"#f38ba8\"></span>{temperatureC}°C",
+        "tooltip": true,
+        "on-click": "foot -a=terminal-btop btop"
+    },
+    "group/pcinfo": {
+      "modules": [
+        "disk",
+        "cpu",
+        "memory",
+        "temperature",
+      ],
+      "orientation": "inherit",
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "<span color=\"#b4befe\">  </span>",
+        "performance": "<span color=\"#fab387\">  </span>",
+        "balanced": "<span color=\"#74c7ec\">  </span>",
+        "power-saver": "<span color=\"#a6e3a1\">  </span>"
+      }
+    },
+    "network": {
+        "format-wifi": "<span color=\"#74c7ec\"> </span>{signalStrength}%",
+        "format-ethernet": "<span color=\"#94e2d5\"> </span> ",
+        "tooltip-format-wifi": "{essid}\r{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\r<span color=\"#89b4fa\"></span>: {bandwidthDownBits}\r<span color=\"#f38ba8\"></span>: {bandwidthUpBits}",
+        "format-linked": " <span color=\"#94e2d5\"> </span> ",
+        "format-disconnected": " <span color=\"#f9e2af\"> </span> ",
+        //"format-alt": " {ifname}: {ipaddr}/{cidr} ",
+        "on-click":"nm-connection-editor",
+    },
+    //"pulseaudio": {
+    //     "scroll-step": 1, // %, can be a float
+    //    //"format": "{volume}% {icon} {format_source}",
+    //    "format": "<span color=\"#cba6f7\">{icon} </span>{volume}%  {format_source}",
+    //    "format-bluetooth": "<span color=\"#cba6f7\">{icon} <span color=\"#89b4fa\"></span>{volume}%  {format_source}",
+    //    "format-bluetooth-muted": "<span color=\"#cba6f7\"> {icon}</span>  {format_source}",
+    //    "format-muted": "<span color= \"#cba6f7\"> </span>{format_source}",
+    //    "format-source": "<span color=\"#cba6f7\"></span> {volume}% ",
+    //    "format-source-muted": "<span color=\"#cba6f7\"> </span>",
+    //    "format-icons": {
+    //        "headphone": "<span color=\"#cba6f7\"> </span>",
+    //        "hands-free": "<span color=\"#cba6f7\"> </span>",
+    //        "headset": "<span color=\"#cba6f7\"> </span>",
+    //        "phone": "<span color=\"#cba6f7\"> </span>",
+    //        "portable": "<span color=\"#cba6f7\"> </span>",
+    //        "car": "<span color=\"#cba6f7\"> </span>",
+    //        "default": [" ", " ", "  "]
+    //    },
+    //    "on-click": "pavucontrol"
+    //},
+    "wireplumber": {
+      "format": "{icon}{volume}%",
+      "format-muted": "<span color= \"#bac2de\"> </span>",
+      "on-click": "easyeffects",
+      "format-icons": ["<span color= \"#89b4fa\">  </span>", "<span color= \"#89b4fa\">  </span>", "<span color= \"#a6e3a1\">  </span>"],
+      "recerse-scrolling": 1,
+    },
+    "custom/nix-updates": {
+        "exec": "update-checker", // <--- path to script
+        "signal": 12,
+        "on-click": "", // refresh on click
+        "on-click-right": "rm ~/.cache/nix-update-last-run", // force an update
+        "interval": 3600, // refresh every hour
+        "tooltip": true,
+        "return-type": "json",
+        "format": "{icon}{}",
+        "format-icons": {
+            "has-updates": "<span color= \"#89b4fa\">󰚰 </span>", // icon when updates needed
+            "updating": "<span color= \"#cba6f7\"> </span>", // icon when updating
+            "updated": "<span color= \"#a6e3a1\"> </span>", // icon when all packages updated
+            "error": "<span color= \"#fab387\"> </span>" // icon when errot occurs
+        },
+    },
+    // "custom/spotify": {
+    //   "format": "{icon} {}",
+    //   "escape": true,
+    //   "return-type": "json",
+    //   "max-length": 40,
+    //   "interval": 30, // Remove this if your script is endless and write in loop
+    //   "on-click": "playerctl -p spotify play-pause",
+    //   "on-click-right": "killall spotify",
+    //   "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    //   "on-scroll-up" : "playerctl -p spotify next",
+    //   "on-scroll-down" : "playerctl -p spotify previous",
+    //   "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    //   "exec-if": "pgrep spotify"
+    // },
+
+    "tray": {
+      "icon-size": 14,
+      "spacing": 4,
+    },
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      //"disable-scroll": true,
+      //"on-click": "activate",
+    },
+    "custom/notification": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "<span color=\"#f9e2af\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
+        "none": "<span color=\"#f9e2af\"> </span>",
+        "dnd-notification": "<span color=\"#cba6f7\"></span></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
+        "dnd-none": "<span color=\"#cba6f7\"> </span>",
+        "inhibited-notification": "<span color=\"#fab387\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
+        "inhibited-none": "<span color=\"#fab387\"> </span>",
+        "dnd-inhibited-notification": "<span color=\"#bac2de\"></span>,<span foreground=\"#f38ba8\"><sup></sup></span>",
+        "dnd-inhibited-none": "<span color=\"#bac2de\"> </span>"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+    "custom/lock":{
+      "format": "<span color=\"#f9e2af\">  </span>",
+      "on-click": "swaylock --clock --indicator --screenshots --effect-blur 7x7 --fade-in 0.3",
+      "tooltip-format": "Lock",
+    },
+    "custom/reboot":{
+      "format": "<span color=\"#74c7ec\">  </span>",
+      "on-click": "reboot",
+      "tooltip-format": "Restart",
+    },
+    "custom/power":{
+      "format": "<span color=\"#f38ba8\">  </span>",
+      "on-click": "foot -a=terminal_shutdown ~/.config/waybar/shutdown.sh",
+      "tooltip-format": "ShutDown",
+    },
+    "custom/filemanager":{
+      "format": "<span color=\"#b4befe\">  </span>",
+      "on-click": "thunar",
+      "tooltip-format": "Filer",
+    },
+    "custom/drawer":{
+      "format": "<span color=\"#cba6f7\">  </span>",
+      "on-click": "nwg-drawer",
+      "tooltip-format": "drawer",
+    },
+    "custom/waybar-media": {
+      "return-type": "json",
+      "exec": "waybar-media.py status  ",
+      "on-click": "waybar-media.py playpause",
+      "on-scroll-up": "waybar-media.py previous",
+      "on-scroll-down": "waybar-media.py next",
+      "escape": true
+    },
+    "group/group-power":{
+      "modules": [
+        "custom/lock",
+        "custom/reboot",
+        "custom/power",
+      ],
+      "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-power",
+        "transition-left-to-right": true,
+      },
+      "orientation": "inherit",
+    },
+}

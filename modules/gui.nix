@@ -66,19 +66,4 @@ in
   # Enable the GUI applications to run in the home-manager environment
   xdg.enable = true;
   # Optional: Set up a desktop entry for Obsidian
-  xdg.configFile."electron-flags.conf".text = ''
-    --enable-features=WaylandWindowDecorations
-    --enable-features=WebRTCPipeWireCapturer
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-    --wayland-text-input-version=3
-    --enable-wayland-ime
-  '';
-  xdg.configFile."chromium-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform-hint=wayland
-    --wayland-text-input-ersion=3
-    --enable-wayland-ime
-    --restore-last-session
-  '';
 }

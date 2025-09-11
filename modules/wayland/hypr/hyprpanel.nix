@@ -1,7 +1,4 @@
-{ pkgs
-, inputs
-, ...
-}:
+{ pkgs, inputs, ... }:
 {
   imports = [
     inputs.ags.homeManagerModules.default
@@ -38,7 +35,7 @@
                 "cpu"
                 "ram"
                 "volume"
-                "network"
+                # "network"
                 "bluetooth"
                 "systray"
                 "clock"

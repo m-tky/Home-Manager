@@ -1,8 +1,8 @@
 { pkgs, ...}:
 {
   home.packages = with pkgs; [
-    font-awesome
     workstyle
+    nvd
   ];
 
   programs.waybar = {
@@ -11,7 +11,11 @@
   };
 
   xdg.configFile."waybar" = {
-    source = ../config/waybar;
+    source = ../../config/waybar;
     recursive = true;
+  };
+
+  home.file = {
+    ".local/bin/update-checker".source = ./scripts/update-checker;
   };
 }

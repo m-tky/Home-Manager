@@ -1,0 +1,158 @@
+@import "./mocha.css";
+* {
+  /* font-family: Moralerspace Argon HWNF; */
+  font-family: Moralerspace Argon;
+  font-weight: 500;
+  font-size: 10.0pt;
+  color: @text;
+  border-radius: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 46, 0.7);
+}
+
+#workspaces button {
+  padding: 1px 5px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+  padding: 1px 5px;
+  border: none;
+  background: rgba(69, 71, 90, 0.7);
+  transition: all 0.2s ease-in-out;
+}
+/* workspace style now in */
+#workspaces button.active,
+#workspaces button.current_output {
+}
+
+/* visible workspace */
+#workspaces button.visible {
+  border-bottom: 2px solid @blue;
+}
+
+/* focused workspace(mouse-over) */
+#workspaces button.focused {
+  border-bottom: 2px solid @peach;
+}
+
+/* urgent workspace */
+#workspaces button.urgent {
+  animation: blink 1s infinite;
+  border-bottom: 2px solid @red;
+}
+#workspaces button.urgent:hover {
+  animation: blink 1s infinite;
+  background: rgba(69, 71, 90, 0.7);
+  border-bottom: 2px solid @red;
+}
+
+/* permanent workspace */
+#workspaces button.persistent {
+  color: @text;
+  text-decoration: underline;
+}
+
+/* empty workspace */
+#workspaces button.empty {
+  font-style: italic;
+}
+
+/* アニメーション (例: 緊急状態で点滅) */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+#clock {
+  padding-left: 4px;
+  padding-right: 4px;
+  background: transparent;
+  border-radius: 10px;
+}
+#window,
+#temperature {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+#cpu {
+  margin-left: 2px;
+  margin-right: 0px;
+  border-radius: 10px 10px 10px 10px;
+  background: transparent;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+#memory {
+  margin: 0;
+  /*background: transparent;*/
+  padding-left: 3px;
+  padding-right: 2px;
+  border-radius: 10px;
+}
+#wireplumber {
+  padding-right: 3px;
+}
+#tray{
+  /*padding-right: 3px;*/
+  /*padding-left: 3px;*/
+}
+
+
+/* Hide window module when not focused on window or empty workspace */
+window#waybar.empty #window {
+  padding: 0px;
+  margin: 0px;
+  opacity: 0;
+}
+
+/* Set up rounding to make these modules look like separate pills */
+#tray {
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 4px;
+  padding-left: 7px;
+  padding-right: 4px;
+  margin-right: 0px;
+}
+#network {
+  background: transparent;
+  border-radius: 10px;
+  margin-right: 2px;
+  margin-left: 10px;
+}
+
+#window {
+  border-radius: 10px;
+  padding: 6px;
+
+}
+
+/* close right side of bar */
+#temperature {
+  border-radius: 10px 10px 10px 10px;
+  padding: 3px;
+  margin-left: 0px;
+}
+
+/* close left side of bar */
+#battery {
+  border-radius: 0px 12px 12px 0px;
+}
+
+#pulseaudio {
+  background: transparent;
+  border-radius: 10px;
+}
+#custom-notification {
+  /*background: rgba(26, 27, 38, 0);*/
+  border-radius: 10px 0px 0px 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#custom-waybar-media.paused {
+    color: @subtext1;
+}

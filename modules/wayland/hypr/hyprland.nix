@@ -42,24 +42,21 @@
       # 自動起動
       exec-once = [
         "hyprpaper"
+        "waybar"
+        "swaync"
         "udiskie"
-        "fcitx5"
-        "copyq"
         "workstyle &> /tmp/workstyle.log"
         "systemctl --user start hyprpolkitagent"
         "nm-applet --sm-disable &"
         "nextcloud --background"
         "wayvnc_server.sh"
         "start.sh"
-        # NOTE: プラグインは`programs.hyprland.plugins`で指定するため、以下の行は不要です。
-        # "hyprctl plugin load \"$HYPR_PLUGIN_DIR/lib/libhyprfocus.so\""
       ];
 
-      # 環境変数
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-      ];
+      # env = [
+      #   "XCURSOR_SIZE,24"
+      #   "HYPRCURSOR_SIZE,24"
+      # ];
 
       # パーミッション
       permission = [
@@ -73,28 +70,26 @@
         gaps_in = 3;
         gaps_out = 6;
         border_size = 2;
-        "col.active_border" = "rgba(2892c2aa) rgba(2850c2aa) 90deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        # "col.active_border" = "rgba(2892c2aa) rgba(2850c2aa) 90deg";
+        # "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = true;
         allow_tearing = false;
         layout = "dwindle";
       };
 
-      # 外観 (Decoration)
+      # # 外観 (Decoration)
       decoration = {
-        rounding = 8;
-        # "rounding_power" は存在しないオプションの可能性があります
-        # rounding_power = 8;
+        rounding = 5;
 
         active_opacity = 1.0;
         inactive_opacity = 0.95;
 
-        shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
-          color = "rgba(1a1a1aee)";
-        };
+        # shadow = {
+        #   enabled = true;
+        #   range = 4;
+        #   render_power = 3;
+        #   color = "rgba(1a1a1aee)";
+        # };
 
         blur = {
           enabled = true;
@@ -193,9 +188,10 @@
         "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
 
-        # my custom keybings
-        "$mainMod, O, exec, zsh -c 'if pgrep -f obsidian > /dev/null; then hyprctl dispatch togglespecialworkspace obsidian; else obsidian &; fi'"
-        "$mainMod, Q, exec, pgrep -f 'foot --title specialfoot' && hyprctl dispatch togglespecialworkspace foot || foot --title specialfoot &"
+        # my custom keybinds
+        "$mainMod, O, exec, hyprctl clients | grep -q 'initialClass: obsidian' && hyprctl dispatch togglespecialworkspace obsidian || obsidian &"
+        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || wezterm start --class specialterm &"
+        "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
@@ -280,7 +276,7 @@
         "float, class:^(blueman-manager)$"
         "float, class:^(pavucontrol)$"
         "move 70% 0%, class:^(pavucontrol)$"
-        "workspace special:foot, title:specialfoot"
+        "workspace special:terminal, class:specialterm"
         "opacity 0.87 0.8,class:^(specialfoot)$"
         "noblur, class:^(specialfoot)$"
         "workspace special:obsidian, class:^(obsidian)$"
@@ -316,8 +312,10 @@
         "float, title:^(launcher)$"
         "center, title:^(launcher)$"
         "float, class:^(com.github.hluk.copyq)$"
-        "float, initialClass:^(=terminal-btop)$"
+        "float, initialClass:^(=terminal-bottom)$"
         "opacity 0.87 0.8,class:^(foot)$"
+        "float, class:^(nm-connection-editor)$"
+        "float, class:^(thunar)$"
       ];
     };
   };

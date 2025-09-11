@@ -30,6 +30,7 @@
   surround = import ./surround.nix;
   lualine = import ./lualine.nix;
   smear-cursor = import ./smear-cursor.nix;
+  highlight-colors = import ./highlight-colors.nix;
 
   # markdown
   render-markdown = import ./render-markdown.nix;

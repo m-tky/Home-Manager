@@ -30,6 +30,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -87,6 +88,7 @@
                 extraSpecialArgs = { inherit inputs; };
                 modules = [
                   inputs.nixvim.homeModules.nixvim
+                  inputs.catppuccin.homeModules.catppuccin
                   cfg.path
                   {
                     home = {

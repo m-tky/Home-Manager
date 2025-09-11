@@ -17,6 +17,21 @@
     bat.enable = true;
     lazygit = {
       enable = true;
+      settings = {
+        gui.showIcons = true;
+        git = {
+          paging = {
+            colorArg = "always";
+            paper = "delta --dark --paging=never";
+          };
+          allBranchesLogCmds = [
+            "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(blue)%h%C(reset) %C(green)%ad%C(reset) %C(magenta)%an%C(reset)%n%C(white)%s%C(reset)'"
+          ];
+          branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(blue)%h%C(reset) %C(green)%ad%C(reset) %C(magenta)%an%C(reset)%n%C(white)%s%C(reset)' {{branchName}";
+          disableMerging = false;
+          disableRebasing = false;
+        };
+      };
     };
     zoxide = {
       enable = true;
@@ -26,18 +41,7 @@
       enable = true;
       enableZshIntegration = true;
     };
-    btop = {
-      enable = true;
-      settings = {
-        theme = "catppuccin_mocha";
-        vim_keys = true;
-        graph_symbol = "braille";
-        graph_symbol_cpu = "braille";
-        graph_symbol_gpu = "default";
-        graph_symbol_mem = "default";
-        rounded_corners = false;
-      };
-    };
+    bottom.enable = true;
     eza = {
       enable = true;
       enableZshIntegration = true;
@@ -77,7 +81,6 @@
       enable = true;
       enableZshIntegration = true;
       settings = {
-        theme = "catppuccin-mocha";
         pane_frames = false;
       };
     };
@@ -178,7 +181,6 @@
       EDITOR = "nvim";
       TERMINAL = "foot"; # footは別途インストールが必要
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
-      DIRENV_LOG_FORMAT="direnv: %s";
     };
     sessionPath = [
       "$HOME/.local/bin"
@@ -187,9 +189,6 @@
   };
 
   # place lazygit configfile
-  xdg.configFile = {
-    "lazygit/config.yml".source = ./config/lazygit/config.yml;
-    "btop/themes/catppuccin_mocha.theme".source = ./config/btop/themes/catppuccin_mocha.theme;
-  };
-  # PATHの追加
+  # xdg.configFile = {
+  # };
 }

@@ -11,7 +11,7 @@
         fcitx5-gtk
         kdePackages.fcitx5-qt
         libsForQt5.fcitx5-qt
-        catppuccin-fcitx5
+        # catppuccin-fcitx5
       ];
       waylandFrontend = true;
     };
@@ -28,5 +28,8 @@
       file=${libskk}/share/skk/SKK-JISYO.L,mode=readonly,type=file
     '';
   };
-  xdg.configFile."fcitx5".source = ../config/fcitx5;
+  xdg.configFile."fcitx5" = {
+    source = ../config/fcitx5;
+    recursive = true;
+  };
 }

@@ -1,0 +1,82 @@
+# Config for workstyle
+#
+# Format:
+# "pattern" = "icon"
+#
+# The pattern will be used to match against the application name, class_id or WM_CLASS.
+# The icon will be used to represent that application.
+#
+# Note if multiple patterns are present in the same application name,
+# precedence is given in order of apparition in this file.
+
+# about contents
+"lazygit" = "󰒲"
+"android-file-transfer" = "󰓷"
+"archwiki" = "󰣇"
+"rust" = ""
+"private browsing" = ""
+"private window" = ""
+"youtube" = ""
+"messenger" = ""
+" : r/" = ""
+"btop" = "󰍹"
+"nvim" = ""
+"yazi: " = "󰇥"
+"remap" = "󰌌"
+"line" = ""
+"julia" = ""
+# about app
+"alacritty" = " "
+"zen browser" = ""
+"firefox" = ""
+"chrome" = ""
+"chromium" = ""
+"vivaldi-stable" = ""
+"file manager" = ""
+"gthumb" = ""
+"calculator" = ""
+"transmission" = ""
+"videostream" = ""
+"mpv" = ""
+"music" = ""
+"disk usage" = ""
+"pdf" = ""
+"thunar" = ""
+"kitty" = ""
+"nm-connection-editor" = ''
+"spotify" = ""
+"obsidian" = ""
+"Qalculate" = ""
+"pamac" = "󰮯"
+"bluetooth" = "󰂯"
+"vlc" = "󰕼"
+"pavucontrol" = "󱕃"
+"cad" = "󰐫"
+"evince" = "󰈙"
+"slack" = ""
+"webcord" = ""
+"nwg-look" = "󱥚"
+"qt5" = "󱥚"
+"qt6" = "󱥚"
+"fcitx5" = ""
+"blender" = "󰂫"
+"thunderbird" = ""
+"bitwarden" = ""
+"helvum" = "󱘖"
+"steam" = ""
+"timeshift" = "󱫭"
+"show me the key" = "󰌓"
+"elisa" = ""
+"zathura" = "󰈙"
+"calibre" = ""
+"kdeconnect" = ""
+"zoom" = ""
+"waydroid" = ""
+"saber" = ""
+"jellyfin" = ""
+"pomodorolm" = ""
+"nextcloud" = ""
+[other]
+fallback_icon = ""
+deduplicate_icons = false
+separator = ": "
