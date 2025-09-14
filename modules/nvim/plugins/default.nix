@@ -1,4 +1,6 @@
-{
+let
+  hostName = builtins.getEnv "HOSTNAME";
+in {
   lz-n = import ./lz-n.nix;
   which-key = import ./which-key.nix;
   treesitter = import ./treesitter.nix;
@@ -24,7 +26,9 @@
   rainbow-delimiters = import ./rainbow-delimiters.nix;
   autopairs = import ./autopairs.nix;
   comment = import ./comment.nix;
-  aerial = import ./aerial.nix;
+  aerial = if hostName == "xiaomipad"
+           then {}
+           else import ./aerial.nix;
   terminal = import ./terminal.nix;
   typst-preview = import ./typst-preview.nix;
   surround = import ./surround.nix;
