@@ -1,6 +1,7 @@
 {
   programs.nixvim.plugins.aerial = {
     enable = true;
+    fzf-lua.enable = true;
     lazyLoad.settings.keys = [ "<leader>a" ];
     luaConfig.post = ''
       require("aerial").setup({
