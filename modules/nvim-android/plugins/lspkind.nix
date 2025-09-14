@@ -1,7 +1,10 @@
 {
   programs.nixvim.plugins.lspkind = {
     enable = true;
-    preset = "codicons";
-    mode = "symbol_text";
+    cmp.enable = false;
+    settings = {
+      preset = "codicons";
+      mode = "symbol_text";
+    };
   };
 }

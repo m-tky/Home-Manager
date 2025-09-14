@@ -5,6 +5,7 @@ in
 {
   settings = {
     enable = true;
+    vimAlias = true;
     colorschemes = colorscheme;
     dependencies = {
       bat.enable = true;
@@ -34,7 +35,7 @@ in
       swapfile          = false;
       whichwrap         = "b,s,<,>,[,]";
       pumblend          = 20;
-      winblend          = 20;
+      winblend          = 0;
       showmode          = false;
       conceallevel      = 1;
       hlsearch          = true;
@@ -87,6 +88,16 @@ in
         pattern = "*",
         callback = function()
           vim.cmd [[%s/\\s\\+$//e]]
+        end,
+      })
+      -- highlight yanked text
+      vim.api.nvim_create_autocmd("TextYankPost", {
+        callback = function()
+          vim.highlight.on_yank({
+            higroup = "IncSearch",  -- ハイライトに使うグループ
+            timeout = 300,          -- ミリ秒でハイライトの長さ
+            on_visual = false,
+          })
         end,
       })
     '';

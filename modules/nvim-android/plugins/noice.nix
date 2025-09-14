@@ -20,7 +20,7 @@
     };
   };
   programs.nixvim.plugins.notify = {
-    enable = false;
+    enable = true;
     lazyLoad.settings.event = [ "UIEnter" ];
   };
   programs.nixvim.keymaps = [

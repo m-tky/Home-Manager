@@ -14,6 +14,6 @@
   ];
   imports = [
     ../modules/cli.nix
-    ../modules/nvim/default.nix
+    ../modules/nvim-android/default.nix
   ];
 }

@@ -5,7 +5,10 @@
   programs.nixvim.plugins.none-ls = {
     enable = true;
     enableLspFormat = true;
-    lazyLoad.settings.event = [ "LspAttach" "BufWritePre" ];
+    lazyLoad = {
+      enable = true;
+      settings.event = [ "LspAttach" "BufWritePre" ];
+    };
     settings = {
       border = "rounded";
       debug = false;
@@ -23,7 +26,9 @@
       on_attach = null;
       on_exit = null;
       on_init = null;
-      root_dir = "require('null-ls.utils').root_pattern('.null-ls-root', '.git', 'Makefile')";
+      root_dir.__raw = ''
+        require('null-ls.utils').root_pattern('.null-ls-root', '.git', 'Makefile')
+      '';
       root_dir_async = null;
       should_attach = null;
       temp_dir = null;
@@ -40,16 +45,18 @@
         statix.enable = true;
 
         # python
-        mypy.enable = true;
+        mypy = {
+          enable = false;
+          settings.disabled_filetypes = [ "ipynb" ];
+        };
         # cpp
         cppcheck.enable = true;
 
         # markdown
-        vale.enable = true;
-        markdownlint.enable = true;
+        markdownlint_cli2.enable = true;
         # dockerfile
         hadolint.enable = true;
-          
+
         # sql
         sqlfluff.enable = true;
       };
