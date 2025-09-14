@@ -69,7 +69,6 @@ return config";
       wl-clipboard
       helvum
       nwg-drawer
-      flameshot
       foot
       wdisplays
       libnotify
