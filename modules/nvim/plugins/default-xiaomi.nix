@@ -1,6 +1,4 @@
-let
-  isNixOnDroid = builtins.pathExists "/system/bin/sh";
-in {
+{
   lz-n = import ./lz-n.nix;
   which-key = import ./which-key.nix;
   treesitter = import ./treesitter.nix;
@@ -26,9 +24,6 @@ in {
   rainbow-delimiters = import ./rainbow-delimiters.nix;
   autopairs = import ./autopairs.nix;
   comment = import ./comment.nix;
-  aerial = if isNixOnDroid
-    then {}
-    else import ./aerial.nix;
   terminal = import ./terminal.nix;
   typst-preview = import ./typst-preview.nix;
   surround = import ./surround.nix;
