@@ -31,6 +31,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
+    nixCats-nvim = {
+      url = "github:Takuya-Mukai/Nixcats";
+    };
   };
 
   outputs =
