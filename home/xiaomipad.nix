@@ -1,5 +1,13 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
+  imports = [
+    ../modules/cli.nix
+    inputs.nixCats-nvim.homeModules.default
+  ];
+  nixCats = {
+    enable = true;
+    packageNames = [ "nixCats" ];
+  };
   systemd.user.startServices = false;
   programs.home-manager.enable = true;
   services.ssh-agent.enable = true;
@@ -11,9 +19,5 @@
     gnused
     gnugrep
     findutils
-  ];
-  imports = [
-    ../modules/cli.nix
-    ../modules/nvim-android/default.nix
   ];
 }

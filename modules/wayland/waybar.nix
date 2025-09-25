@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     font-awesome
@@ -7,11 +7,9 @@
 
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
   };
 
-  xdg.configFile."waybar" = {
-    source = ../config/waybar;
-    recursive = true;
+  home.file = {
+    ".local/bin/shutdown.sh".source = ../../config/waybar/shutdown.sh;
   };
 }

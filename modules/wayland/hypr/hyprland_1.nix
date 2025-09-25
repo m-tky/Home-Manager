@@ -1,9 +1,6 @@
-{ inputs, pkgs, ... }:
+{pkgs, ... }:
 {
-  programs.hyprlock.enable = true;
   services = {
-    hypridle.enable = true;
-    hyprpaper.enable = true;
     hyprpolkitagent.enable = true;
   };
   home.file = {
@@ -16,20 +13,11 @@
     enable = true;
     package = null;
     portalPackage = null;
-    # extraConfig = ''
-    #   # Tablets
-    #   input:tablet:wacom-intuos-s-2-pen {
-    #       output = HDMI-A-1
-    #       transform = -1
-    #   }
-    # '';
     plugins = [
-      # pkgs.hyprlandPlugins.hyprspace
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprfocus
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      pkgs.hyprlandPlugins.hyprfocus
+      pkgs.hyprlandPlugins.hyprspace
       # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
-      # pkgs.hyprlandPlugins.hyprfocus
-      pkgs.hyprlandPlugins.hyprexpo
     ];
     settings = {
       # 変数定義
@@ -38,6 +26,10 @@
       "$menu" = "walker";
       "$browser" = "zen";
       "$mainMod" = "SUPER";
+
+      # config about plugins
+      "hyprfocus:mode" = "bounce";
+      "hyprfocus:bounce_strength" = "0.95";
 
       "gesture" = "3, horizontal, workspace";
 
@@ -53,9 +45,8 @@
         "nextcloud --background"
         "wayvnc_server.sh"
         "start.sh"
-        # "hyprctl plugin load ${inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo}/lib/libhyprexpo.so"
-        "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprexpo}/lib/libhyprexpo.so"
-        # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprfocus}/lib/libhyprfocus.so"
+        # "hyprctl plugin load \"$HYPR_PLUGIN_DIR/lib/hyprfocus.so\""
+        # "hyprctl plugin load \"$HYPR_PLUGIN_DIR/lib/Hyprspace.so\""
       ];
 
       # env = [
@@ -67,7 +58,6 @@
       permission = [
         "grim, screencopy, allow"
         "xdg-desktop-portal-hyprland, screencopy, allow"
-        "hyprpm, plugin, allow"
       ];
 
       # 外観 (General)
@@ -114,6 +104,7 @@
           "almostLinear,0.5,0.5,0.75,1.0"
           "quick,0.15,0,0.1,1"
         ];
+
         animation = [
           "global, 1, 10, default"
           "border, 1, 5.39, easeOutQuint"
@@ -131,26 +122,16 @@
           "workspaces, 1, 1.94, almostLinear, fade"
           "workspacesIn, 1, 1.21, almostLinear, fade"
           "workspacesOut, 1, 1.94, almostLinear, fade"
+          "hyprfocusIn, 1, 1.7, quick"
+          "hyprfocusOut, 1, 1.7, quick"
         ];
       };
 
       # プラグイン設定
-      plugin = {
-        hyprexpo = {
-          columns = 3;
-          gap_size = 5;
-          bg_col = "rgb(89b4fa)";
-          workspace_method = "center current";
-          gesture_distance = 300;
-        };
-      };
-      # plugin = {
-      #   hyprfocus = {
-      #     enabled = true;
-      #     mode = "bounce";
-      #     bounce_strength = 0.98;
-      #   };
-      # };
+      plugin = [
+        pkgs.hyprlandPlugins.hyprspace
+        pkgs.hyprlandPlugins.hyprfocus
+      ];
 
       # レイアウト
       dwindle = {
@@ -175,6 +156,7 @@
           natural_scroll = true;
         };
       };
+
 
       # デバイス固有設定
       device = {
@@ -242,7 +224,7 @@
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod SHIFT, T, exec, translate.sh"
         "$mainMod SHIFT, W, exec, wiki.sh"
-        "$mainMod, E, hyprexpo:expo, toggle"
+        "$mainMod, E, overview:toggle"
       ];
 
       bindm = [
