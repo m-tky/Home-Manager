@@ -6,7 +6,7 @@
   ];
   nixCats = {
     enable = true;
-    packageNames = [ "nixCats" ];
+    packageNames = [ "androidCats" ];
   };
   systemd.user.startServices = false;
   programs.home-manager.enable = true;
