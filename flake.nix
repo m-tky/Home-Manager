@@ -89,7 +89,7 @@
             };
             extraSpecialArgs = { inherit inputs; };
             modules = [
-              inputs.nixvim.homeModules.nixvim
+              # inputs.nixvim.homeModules.nixvim
               inputs.catppuccin.homeModules.catppuccin
               cfg.path
               {
