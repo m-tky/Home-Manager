@@ -195,7 +195,7 @@
     },
     "custom/power":{
       "format": "<span color=\"#f38ba8\">  </span>",
-      "on-click": "foot -a=terminal_shutdown shutdown.sh",
+      "on-click": "wezterm --class terminal_shutdown shutdown.sh",
       "tooltip-format": "ShutDown",
     },
     "custom/filemanager":{
