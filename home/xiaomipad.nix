@@ -13,11 +13,14 @@
   services.ssh-agent.enable = true;
   programs.git.enable = true;
   home.packages = with pkgs; [
+    openssh
+    gdown
     ripgrep
     curl
     wget
     gnused
     gnugrep
     findutils
+    unzip
   ];
 }
