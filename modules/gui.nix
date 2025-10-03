@@ -15,7 +15,13 @@ let
   };
 in
 {
-  programs.chromium.enable = true;
+  imports = [
+    inputs.zen-browser.homeModules.twilight-official
+  ];
+  programs = {
+    chromium.enable = true;
+    zen-browser.enable = true;
+  };
   services = {
     kdeconnect = {
       enable = true;
@@ -25,7 +31,6 @@ in
   home.packages = with pkgs; [
     zoom-us
     myObsidian
-    inputs.zen-browser.packages.${system}.specific
     anki-bin
     spotify
     webcord

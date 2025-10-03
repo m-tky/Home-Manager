@@ -17,6 +17,6 @@
     ../modules/wayland/wlogout/default.nix
     ../modules/wayland/hypr/default.nix
     ../modules/wayland/hypr/monitor/hyprland-monitor-thinkpad.nix
-    ../modules/systemd/nixos-home-manager.nix
+    ../modules/systemd/mini-home-manager.nix
   ];
 }
