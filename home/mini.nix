@@ -17,7 +17,7 @@
     ../modules/wayland/wlogout/default.nix
     ../modules/wayland/hypr/default.nix
     ../modules/wayland/hypr/monitor/hyprland-monitor-mini.nix
-    ../modules/rustdesk.nix
+    # ../modules/rustdesk.nix
     ../modules/systemd/mini-home-manager.nix
   ];
 }
