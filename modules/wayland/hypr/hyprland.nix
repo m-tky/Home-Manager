@@ -243,7 +243,7 @@
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod SHIFT, T, exec, translate.sh"
         "$mainMod SHIFT, W, exec, wiki.sh"
-        "$mainMod, E, hyprexpo:expo, toggle"
+        # "$mainMod, E, hyprexpo:expo, toggle"
       ];
 
       bindm = [
