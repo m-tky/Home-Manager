@@ -412,11 +412,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1759425782,
-        "narHash": "sha256-rtT2s/we1MD50iu8ARx36hAf+Ta8o233a7Z9VI7BQ3s=",
+        "lastModified": 1759681955,
+        "narHash": "sha256-Hj9K8clRVFcBoxq6/qev7A6qj9OLU1UAiFaIE50halU=",
         "owner": "Takuya-Mukai",
         "repo": "Nixcats",
-        "rev": "531fc5f3783000481161e19d3ed6996af07b3d35",
+        "rev": "f7c0dc071fe86461d6e7f5573b8a51602ff481cc",
         "type": "github"
       },
       "original": {
@@ -443,11 +443,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1759036355,
-        "narHash": "sha256-0m27AKv6ka+q270dw48KflE0LwQYrO7Fm4/2//KCVWg=",
+        "lastModified": 1759632233,
+        "narHash": "sha256-krgZxGAIIIKFJS+UB0l8do3sYUDWJc75M72tepmVMzE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e9f00bd893984bc8ce46c895c3bf7cac95331127",
+        "rev": "d7f52a7a640bc54c7bb414cca603835bf8dd4b10",
         "type": "github"
       },
       "original": {
