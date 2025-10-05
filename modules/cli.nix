@@ -178,8 +178,8 @@
   home = {
     sessionVariables = {
       BROWSER = "zen"; # zen-browserは別途インストールが必要
-      EDITOR = "nvim";
-      TERMINAL = "foot"; # footは別途インストールが必要
+      EDITOR = "vim";
+      TERMINAL = "wezterm"; # footは別途インストールが必要
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
     };
     sessionPath = [
