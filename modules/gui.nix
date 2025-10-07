@@ -1,5 +1,10 @@
 # install obsidian and chromium with home-manager
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   myObsidian = pkgs.symlinkJoin {
     name = "obsidian-with-flags";
@@ -23,6 +28,12 @@ in
     zen-browser.enable = true;
   };
   services = {
+    syncthing = {
+      enable = true;
+      tray = {
+        enable = true;
+      };
+    };
     kdeconnect = {
       enable = true;
       indicator = true;
@@ -65,7 +76,10 @@ in
       desktopName = "Messenger";
       exec = "${pkgs.chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform-hint=wayland --wayland-text-input-version=3 --enable-wayland-ime --app=https://messenger.com";
       icon = "fbmessenger";
-      categories = [ "Network" "InstantMessaging" ];
+      categories = [
+        "Network"
+        "InstantMessaging"
+      ];
     })
   ];
   # Enable the GUI applications to run in the home-manager environment
