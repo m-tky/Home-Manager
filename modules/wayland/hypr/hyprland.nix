@@ -11,6 +11,7 @@
     ".local/bin/select_language.sh".source = ./scripts/select_language.sh;
     ".local/bin/wayvnc_server.sh".source = ./scripts/wayvnc_server.sh;
     ".local/bin/wiki.sh".source = ./scripts/wiki.sh;
+    ".local/bin/notevim.sh".source = ./scripts/notevim.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -203,6 +204,7 @@
         "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || wezterm start --class specialterm &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
         "$mainMod CTRL, F, exec, wezterm start --class terminal_yazi yazi"
+        "$mainMod, N, exec, wezterm start --class note notevim.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
@@ -243,7 +245,7 @@
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod SHIFT, T, exec, translate.sh"
         "$mainMod SHIFT, W, exec, wiki.sh"
-        # "$mainMod, E, hyprexpo:expo, toggle"
+        "$mainMod, E, hyprexpo:expo, toggle"
       ];
 
       bindm = [
@@ -311,6 +313,7 @@
         "size 18% 10%, title:terminal_shutdown$"
         "center, class:terminal_shutdown$"
         "float, class:terminal_yazi$"
+        "float, class:^(note)$"
         "float, class:^(=translation_kitty)$"
         "size 35% 70%, title:^(=translation_kitty)$"
         "center, class:^(=translation_kitty)$"
