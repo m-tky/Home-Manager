@@ -8,6 +8,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    xremap-flake.url = "github:xremap/nix-flake";
+
     # settings for hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";

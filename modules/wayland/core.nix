@@ -1,7 +1,28 @@
 # ~/dotfilem/linux/wm.nix
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
+  imports = [
+    inputs.xremap-flake.homeManagerModules.default
+  ];
+  services.xremap = {
+    config.modmap = [
+      {
+        name = "Global";
+        remap = {
+          "CapsLock" = {
+            "alone" = "Esc";
+            "held" = "Ctrl_L";
+          };
+          "Space" = {
+            "Alone" = "Space";
+            "held" = "Shift_L";
+          };
+        };
+      }
+    ];
+  };
+
   programs.kitty = {
     enable = true;
     enableGitIntegration = true;
