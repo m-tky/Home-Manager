@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.hyprlock.enable = true;
   services = {
@@ -59,10 +59,10 @@
         # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprfocus}/lib/libhyprfocus.so"
       ];
 
-      # env = [
-      #   "XCURSOR_SIZE,24"
-      #   "HYPRCURSOR_SIZE,24"
-      # ];
+      env = [
+        #   "XCURSOR_SIZE,24"
+        #   "HYPRCURSOR_SIZE,24"
+      ];
 
       # パーミッション
       permission = [
@@ -204,7 +204,7 @@
         "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || wezterm start --class specialterm &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
         "$mainMod CTRL, F, exec, wezterm start --class terminal_yazi yazi"
-        "$mainMod, N, exec, wezterm start --class note notevim.sh"
+        "$mainMod, N, exec, ${config.home.homeDirectory}/.local/bin/notevim.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"

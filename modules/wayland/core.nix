@@ -110,6 +110,10 @@ return config";
         source = ../config/foot;
         recursive = true;
       };
+      ".config/walker" = {
+        source = ../config/walker;
+        recursive = true;
+      };
     };
   };
   services = {

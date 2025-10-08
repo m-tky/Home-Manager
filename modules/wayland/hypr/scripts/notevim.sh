@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+set -e
 # ----------------------------------------------------
 # 1. 環境に合わせてここを設定してください
 OBSIDIAN_VAULT="Obsidian"
@@ -20,12 +21,9 @@ TIMEOUT=5    # タイムアウト時間 (秒)
 INTERVAL=0.2 # 確認間隔 (秒)
 ELAPSED=0    # 経過時間
 
-# ファイルが存在するか、またはタイムアウトするまでループ
-while [ ! -f "$NOTE_PATH" ] && [ "$ELAPSED" -lt "$TIMEOUT" ]; do
+while [ ! -f "$NOTE_PATH" ] && awk "BEGIN{exit !($ELAPSED < $TIMEOUT)}"; do
   sleep "$INTERVAL"
-  # ELAPSED変数を小数点以下も扱えるよう計算（例：BCコマンドを使用）
-  # 多くの環境で利用可能な `awk` で計算
-  ELAPSED=$(echo "$ELAPSED + $INTERVAL" | awk '{printf "%.1f", $1}')
+  ELAPSED=$(awk "BEGIN{printf \"%.1f\", $ELAPSED + $INTERVAL}")
 done
 
 # タイムアウトした場合のエラー処理
@@ -34,8 +32,6 @@ if [ ! -f "$NOTE_PATH" ]; then
   # エラーが発生した場合は、weztermを起動せずに終了
   return 1
 fi
-
-# --- ステップ B: ファイルが存在するか確認し、Vimで開く ---
 
 wezterm start --class note vim "$NOTE_PATH" \
   "+/## Pomodoro Log" \
