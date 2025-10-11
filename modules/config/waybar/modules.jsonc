@@ -158,11 +158,6 @@
       "icon-size": 14,
       "spacing": 4,
     },
-    "hyprland/workspaces": {
-      "format": "{icon}",
-      //"disable-scroll": true,
-      //"on-click": "activate",
-    },
     "custom/notification": {
       "tooltip": false,
       "format": "{icon}",
@@ -229,4 +224,58 @@
       },
       "orientation": "inherit",
     },
+    // "hyprctl/window": {
+    //   "format": "{}",
+    //   "rewrite": {
+    //     "(.*) - Slack": " ",
+    //     "(.*) - Obsidian.*": "󰇈 ",
+    //     "(.*) — Zen Twilight": " ",
+    //     "Messenger通話": " ",
+    //     "Messenger": " ",
+    //     "Mission Center": "󰍹 ",
+    //     "RustDesk": " ",
+    //     "foot": " ",
+    //     "Volume Control": "󱕃 ",
+    //     "Bluetooth Devices": "󰂯",
+    //     "Network Connections": " ",
+    //     "Ryujinx(.*)": "󰟡 ",
+    //     "Azahar(.*)": "󱎓",
+    //     "class<org.wezfurlong.wezterm>": " ",
+    //     "class<specialterm>": " ",
+    //     "Virtual Machine Manager": "",
+    //     "(.*) - Thunar": " ",
+    //     "org.pwmt.zathura": "󰈙",
+    //     "zoom": " ",
+    //     "calibre - (.*)": " ",
+    //     "Nextcloud(.*)": " ",
+    //     "Webcord": " ",
+    //     "(.*)": " ",
+    //     "KDE Connect": " ",
+    //   },
+    // },
+    "hyprland/workspaces": {
+        // ワークスペース自体のフォーマット (アイコンとウィンドウ一覧を表示)
+        "format": "{icon} {windows}", 
+        "format-window-separator": "",
+
+        // ======== ワークスペース・タスクバーの設定 ========
+        "workspace-taskbar": {
+            "enable": true, // 機能を有効化
+
+            // アクティブなウィンドウにCSSクラスを追加（スタイリング用）
+            "update-active-window": true, 
+
+            // ウィンドウアイコンの表示フォーマット
+            // {icon} と {title} が使用可能。タイトルを20文字に制限
+            "format": "{icon}", 
+
+            "icon-size": 18, // アイコンのサイズ (px)
+
+            // 使用するアイコンテーマ（OSにインストールされているもの）
+            "icon-theme": "Papirus-Dark", 
+            
+            // 外部スクリプトでクリック動作をカスタマイズ
+            "on-click-window": "./focus-window.sh {address} {button}" 
+        }
+    }
 }

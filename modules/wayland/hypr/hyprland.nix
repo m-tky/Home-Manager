@@ -243,7 +243,7 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        "$mainMod SHIFT, T, exec, translate.sh"
+        "$mainMod SHIFT, T, exec, ~/.local/bin/translate.sh"
         "$mainMod SHIFT, W, exec, wiki.sh"
         "$mainMod, E, hyprexpo:expo, toggle"
       ];
