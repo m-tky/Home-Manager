@@ -5,6 +5,9 @@
   ...
 }:
 {
+  home.packages = with pkgs; [
+    ryubing
+  };
   programs.home-manager.enable = true;
   systemd.user.startServices = true;
   imports = [

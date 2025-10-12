@@ -19,6 +19,7 @@
         enable = false;
       };
     };
+    firefox.enable = true;
     hyprland.enable = true;
     kvantum.enable = true;
     lazygit.enable = true;

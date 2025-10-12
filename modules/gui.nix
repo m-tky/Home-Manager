@@ -18,13 +18,30 @@ let
         --add-flags "--enable-wayland-ime"
     '';
   };
+  mychromium = pkgs.symlinkJoin {
+    name = "chromium-with-flags";
+    paths = [ pkgs.chromium ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/chromium \
+        --add-flags "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,UseOzonePlatform" \
+        --add-flags "--ozone-platform=wayland" \
+        --add-flags "--wayland-text-input-version=3" \
+        --add-flags "--enable-wayland-ime" \
+        --add-flags "--disable-features=WaylandWpColorManagerV1"
+    '';
+  };
 in
 {
   imports = [
     inputs.zen-browser.homeModules.twilight-official
   ];
   programs = {
-    chromium.enable = true;
+    firefox.enable = true;
+    chromium = {
+      enable = true;
+      package = mychromium;
+    };
     zen-browser.enable = true;
   };
   services = {
@@ -40,6 +57,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    ryubing
     zoom-us
     myObsidian
     anki-bin
