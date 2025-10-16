@@ -37,7 +37,7 @@
       "$terminal" = "wezterm";
       "$fileManager" = "thunar";
       "$menu" = "walker";
-      "$browser" = "zen";
+      "$browser" = "firefox";
       "$mainMod" = "SUPER";
 
       "gesture" = "3, horizontal, workspace";

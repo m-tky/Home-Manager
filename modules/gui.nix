@@ -33,16 +33,12 @@ let
   };
 in
 {
-  imports = [
-    inputs.zen-browser.homeModules.twilight-official
-  ];
   programs = {
     firefox.enable = true;
     chromium = {
       enable = true;
       package = mychromium;
     };
-    zen-browser.enable = true;
   };
   services = {
     syncthing = {
