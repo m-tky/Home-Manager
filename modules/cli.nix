@@ -11,23 +11,42 @@
     delta
     python313Packages.jupytext
     rclone
+    unzip
   ];
 
   programs = {
     bat.enable = true;
+    git = {
+      enable = true;
+      extraConfig = {
+        core = {
+          pager = "delta --side-by-side";
+        };
+        interactive = {
+          diffFilter = "delta --color-only";
+        };
+        delta = {
+          navigate = true;
+          light = false;
+        };
+      };
+    };
     lazygit = {
       enable = true;
       settings = {
         gui.showIcons = true;
         git = {
+          allBranchesLogCmds = [
+            "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --"
+          ];
+          branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' $branchName --";
           paging = {
             colorArg = "always";
-            paper = "delta --dark --paging=never";
+            pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
           };
-          allBranchesLogCmds = [
-            "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(blue)%h%C(reset) %C(green)%ad%C(reset) %C(magenta)%an%C(reset)%n%C(white)%s%C(reset)'"
-          ];
-          branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(blue)%h%C(reset) %C(green)%ad%C(reset) %C(magenta)%an%C(reset)%n%C(white)%s%C(reset)' {{branchName}";
+          log = {
+            showWholeGraph = true;
+          };
           disableMerging = false;
           disableRebasing = false;
         };
