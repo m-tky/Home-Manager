@@ -8,6 +8,13 @@
   home.packages = with pkgs; [
     ryubing
   ];
+  services.ollama = {
+    enable = true;
+    environmentVariables = {
+      OLLAMA_LLM_LIBRARY = "cpu";
+      OLLAMA_HOST = "0.0.0.0:11434";
+    };
+  };
   programs.home-manager.enable = true;
   systemd.user.startServices = true;
   imports = [
