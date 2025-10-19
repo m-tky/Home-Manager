@@ -77,7 +77,7 @@ in
     networkmanagerapplet
     mission-center
     kdePackages.kalgebra
-    jellyfin-mpv-shim
+    feishin
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-media-tags-plugin
@@ -99,4 +99,7 @@ in
   # Enable the GUI applications to run in the home-manager environment
   xdg.enable = true;
   # Optional: Set up a desktop entry for Obsidian
+  home.file = {
+    ".config/zathura/zathurarc".source = ./config/zathura/zathurarc;
+  };
 }

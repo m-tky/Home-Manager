@@ -201,6 +201,7 @@
 
         # my custom keybinds
         "$mainMod, O, exec, hyprctl clients | grep -q 'initialClass: obsidian' && hyprctl dispatch togglespecialworkspace obsidian || obsidian &"
+        "$mainMod SHIFT, O, movetoworkspace, special:obsidian"
         "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || wezterm start --class specialterm &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
         "$mainMod CTRL, F, exec, wezterm start --class terminal_yazi yazi"
