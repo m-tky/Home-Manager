@@ -10,13 +10,13 @@
       {
         name = "Global";
         remap = {
-          "CapsLock" = {
-            "alone" = "Esc";
-            "held" = "Ctrl_L";
+          "KEY_CAPSLOCK" = {
+            "alone" = "KEY_ESC";
+            "held" = "KEY_LEFTCTRL";
           };
-          "Space" = {
-            "Alone" = "Space";
-            "held" = "Shift_L";
+          "KEY_SPACE" = {
+            "alone" = "KEY_SPACE";
+            "held" = "KEY_LEFTSHIFT";
           };
         };
       }
