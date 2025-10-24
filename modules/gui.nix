@@ -79,6 +79,7 @@ in
     kdePackages.kalgebra
     feishin
     xfce.thunar
+    xfce.thunar-volman
     xfce.thunar-archive-plugin
     xfce.thunar-media-tags-plugin
     xournalpp
