@@ -1,11 +1,17 @@
 # ~/dotfilem/linux/wm.nix
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  pkgsStable,
+  inputs,
+  ...
+}:
 
 {
   imports = [
     inputs.xremap-flake.homeManagerModules.default
   ];
   services.xremap = {
+    enable = true;
     config.modmap = [
       {
         name = "Global";
@@ -73,30 +79,34 @@ config.warn_about_missing_glyphs = false
 return config";
   };
   home = {
-    packages = with pkgs; [
-      # inputs.quickshell.packages.x86_64-linux.default
-      selectdefaultapplication
-      workstyle
-      power-profiles-daemon
-      killall
-      hyprshot
-      walker
-      wlvncc
-      nwg-displays
-      pavucontrol
-      wayvnc
-      kdePackages.xwaylandvideobridge
-      wf-recorder
-      wl-clipboard
-      helvum
-      nwg-drawer
-      foot
-      wdisplays
-      libnotify
-      translate-shell
-      wiki-tui
-      swaynotificationcenter
-    ];
+    packages =
+      with pkgs;
+      [
+        # inputs.quickshell.packages.x86_64-linux.default
+        selectdefaultapplication
+        workstyle
+        power-profiles-daemon
+        killall
+        hyprshot
+        walker
+        wlvncc
+        nwg-displays
+        pavucontrol
+        wayvnc
+        wf-recorder
+        wl-clipboard
+        helvum
+        nwg-drawer
+        foot
+        wdisplays
+        libnotify
+        translate-shell
+        wiki-tui
+        swaynotificationcenter
+      ]
+      ++ [
+        pkgsStable.libsForQt5.xwaylandvideobridge
+      ];
     file = {
       ".config/swaync" = {
         source = ../config/swaync;

@@ -18,7 +18,7 @@
     bat.enable = true;
     git = {
       enable = true;
-      extraConfig = {
+      settings = {
         core = {
           pager = "delta --side-by-side";
         };

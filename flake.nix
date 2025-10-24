@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +39,12 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      nixpkgs,
+      nixpkgs-stable,
+      home-manager,
+      ...
+    }@inputs:
     let
       # 各マシンごとに設定（system, path, username, homeDirectory）を指定
       userMachines = {
@@ -80,6 +86,10 @@
         let
           fullName = "${cfg.username}@${machine}";
           system = cfg.system;
+          pkgsStable = import nixpkgs-stable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         in
         {
           name = fullName;
@@ -88,7 +98,7 @@
               inherit system;
               config.allowUnfree = true;
             };
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs pkgsStable; };
             modules = [
               # inputs.nixvim.homeModules.nixvim
               inputs.catppuccin.homeModules.catppuccin
