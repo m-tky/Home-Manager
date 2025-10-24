@@ -127,6 +127,6 @@ return config";
     };
   };
   services = {
-    copyq.enable = true;
+    # copyq.enable = true;
   };
 }
