@@ -153,6 +153,23 @@ window#waybar.empty #window {
   padding-right: 5px;
   padding-left: 5px;
 }
-#custom-waybar-media.paused {
-    color: @subtext1;
+
+#custom-playerstatus {
+    /* デフォルト（Stopped状態）の色 */
+    color: #cdd6f4; /* Catppuccin MacchiatoのTextなど */
+}
+
+#custom-playerctatus.Playing {
+    /* 再生中の色（アイコンとテキスト全体に適用される） */
+    color: #a6e3a1; /* Green */
+}
+
+#custom-playerctatus.Paused {
+    /* 一時停止中の色 */
+    color: #f38ba8; /* Red */
+}
+
+#custom-playerctatus.Stopped {
+    /* 停止中・プレイヤーなしの色 */
+    color: #89b4fa; /* Blue */
 }

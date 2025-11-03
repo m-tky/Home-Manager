@@ -12,6 +12,9 @@
     ".local/bin/wayvnc_server.sh".source = ./scripts/wayvnc_server.sh;
     ".local/bin/wiki.sh".source = ./scripts/wiki.sh;
     ".local/bin/notevim.sh".source = ./scripts/notevim.sh;
+    ".local/bin/raycast.sh".source = ./scripts/raycast.sh;
+    ".local/bin/findfile.sh".source = ./scripts/findfile.sh;
+    ".local/bin/findcontent.sh".source = ./scripts/findcontent.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -36,7 +39,7 @@
       # 変数定義
       "$terminal" = "wezterm";
       "$fileManager" = "thunar";
-      "$menu" = "walker";
+      "$menu" = "fuzzel";
       "$browser" = "firefox";
       "$mainMod" = "SUPER";
 
@@ -191,6 +194,7 @@
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
+        "$mainMod SHIFT, R, exec, $HOME/.local/bin/raycast.sh"
         "$mainMod, P, pseudo,"
         "$mainMod, T, togglesplit,"
         "$mainMod, F, fullscreen"
@@ -333,6 +337,14 @@
         "float, class:^(nm-connection-editor)$"
         "float, class:^(thunar)$"
         "float,class: ^(org.pulseaudio.pavucontrol)$"
+
+        "float, class:^(FindFile)$"
+        "center, class:^(FindFile)$"
+        "size 60% 60%, class:^(FindFile)$"
+
+        "float, class:^(FindContent)$"
+        "center, class:^(FindContent)$"
+        "size 60% 60%, class:^(FindContent)$"
       ];
     };
   };

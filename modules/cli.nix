@@ -3,13 +3,14 @@
 {
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
-    pure-prompt
+    bash
+    python3
+    jq
     tree
     tesseract
     gemini-cli
     neofetch
     delta
-    python313Packages.jupytext
     rclone
     unzip
   ];

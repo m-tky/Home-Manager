@@ -1,193 +1,304 @@
-#!/usr/bin/env python3
-import gi
-gi.require_version("Playerctl", "2.0")
-from gi.repository import Playerctl, GLib
-from gi.repository.Playerctl import Player
-import argparse
-import logging
-import sys
-import signal
-import gi
+#!/usr/bin/env nix-shell
+#! nix-shell -i python3 -p python3 python3Packages.pygobject3 playerctl
+
 import json
+import math
 import os
-from typing import List
+import sys
+import textwrap
+import traceback
 
-logger = logging.getLogger(__name__)
+import psutil
+from gi.repository import GLib
+from pydbus import SessionBus
 
-def signal_handler(sig, frame):
-    logger.info("Received signal to stop, exiting")
-    sys.stdout.write("\n")
-    sys.stdout.flush()
-    # loop.quit()
-    sys.exit(0)
+MPRIS_PLAYER_OBJ_PATH = "/org/mpris/MediaPlayer2"
+MPRIS_PLAYER_IFACE = "org.mpris.MediaPlayer2.Player"
+KNOWN_SERVICES = ["org.mpris.MediaPlayer2.mpv", "org.kde.plasma.browser_integration"]
+KNOWN_BROWSER_MAP = {
+    "mozilla": "Firefox",
+    "chromium": "Chromium",
+    "chrome": "Google Chrome",
+}
 
 
-class PlayerManager:
-    def __init__(self, selected_player=None, excluded_player=[]):
-        self.manager = Playerctl.PlayerManager()
-        self.loop = GLib.MainLoop()
-        self.manager.connect(
-            "name-appeared", lambda *args: self.on_player_appeared(*args))
-        self.manager.connect(
-            "player-vanished", lambda *args: self.on_player_vanished(*args))
+class Player:
+    def __init__(self, bus, owner_name):
+        self._bus = bus
+        self.owner_name = owner_name
+        self.owner_process = self._get_owner_process()
+        self._obj = self._bus.get(owner_name, MPRIS_PLAYER_OBJ_PATH)
 
-        signal.signal(signal.SIGINT, signal_handler)
-        signal.signal(signal.SIGTERM, signal_handler)
-        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
-        self.selected_player = selected_player
-        self.excluded_player = excluded_player.split(',') if excluded_player else []
-
-        self.init_players()
-
-    def init_players(self):
-        for player in self.manager.props.player_names:
-            if player.name in self.excluded_player:
-                continue
-            if self.selected_player is not None and self.selected_player != player.name:
-                logger.debug(f"{player.name} is not the filtered player, skipping it")
-                continue
-            self.init_player(player)
-
-    def run(self):
-        logger.info("Starting main loop")
-        self.loop.run()
-
-    def init_player(self, player):
-        logger.info(f"Initialize new player: {player.name}")
-        player = Playerctl.Player.new_from_name(player)
-        player.connect("playback-status",
-                       self.on_playback_status_changed, None)
-        player.connect("metadata", self.on_metadata_changed, None)
-        self.manager.manage_player(player)
-        self.on_metadata_changed(player, player.props.metadata)
-
-    def get_players(self) -> List[Player]:
-        return self.manager.props.players
-
-    def write_output(self, text, player):
-        logger.debug(f"Writing output: {text}")
-
-        output = {"text": text,
-                  "class": "custom-" + player.props.player_name,
-                  "alt": player.props.player_name}
-
-        sys.stdout.write(json.dumps(output) + "\n")
-        sys.stdout.flush()
-
-    def clear_output(self):
-        sys.stdout.write("\n")
-        sys.stdout.flush()
-
-    def on_playback_status_changed(self, player, status, _=None):
-        logger.debug(f"Playback status changed for player {player.props.player_name}: {status}")
-        self.on_metadata_changed(player, player.props.metadata)
-
-    def get_first_playing_player(self):
-        players = self.get_players()
-        logger.debug(f"Getting first playing player from {len(players)} players")
-        if len(players) > 0:
-            # if any are playing, show the first one that is playing
-            # reverse order, so that the most recently added ones are preferred
-            for player in players[::-1]:
-                if player.props.status == "Playing":
-                    return player
-            # if none are playing, show the first one
-            return players[0]
-        else:
-            logger.debug("No players found")
+    def _get_owner_process(self):
+        obj = self._bus.get("org.freedesktop.DBus", "/org/freedesktop/DBus")
+        pid = obj.GetConnectionUnixProcessID(self.owner_name)
+        if pid is None:
             return None
 
-    def show_most_important_player(self):
-        logger.debug("Showing most important player")
-        # show the currently playing player
-        # or else show the first paused player
-        # or else show nothing
-        current_player = self.get_first_playing_player()
-        if current_player is not None:
-            self.on_metadata_changed(current_player, current_player.props.metadata)
-        else:    
-            self.clear_output()
+        return psutil.Process(pid)
 
-    def on_metadata_changed(self, player, metadata, _=None):
-        logger.debug(f"Metadata changed for player {player.props.player_name}")
-        player_name = player.props.player_name
-        artist = player.get_artist()
-        title = player.get_title()
+    @staticmethod
+    def _identify_browser_by_cmdline(cmdline):
+        for fragment, browser in KNOWN_BROWSER_MAP.items():
+            if fragment in cmdline:
+                return browser
+        return None
 
-        track_info = ""
-        if player_name == "spotify" and "mpris:trackid" in metadata.keys() and ":ad:" in player.props.metadata["mpris:trackid"]:
-            track_info = "Advertisement"
-        elif artist is not None and title is not None:
-            track_info = f"{artist} - {title}"
+    @property
+    def name(self):
+        name = self.owner_process.name()
+        if name == "plasma-browser-integration-host":
+            cmdline = " ".join(self.owner_process.cmdline())
+            return self._identify_browser_by_cmdline(cmdline)
+        return name
+
+    @property
+    def status(self):
+        return self._obj.PlaybackStatus.lower()
+
+    @property
+    def title(self):
+        return self._obj.Metadata.get("xesam:title")
+
+    @property
+    def album(self):
+        return self._obj.Metadata.get("xesam:album")
+
+    @property
+    def artist(self):
+        artists = self._obj.Metadata.get("xesam:artist")
+        return ", ".join(artists) if isinstance(artists, list) else artists
+
+    def playpause(self):
+        if self._obj.CanPlay or self._obj.CanPause:
+            self._obj.PlayPause()
+
+    def play(self):
+        if self._obj.CanPlay:
+            self._obj.Play()
+
+    def pause(self):
+        if self._obj.CanPause:
+            self._obj.Pause()
+
+    def previous(self):
+        if self._obj.CanGoPrevious:
+            self._obj.Previous()
+
+    def next(self):
+        if self._obj.CanGoNext:
+            self._obj.Next()
+
+
+class MediaWatcher:
+    def __init__(self, bus, do_print_status=False):
+        self._bus = bus
+
+        self._owner_to_player = self._find_players()
+        self.player = self._find_active_player()
+
+        if do_print_status:
+            self.status_builder = MediaWatcherStatusBuilder(self)
+            self.status_builder.print_status()
         else:
-            track_info = title
+            self.status_builder = None
 
-        if track_info:
-            if player.props.status == "Playing":
-                track_info = " " + track_info
+    def __enter__(self):
+        self._subscription = self._bus.subscribe(
+            iface="org.freedesktop.DBus.Properties",
+            signal="PropertiesChanged",
+            object=MPRIS_PLAYER_OBJ_PATH,
+            arg0=MPRIS_PLAYER_IFACE,
+            signal_fired=self._mpris_signal_handler,
+        )
+        return self
+
+    def __exit__(self, exc_type, exc_value, tb):
+        if exc_type is not None:
+            traceback.print_exception(exc_type, exc_value, tb)
+        self._subscription.unsubscribe()
+
+    def _find_players(self):
+        owner_to_player = {}
+        for service in KNOWN_SERVICES:
+            try:
+                owner_name = self._bus.dbus.GetNameOwner(service)
+            except GLib.Error:
+                continue
+            owner_to_player[owner_name] = Player(bus=self._bus, owner_name=owner_name)
+        return owner_to_player
+
+    def _group_players_by_status(self):
+        status_to_players = {}
+        for player in self._owner_to_player.values():
+            if player.status in status_to_players:
+                status_to_players[player.status].append(player)
             else:
-                track_info = " " + track_info
-        # only print output if no other player is playing
-        current_playing = self.get_first_playing_player()
-        if current_playing is None or current_playing.props.player_name == player.props.player_name:
-            self.write_output(track_info, player)
+                status_to_players[player.status] = [player]
+        return status_to_players
+
+    def _find_active_player(self):
+        players_by_status = self._group_players_by_status()
+
+        if players_by_status.get("playing"):
+            players_by_status["playing"].sort(
+                key=lambda x: x.owner_process.create_time(), reverse=True
+            )
+            return players_by_status["playing"][0]
+        elif players_by_status.get("paused"):
+            return players_by_status["paused"][0]
+        elif players_by_status.get("stopped"):
+            return players_by_status["stopped"][0]
+
+        return None
+
+    def _mpris_signal_handler(self, sender_name, *_):
+        if sender_name not in self._owner_to_player:
+            self._owner_to_player[sender_name] = Player(
+                bus=self._bus, owner_name=sender_name
+            )
+
+        self.player = self._find_active_player()
+
+        if self.status_builder:
+            self.status_builder.print_status()
+
+
+class MediaWatcherStatusBuilder:
+    def __init__(self, watcher):
+        self.watcher = watcher
+
+    def _build_tooltip(self):
+        tooltip = []
+        player = self.watcher.player
+
+        if player == None:
+            return None
+
+        if player.status in ["playing", "paused"]:
+            tooltip.append(player.status.title() + ":")
+        if player.title:
+            tooltip.append(player.title)
+        if player.album:
+            tooltip.append(player.album)
+        if player.artist:
+            tooltip.append(player.artist)
+        if player.name:
+            tooltip.append("(" + player.name + ")")
+
+        return "\n".join(tooltip) if tooltip else None
+
+    def _build_text(
+        self, max_width, title_to_artist_ratio=2 / 3, separator=" - ", placeholder="…"
+    ):
+        max_width = max_width - len(separator)
+        player = self.watcher.player
+
+        if player == None:
+            return None
+
+        if player.title and player.artist:
+            title_width = math.floor(max_width * title_to_artist_ratio)
+            artist_width = max_width - title_width
+        elif player.title and not player.artist:
+            title_width = max_width
+            artist_width = 0
+        elif player.artist and not player.title:
+            title_width = 0
+            artist_width = max_width
         else:
-            logger.debug(f"Other player {current_playing.props.player_name} is playing, skipping")
+            return None
 
-    def on_player_appeared(self, _, player):
-        logger.info(f"Player has appeared: {player.name}")
-        if player.name in self.excluded_player:
-            logger.debug(
-                "New player appeared, but it's in exclude player list, skipping")
-            return
-        if player is not None and (self.selected_player is None or player.name == self.selected_player):
-            self.init_player(player)
+        short_title = (
+            None
+            if title_width == 0
+            else textwrap.shorten(
+                player.title, width=title_width, placeholder=placeholder
+            )
+        )
+        short_artist = (
+            None
+            if artist_width == 0
+            else textwrap.shorten(
+                player.artist, width=artist_width, placeholder=placeholder
+            )
+        )
+
+        if short_title and short_artist:
+            return separator.join((short_title, short_artist))
+        elif short_title and not short_artist:
+            return short_title
+        elif short_artist and not short_title:
+            return short_artist
+
+    def _build_classes(self):
+        classes = []
+        player = self.watcher.player
+
+        if player == None:
+            return classes
+
+        if player.status in ["playing", "paused"]:
+            classes.append(player.status)
         else:
-            logger.debug(
-                "New player appeared, but it's not the selected player, skipping")
+            classes.append("stopped")
 
-    def on_player_vanished(self, _, player):
-        logger.info(f"Player {player.props.player_name} has vanished")
-        self.show_most_important_player()
+        return classes
 
-def parse_arguments():
-    parser = argparse.ArgumentParser()
+    def build_status(self):
+        return json.dumps(
+            {
+                "tooltip": self._build_tooltip(),
+                "text": self._build_text(max_width=80),
+                "class": self._build_classes(),
+            }
+        )
 
-    # Increase verbosity with every occurrence of -v
-    parser.add_argument("-v", "--verbose", action="count", default=0)
+    def print_status(self):
+        print(self.build_status())
+        sys.stdout.flush()
 
-    parser.add_argument("-x", "--exclude", "- Comma-separated list of excluded player")
 
-    # Define for which player we"re listening
-    parser.add_argument("--player")
-
-    parser.add_argument("--enable-logging", action="store_true")
-
-    return parser.parse_args()
+def print_usage():
+    name = os.path.basename(sys.argv[0])
+    print("Usage:\n\t{} (status|playpause|previous|next)\n".format(name))
 
 
 def main():
-    arguments = parse_arguments()
+    bus = SessionBus()
+    loop = GLib.MainLoop()
 
-    # Initialize logging
-    if arguments.enable_logging:
-        logfile = os.path.join(os.path.dirname(
-            os.path.realpath(__file__)), "media-player.log")
-        logging.basicConfig(filename=logfile, level=logging.DEBUG,
-                            format="%(asctime)s %(name)s %(levelname)s:%(lineno)d %(message)s")
+    if len(sys.argv) == 2:
+        arg = sys.argv[1]
+    else:
+        print_usage()
+        return
 
-    # Logging is set by default to WARN and higher.
-    # With every occurrence of -v it's lowered by one
-    logger.setLevel(max((3 - arguments.verbose) * 10, 0))
-
-    logger.info("Creating player manager")
-    if arguments.player:
-        logger.info(f"Filtering for player: {arguments.player}")
-    if arguments.exclude:
-        logger.info(f"Exclude player {arguments.exclude}")
-
-    player = PlayerManager(arguments.player, arguments.exclude)
-    player.run()
+    with MediaWatcher(bus, do_print_status=(arg == "status")) as media_watcher:
+        if arg == "status":
+            while True:
+                try:
+                    loop.run()
+                except GLib.Error:
+                    pass
+        elif arg == "playpause":
+            if media_watcher.player != None:
+                media_watcher.player.playpause()
+        elif arg == "play":
+            if media_watcher.player != None:
+                media_watcher.player.play()
+        elif arg == "pause":
+            if media_watcher.player != None:
+                media_watcher.player.pause()
+        elif arg == "previous":
+            if media_watcher.player != None:
+                media_watcher.player.previous()
+        elif arg == "next":
+            if media_watcher.player != None:
+                media_watcher.player.next()
+        else:
+            print_usage()
+            return
 
 
 if __name__ == "__main__":

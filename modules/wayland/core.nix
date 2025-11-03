@@ -83,12 +83,15 @@ return config";
       with pkgs;
       [
         # inputs.quickshell.packages.x86_64-linux.default
+        gtk3
+        playerctl
+        jq
         selectdefaultapplication
         workstyle
         power-profiles-daemon
         killall
         hyprshot
-        walker
+        fuzzel
         wlvncc
         nwg-displays
         pavucontrol
@@ -120,8 +123,8 @@ return config";
         source = ../config/foot;
         recursive = true;
       };
-      ".config/walker" = {
-        source = ../config/walker;
+      ".config/fuzzel" = {
+        source = ../config/fuzzel;
         recursive = true;
       };
     };

@@ -71,7 +71,6 @@ in
     ffmpegthumbnailer
     android-file-transfer
     isoimagewriter
-    nextcloud-client
     showmethekey
     cheese
     networkmanagerapplet

@@ -15,15 +15,12 @@
   ],
   "modules-center": [
       "hyprland/workspaces",
+      "custom/playerstatus",
   ],
   "modules-right": [
-      //"mpd",
       "power-profiles-daemon",
       "pulseaudio",
-      // "custom/waybar-media",
-      // "wireplumber",
       "group/pcinfo",
-      //"custom/power",
       "network",
       "custom/notification",
   ],

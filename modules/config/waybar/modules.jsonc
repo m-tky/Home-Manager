@@ -93,7 +93,6 @@
         "disk",
         "cpu",
         "memory",
-        "temperature",
       ],
       "orientation": "inherit",
     },
@@ -190,7 +189,7 @@
     },
     "custom/power":{
       "format": "<span color=\"#f38ba8\">  </span>",
-      "on-click": "wezterm --class terminal_shutdown shutdown.sh",
+      "on-click": "wezterm start --class terminal_shutdown shutdown.sh",
       "tooltip-format": "ShutDown",
     },
     "custom/filemanager":{
@@ -205,10 +204,10 @@
     },
     "custom/waybar-media": {
       "return-type": "json",
-      "exec": "waybar-media.py status  ",
-      "on-click": "waybar-media.py playpause",
-      "on-scroll-up": "waybar-media.py previous",
-      "on-scroll-down": "waybar-media.py next",
+      "exec": "mediaplayer.py status  ",
+      "on-click": "mediaplayer.py playpause",
+      "on-scroll-up": "mediaplayer.py previous",
+      "on-scroll-down": "mediaplayer.py next",
       "escape": true
     },
     "group/group-power":{
@@ -253,6 +252,17 @@
     //     "KDE Connect": " ",
     //   },
     // },
+    "custom/playerstatus": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "$HOME/.local/bin/playerctl.zsh",
+        "interval": 2,
+        "tooltip": true,
+        "max-length": 50,
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+    },
     "hyprland/workspaces": {
         // ワークスペース自体のフォーマット (アイコンとウィンドウ一覧を表示)
         "format": "{icon} {windows}", 
