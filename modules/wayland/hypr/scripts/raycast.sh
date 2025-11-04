@@ -3,16 +3,16 @@ set -e
 
 # === メニュー構築 ===
 options=(
-  "󱓞 Launch App"
   " Web Search"
   " Calculator"
   "⏻ System"
   "󰈙 Open File by filename"
   " Open File by Content"
+  "󱓞 Launch App"
   "󰿅 Exit"
 )
 
-choice=$(printf '%s\n' "${options[@]}" | fuzzel --dmenu --prompt "Raycast Menu:")
+choice=$(printf '%s\n' "${options[@]}" | fuzzel --dmenu --prompt "Menu:")
 
 case "$choice" in
 *"Web Search"*)
@@ -22,7 +22,7 @@ case "$choice" in
 *"Calculator"*)
   expr=$(fuzzel --dmenu --prompt "Calc:")
   if [ -n "$expr" ]; then
-    result=$(python3 -c "print(eval('$expr'))" 2>/dev/null || echo "Error")
+    result=$(python3 -c "import numpy as np; print(np.round(eval('$expr'), 3))" 2>/dev/null || echo "Error")
     notify-send "󰪚 Result" "$expr = $result"
   fi
   ;;

@@ -194,7 +194,7 @@
         "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
-        "$mainMod SHIFT, R, exec, $HOME/.local/bin/raycast.sh"
+        "$mainMod, SPACE, exec, $HOME/.local/bin/raycast.sh"
         "$mainMod, P, pseudo,"
         "$mainMod, T, togglesplit,"
         "$mainMod, F, fullscreen"

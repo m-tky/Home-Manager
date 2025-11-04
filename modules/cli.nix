@@ -4,7 +4,7 @@
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
     bash
-    python3
+    (python3.withPackages (ps: with ps; [ numpy ]))
     jq
     tree
     tesseract
