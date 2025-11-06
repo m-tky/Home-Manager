@@ -11,11 +11,13 @@
     gemini-cli
     neofetch
     delta
-    rclone
     unzip
   ];
 
   programs = {
+    rclone = {
+      enable = true;
+    };
     bat.enable = true;
     git = {
       enable = true;
