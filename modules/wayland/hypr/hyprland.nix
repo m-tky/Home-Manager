@@ -15,6 +15,7 @@
     ".local/bin/raycast.sh".source = ./scripts/raycast.sh;
     ".local/bin/findfile.sh".source = ./scripts/findfile.sh;
     ".local/bin/findcontent.sh".source = ./scripts/findcontent.sh;
+    ".local/bin/rcloneObsidianDocuments.sh".source = ./scripts/rcloneObsidianDocuments.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;

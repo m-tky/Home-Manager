@@ -834,11 +834,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1762330735,
-        "narHash": "sha256-bXGoqMtlwM9FdhFFl9q8r2GQhnBwB7VRyVpsH88fWwM=",
+        "lastModified": 1762600967,
+        "narHash": "sha256-d60nZrXSAq0AOLNjs3znfQ7GDbnQe/kLD0Khe/OVsH8=",
         "owner": "Takuya-Mukai",
         "repo": "Nixcats",
-        "rev": "c8be6b5a82dda1dec96a18635eda5b41f19c2bb9",
+        "rev": "3b3edc709e06de4672b298380f078ee0058415f0",
         "type": "github"
       },
       "original": {
