@@ -27,6 +27,7 @@
     thunderbird.enable = true;
     tmux.enable = true;
     wezterm.enable = true;
+    kitty.enable = true;
     yazi.enable = true;
     hyprlock.enable = true;
     zathura.enable = true;

@@ -38,7 +38,7 @@
     ];
     settings = {
       # 変数定義
-      "$terminal" = "wezterm";
+      "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$menu" = "fuzzel";
       "$browser" = "firefox";
@@ -207,9 +207,9 @@
         # my custom keybinds
         "$mainMod, O, exec, hyprctl clients | grep -q 'initialClass: obsidian' && hyprctl dispatch togglespecialworkspace obsidian || obsidian &"
         "$mainMod SHIFT, O, movetoworkspace, special:obsidian"
-        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || wezterm start --class specialterm &"
+        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || kitty --class specialterm &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
-        "$mainMod CTRL, F, exec, wezterm start --class terminal_yazi yazi"
+        "$mainMod CTRL, F, exec, kitty --class terminal_yazi yazi"
         "$mainMod, N, exec, ${config.home.homeDirectory}/.local/bin/notevim.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"

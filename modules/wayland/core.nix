@@ -34,13 +34,14 @@
     enableGitIntegration = true;
     shellIntegration.enableZshIntegration = true;
     settings = {
-      font_family = "family=\"Moralerspace Argon\" style=Regular";
-      bold_font = "family=\"Moralerspace Argon\" style=Bold";
-      italic_font = "family=\"Moralerspace Radon\" style=Regular";
-      bold_italic_font = "family=\"Moralerspace Radon\" style=Bold";
-      font_size = "10.5";
+      font_family = "family=\"Moralerspace Argon\" style=\"Regular\"";
+      bold_font = "family=\"Moralerspace Argon\" style=\"Bold\"";
+      italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
+      bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
+      font_size = "11.0";
+      background_opacity = "0.85";
+      allow_remote_control = "yes";
     };
-    themeFile = "Catppuccin-Mocha";
   };
   programs.wezterm = {
     enable = true;
@@ -125,6 +126,10 @@ return config";
       };
       ".config/fuzzel" = {
         source = ../config/fuzzel;
+        recursive = true;
+      };
+      ".config/fontconfig" = {
+        source = ../config/fontconfig;
         recursive = true;
       };
     };

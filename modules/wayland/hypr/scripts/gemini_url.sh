@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 # --- 設定 ---
 OBSIDIAN_INBOX_DIR="$HOME/Documents/Obsidian/01_Inbox"
@@ -7,16 +7,16 @@ echo $GEMINI_APIKEY
 
 # --- 事前チェック ---
 if [ -z "$GEMINI_API_KEY" ]; then
-    notify-send -u critical "Gemini要約エラー" "環境変数 GEMINI_API_KEY が設定されていません。"
-    exit 1
+  notify-send -u critical "Gemini要約エラー" "環境変数 GEMINI_API_KEY が設定されていません。"
+  exit 1
 fi
 
 # 1. クリップボードからURLを取得
 url=$(wl-paste -n | tr -d '[:space:]')
 
 if [[ ! "$url" =~ ^https?:// ]]; then
-    notify-send "クリップボードエラー" "有効なURLがクリップボードに見つかりません。"
-    exit 1
+  notify-send "クリップボードエラー" "有効なURLがクリップボードに見つかりません。"
+  exit 1
 fi
 
 # 2. ウェブページのタイトルと現在の日時を取得
@@ -24,9 +24,9 @@ page_title=$(curl -sL "$url" | pup 'title text{}')
 current_datetime_iso=$(date +"%Y-%m-%dT%H:%M:%S")
 current_datetime_human=$(date +"%Y-%m-%d %H:%M")
 
-if [ -z "$page_title" ]; then
-    page_title="No Title"
-    notify-send -u normal "タイトル取得" "ページのタイトルが取得できませんでした。"
+if [[ -z "$page_title" ]]; then
+  page_title="No Title"
+  notify-send -u normal "タイトル取得" "ページのタイトルが取得できませんでした。"
 fi
 
 # -----------------------------------------------------------------------------
@@ -34,7 +34,8 @@ fi
 # -----------------------------------------------------------------------------
 # JSONに埋め込むために、プロンプト内の改行や特殊文字をエスケープする
 # jqを使って安全にJSON文字列を生成するのが確実
-prompt_text=$(cat << EOP
+prompt_text=$(
+  cat <<EOP
 あなたは、ウェブページの情報を整理し、Obsidianに保存するためのMarkdownを生成する優秀なアシスタントです。
 以下の指示と情報に基づいて、Markdownファイルを作成してください。
 
@@ -61,22 +62,22 @@ json_payload=$(jq -n --arg prompt "$prompt_text" \
   '{ "contents": [ { "parts": [ { "text": $prompt } ] } ] }')
 
 response=$(curl -s -H "Content-Type: application/json" \
-    -d "$json_payload" \
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_API_KEY}")
+  -d "$json_payload" \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GEMINI_API_KEY}")
 
 # エラーチェック
 if echo "$response" | grep -q "error"; then
-    error_message=$(echo "$response" | jq -r .error.message)
-    notify-send -u critical "Gemini APIエラー" "$error_message"
-    exit 1
+  error_message=$(echo "$response" | jq -r .error.message)
+  notify-send -u critical "Gemini APIエラー" "$error_message"
+  exit 1
 fi
 
 # APIレスポンスからMarkdownテキストを抽出
 markdown_output=$(echo "$response" | jq -r '.candidates[0].content.parts[0].text')
 
 if [ -z "$markdown_output" ] || [ "$markdown_output" == "null" ]; then
-    notify-send -u critical "Gemini要約エラー" "Markdownの生成に失敗しました。"
-    exit 1
+  notify-send -u critical "Gemini要約エラー" "Markdownの生成に失敗しました。"
+  exit 1
 fi
 
 # ファイル名を作成し、Geminiの出力をそのまま保存
@@ -84,7 +85,7 @@ safe_title=$(echo "$page_title" | sed 's/[/\\?%*:|"<>]/_/g')
 file_path="${OBSIDIAN_INBOX_DIR}/${safe_title}.md"
 
 # Geminiが生成したMarkdownをそのままファイルに書き出す
-echo -e "${markdown_output}" > "$file_path"
+echo -e "${markdown_output}" >"$file_path"
 
 # 完了通知
 notify-send "Obsidianに保存しました" "『${page_title}』をInboxに追加しました。"

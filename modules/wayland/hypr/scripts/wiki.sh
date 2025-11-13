@@ -19,7 +19,7 @@ fi
 # -l ja は日本語版Wikipediaを指定
 # bash -c '...': ターミナル内で実行するコマンド
 # read -p "...": wiki-tui 終了後、Enterキーが押されるまでターミナルを閉じない
-TERM_CMD="foot -a wiki_popup bash -c 'wiki-tui -l ja \"$TERM_TO_LOOKUP\"; read -p \"Press Enter to close the window...\"'"
+TERM_CMD="foot -a wiki_popup zsh -c 'wiki-tui -l ja \"$TERM_TO_LOOKUP\"; read -p \"Press Enter to close the window...\"'"
 
 # hyprland でターミナルを起動
 hyprctl exec "$TERM_CMD" &

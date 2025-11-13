@@ -3,7 +3,6 @@
 {
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
-    bash
     (python3.withPackages (ps: with ps; [ numpy ]))
     jq
     tree
@@ -43,10 +42,12 @@
             "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --"
           ];
           branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' $branchName --";
-          paging = {
-            colorArg = "always";
-            pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
-          };
+          pagers = [
+            {
+              colorArg = "always";
+              pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+            }
+          ];
           log = {
             showWholeGraph = true;
           };
@@ -133,6 +134,7 @@
         ls = "ei";
         la = "ea";
         ll = "ee";
+        jutty = "kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes";
         l = "clear && ls";
       };
 
@@ -200,7 +202,7 @@
     sessionVariables = {
       BROWSER = "firefox"; # zen-browserは別途インストールが必要
       EDITOR = "vim";
-      TERMINAL = "wezterm"; # footは別途インストールが必要
+      TERMINAL = "kitty"; # footは別途インストールが必要
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
     };
     sessionPath = [
