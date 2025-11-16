@@ -9,7 +9,7 @@
   systemd.user.startServices = true;
   imports = [
     ../modules/cli.nix
-    ../modules/nvim/default.nix
+    ../modules/editor/default.nix
     ../modules/gui.nix
     ../modules/localization/fcitx5.nix
     ../modules/theme/default.nix

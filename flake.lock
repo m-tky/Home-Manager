@@ -869,11 +869,11 @@
         "vim-jukit": "vim-jukit"
       },
       "locked": {
-        "lastModified": 1762948564,
-        "narHash": "sha256-Kw+z7czBfU/4kIGcr+lQQ+tUM15ZHc3rvWoHfemt6lo=",
+        "lastModified": 1763228287,
+        "narHash": "sha256-IheRSkrKGgSeEapJB9chlYiGFw/NHwKqBUoE3vWLjGg=",
         "owner": "Takuya-Mukai",
         "repo": "Nixcats",
-        "rev": "7532dabb69024ce73a5d03f4a9bebd4c82e62352",
+        "rev": "2bda34931b744c9d8db95443f348aba0ba22bcd7",
         "type": "github"
       },
       "original": {

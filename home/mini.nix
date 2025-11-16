@@ -9,7 +9,7 @@
   systemd.user.startServices = true;
   imports = [
     ../modules/cli.nix
-    ../modules/nvim/default.nix
+    ../modules/editor/default.nix
     ../modules/gui.nix
     ../modules/localization/fcitx5.nix
     ../modules/theme/default.nix
@@ -17,7 +17,6 @@
     ../modules/wayland/wlogout/default.nix
     ../modules/wayland/hypr/default.nix
     ../modules/wayland/hypr/monitor/hyprland-monitor-mini.nix
-    # ../modules/rustdesk.nix
     ../modules/systemd/mini-home-manager.nix
   ];
 }
