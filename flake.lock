@@ -826,6 +826,23 @@
         "type": "github"
       }
     },
+    "jovian-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764354112,
+        "narHash": "sha256-kUq5DFtUUgCAQy7EvRsiAblxGe4pKRplvDAbicdu+hY=",
+        "owner": "Takuya-Mukai",
+        "repo": "jovian.nvim",
+        "rev": "ba20d82fbff36f5fc11d1338c36a607e0b81bf93",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Takuya-Mukai",
+        "ref": "v0.1.1",
+        "repo": "jovian.nvim",
+        "type": "github"
+      }
+    },
     "jupytext-nvim": {
       "flake": false,
       "locked": {
@@ -844,11 +861,11 @@
     },
     "nixCats": {
       "locked": {
-        "lastModified": 1763330129,
-        "narHash": "sha256-KbOeWIF52SV53BOeETGO2C5ewaV2Ex9iaXH7G72gOr8=",
+        "lastModified": 1764009888,
+        "narHash": "sha256-hJekfTiW1792txgRSM4LcHnz1lDSY87LYbsJEn2V378=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "c81551ed87db2aefab30a12cf7425ff94dc0ad64",
+        "rev": "16ac3281f322ea15d39843829e42a44d22da3715",
         "type": "github"
       },
       "original": {
@@ -859,17 +876,17 @@
     },
     "nixCats-nvim": {
       "inputs": {
+        "jovian-nvim": "jovian-nvim",
         "jupytext-nvim": "jupytext-nvim",
         "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs_2",
-        "nvim-jukit": "nvim-jukit"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764073739,
-        "narHash": "sha256-QsChp2GAjxtJA1WOa3FQ3SjtWa+l3/3WDorSbJiWYBQ=",
+        "lastModified": 1764358585,
+        "narHash": "sha256-nkYubO8mnzLMVMeaCqAPbSvX0VkZMUiNMNRW4XYvVsU=",
         "owner": "Takuya-Mukai",
         "repo": "Nixcats",
-        "rev": "3031176cc67784f3c9758b93fad29be949e41ee5",
+        "rev": "8e799b6b2ad97f79d4e9d574f252bba5706b42e3",
         "type": "github"
       },
       "original": {
@@ -927,11 +944,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1763806073,
-        "narHash": "sha256-FHsEKDvfWpzdADWj99z7vBk4D716Ujdyveo5+A048aI=",
+        "lastModified": 1764230294,
+        "narHash": "sha256-Z63xl5Scj3Y/zRBPAWq1eT68n2wBWGCIEF4waZ0bQBE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "878e468e02bfabeda08c79250f7ad583037f2227",
+        "rev": "0d59e0290eefe0f12512043842d7096c4070f30e",
         "type": "github"
       },
       "original": {
@@ -1034,22 +1051,6 @@
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nvim-jukit": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1764073402,
-        "narHash": "sha256-huE+8xUAr4NB7BfMJprQEW1tFNgXXxO66gEysFBmcD8=",
-        "owner": "Takuya-Mukai",
-        "repo": "nvim-jukit",
-        "rev": "1eb579d41430aa4b38875ead024d9553b5e15734",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Takuya-Mukai",
-        "repo": "nvim-jukit",
         "type": "github"
       }
     },

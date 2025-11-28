@@ -12,6 +12,7 @@
     delta
     unzip
     python3Packages.jupytext
+    imagemagick
   ];
 
   programs = {
