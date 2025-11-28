@@ -38,7 +38,7 @@
     ];
     settings = {
       # 変数定義
-      "$terminal" = "kitty";
+      "$terminal" = "kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes";
       "$fileManager" = "thunar";
       "$menu" = "fuzzel";
       "$browser" = "firefox";
@@ -207,9 +207,9 @@
         # my custom keybinds
         "$mainMod, O, exec, hyprctl clients | grep -q 'initialClass: obsidian' && hyprctl dispatch togglespecialworkspace obsidian || obsidian &"
         "$mainMod SHIFT, O, movetoworkspace, special:obsidian"
-        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || kitty --class specialterm &"
+        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || kitty --class specialterm --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
-        "$mainMod CTRL, F, exec, kitty --class terminal_yazi yazi"
+        "$mainMod CTRL, F, exec, kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes --class terminal_yazi yazi"
         "$mainMod, N, exec, ${config.home.homeDirectory}/.local/bin/notevim.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"

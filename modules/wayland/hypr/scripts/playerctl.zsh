@@ -58,11 +58,11 @@ print_status() {
     # 状態に応じて色とアイコンを設定
     case "$player_status" in
         "Playing")
-            icon=""
+            icon=""
             color="#a6e3a1" # 緑
             ;;
         "Paused")
-            icon=""
+            icon=""
             color="#f9e2af" # 黄
             ;;
         *)

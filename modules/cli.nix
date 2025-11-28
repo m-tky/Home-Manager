@@ -11,6 +11,7 @@
     neofetch
     delta
     unzip
+    python3Packages.jupytext
   ];
 
   programs = {

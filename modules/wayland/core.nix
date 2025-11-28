@@ -41,6 +41,7 @@
       font_size = "11.0";
       background_opacity = "0.85";
       allow_remote_control = "yes";
+      enabled_layouts = "splits:split_axis=horizontal";
     };
   };
   programs.wezterm = {
