@@ -829,16 +829,15 @@
     "jovian-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1764354112,
-        "narHash": "sha256-kUq5DFtUUgCAQy7EvRsiAblxGe4pKRplvDAbicdu+hY=",
-        "owner": "Takuya-Mukai",
+        "lastModified": 1764565304,
+        "narHash": "sha256-Y3BT8dMWHeMxXniIpF29vjT30vfql+VklaYpUKcrlbc=",
+        "owner": "m-tky",
         "repo": "jovian.nvim",
-        "rev": "ba20d82fbff36f5fc11d1338c36a607e0b81bf93",
+        "rev": "bae41036f83bf35818012e7b9c7241b02f05009f",
         "type": "github"
       },
       "original": {
-        "owner": "Takuya-Mukai",
-        "ref": "v0.1.1",
+        "owner": "m-tky",
         "repo": "jovian.nvim",
         "type": "github"
       }
@@ -882,15 +881,15 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764358585,
-        "narHash": "sha256-nkYubO8mnzLMVMeaCqAPbSvX0VkZMUiNMNRW4XYvVsU=",
-        "owner": "Takuya-Mukai",
+        "lastModified": 1764653828,
+        "narHash": "sha256-YmqbQm7Kj2vl2Gckn7DDAS3Un839YBwcwYpQ1kPzhSU=",
+        "owner": "m-tky",
         "repo": "Nixcats",
-        "rev": "8e799b6b2ad97f79d4e9d574f252bba5706b42e3",
+        "rev": "ee74c4509d0885a9b44df8eeb252ecefc35d9753",
         "type": "github"
       },
       "original": {
-        "owner": "Takuya-Mukai",
+        "owner": "m-tky",
         "repo": "Nixcats",
         "type": "github"
       }

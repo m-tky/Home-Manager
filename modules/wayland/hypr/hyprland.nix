@@ -16,6 +16,7 @@
     ".local/bin/findfile.sh".source = ./scripts/findfile.sh;
     ".local/bin/findcontent.sh".source = ./scripts/findcontent.sh;
     ".local/bin/rcloneObsidianDocuments.sh".source = ./scripts/rcloneObsidianDocuments.sh;
+    ".local/bin/toggle_blur.sh".source = ./scripts/toggle_blur.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -211,6 +212,7 @@
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
         "$mainMod CTRL, F, exec, kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes --class terminal_yazi yazi"
         "$mainMod, N, exec, ${config.home.homeDirectory}/.local/bin/notevim.sh"
+        "$mainMod, B, exec, $HOME/.local/bin/toggle_blur.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
@@ -282,8 +284,7 @@
       ];
 
       windowrulev2 = [
-        "opacity 0.95, class:^(kitty)$"
-        "opacity 0.95, initialTitle:^(wezterm)$"
+        "opacity 0.92, class:^(kitty)$"
         "float, title:^(Network Connection)$"
         "center, title:^(Network Connection)$"
         "float, title:^(Floating Window - Show Me The Key)$"

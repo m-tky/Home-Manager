@@ -226,7 +226,7 @@
     "custom/playerstatus": {
         "format": "{}",
         "return-type": "json",
-        "exec": "$HOME/.local/bin/playerctl.zsh",
+        "exec": "$HOME/.local/bin/playerctl.sh",
         "interval": 2,
         "tooltip": true,
         "max-length": 50,

@@ -34,7 +34,7 @@
     # };
     catppuccin.url = "github:catppuccin/nix";
     nixCats-nvim = {
-      url = "github:Takuya-Mukai/Nixcats";
+      url = "github:m-tky/Nixcats";
     };
   };
 
