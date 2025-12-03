@@ -829,11 +829,11 @@
     "jovian-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1764565304,
-        "narHash": "sha256-Y3BT8dMWHeMxXniIpF29vjT30vfql+VklaYpUKcrlbc=",
+        "lastModified": 1764749631,
+        "narHash": "sha256-c8AzqDQvFioxRt5sxqlxHOtHdBBwy/K7ceZk0upcjIg=",
         "owner": "m-tky",
         "repo": "jovian.nvim",
-        "rev": "bae41036f83bf35818012e7b9c7241b02f05009f",
+        "rev": "903f82cfee7feea533d1dedad81886b0288ff884",
         "type": "github"
       },
       "original": {
@@ -881,11 +881,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764653828,
-        "narHash": "sha256-YmqbQm7Kj2vl2Gckn7DDAS3Un839YBwcwYpQ1kPzhSU=",
+        "lastModified": 1764750130,
+        "narHash": "sha256-HoZ7yxf2T1h3yfqM0WAoYBoWzQjS1qlDJwzmQFaKrLg=",
         "owner": "m-tky",
         "repo": "Nixcats",
-        "rev": "ee74c4509d0885a9b44df8eeb252ecefc35d9753",
+        "rev": "c47c5e7919c69c4fd2126bd0483854826c2c794a",
         "type": "github"
       },
       "original": {
@@ -943,11 +943,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1764230294,
-        "narHash": "sha256-Z63xl5Scj3Y/zRBPAWq1eT68n2wBWGCIEF4waZ0bQBE=",
+        "lastModified": 1764642553,
+        "narHash": "sha256-mvbFFzVBhVK1FjyPHZGMAKpNiqkr7k++xIwy+p/NQvA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0d59e0290eefe0f12512043842d7096c4070f30e",
+        "rev": "f720de59066162ee879adcc8c79e15c51fe6bfb4",
         "type": "github"
       },
       "original": {
