@@ -39,7 +39,7 @@
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
       bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
       font_size = "11.0";
-      background_opacity = "0.85";
+      background_opacity = "0.70";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";
     };

@@ -22,13 +22,6 @@
     enable = true;
     package = null;
     portalPackage = null;
-    # extraConfig = ''
-    #   # Tablets
-    #   input:tablet:wacom-intuos-s-2-pen {
-    #       output = HDMI-A-1
-    #       transform = -1
-    #   }
-    # '';
     plugins = [
       # pkgs.hyprlandPlugins.hyprspace
       # inputs.hyprland-plugins.packages.${pkgs.system}.hyprfocus
@@ -60,8 +53,8 @@
         "wayvnc_server.sh"
         "start.sh"
         # "hyprctl plugin load ${inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo}/lib/libhyprexpo.so"
-        "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprexpo}/lib/libhyprexpo.so"
         # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprfocus}/lib/libhyprfocus.so"
+        "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprexpo}/lib/libhyprexpo.so"
       ];
 
       env = [
@@ -284,7 +277,8 @@
       ];
 
       windowrulev2 = [
-        "opacity 0.92, class:^(kitty)$"
+        # "opacity 0.85, class:^(specialterm)$"
+        # "opacity 0.85, class:^(kitty)$"
         "float, title:^(Network Connection)$"
         "center, title:^(Network Connection)$"
         "float, title:^(Floating Window - Show Me The Key)$"
