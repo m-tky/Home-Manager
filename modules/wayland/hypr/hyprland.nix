@@ -277,8 +277,8 @@
       ];
 
       windowrulev2 = [
-        # "opacity 0.85, class:^(specialterm)$"
-        # "opacity 0.85, class:^(kitty)$"
+        # "opacity 0.70, class:^(specialterm)$"
+        # "opacity 0.70, class:^(kitty)$"
         "float, title:^(Network Connection)$"
         "center, title:^(Network Connection)$"
         "float, title:^(Floating Window - Show Me The Key)$"

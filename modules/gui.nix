@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    antigravity
     ryubing
     zoom-us
     myObsidian
@@ -70,7 +71,7 @@ in
     bottles
     ffmpegthumbnailer
     android-file-transfer
-    isoimagewriter
+    kdePackages.isoimagewriter
     showmethekey
     cheese
     networkmanagerapplet
