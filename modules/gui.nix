@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    heroic
     antigravity
     ryubing
     zoom-us
