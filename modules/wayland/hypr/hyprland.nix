@@ -17,6 +17,7 @@
     ".local/bin/findcontent.sh".source = ./scripts/findcontent.sh;
     ".local/bin/rcloneObsidianDocuments.sh".source = ./scripts/rcloneObsidianDocuments.sh;
     ".local/bin/toggle_blur.sh".source = ./scripts/toggle_blur.sh;
+    ".local/bin/tm.sh".source = ./scripts/tm.sh;
   };
   wayland.windowManager.hyprland = {
     enable = true;
@@ -176,10 +177,24 @@
       };
 
       # デバイス固有設定
-      device = {
-        name = "epic-mouse-v1";
-        sensitivity = -0.5;
-      };
+      device = [
+        {
+          name = "epic-mouse-v1";
+          sensitivity = -0.5;
+        }
+        {
+          name = "touch-passthrough-1";
+          output = "HEADLESS-2";
+        }
+        {
+          name = "pen-passthrough";
+          output = "HEADLESS-2";
+        }
+        {
+          name = "mouse-passthrough-(absolute)";
+          output = "HEADLESS-2";
+        }
+      ];
 
       # キーバインド
       bind = [
@@ -203,9 +218,10 @@
         "$mainMod SHIFT, O, movetoworkspace, special:obsidian"
         "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || kitty --class specialterm --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes &"
         "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
-        "$mainMod CTRL, F, exec, kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes --class terminal_yazi yazi"
-        "$mainMod, N, exec, ${config.home.homeDirectory}/.local/bin/notevim.sh"
+        "$mainMod CTRL, F, exec, kitty --class terminal_yazi yazi"
+        "$mainMod, N, exec, $HOME/.local/bin/notevim.sh"
         "$mainMod, B, exec, $HOME/.local/bin/toggle_blur.sh"
+        "$mainMod CTRL, T, exec, kitty --class task_manager $HOME/.local/bin/tm.sh"
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
@@ -314,6 +330,8 @@
         "size 18% 10%, title:terminal_shutdown$"
         "center, class:terminal_shutdown$"
         "float, class:terminal_yazi$"
+        "float, class:task_manager$"
+        "size 30% 30%, class:task_manager$"
         "float, class:^(note)$"
         "float, class:^(=translation_kitty)$"
         "size 35% 70%, title:^(=translation_kitty)$"
