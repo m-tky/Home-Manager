@@ -19,4 +19,7 @@
     ../modules/wayland/hypr/monitor/hyprland-monitor-mini.nix
     ../modules/systemd/mini-home-manager.nix
   ];
+  home.packages = with pkgs; [
+    pandoc
+  ];
 }

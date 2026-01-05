@@ -15,7 +15,7 @@ REMOTE_NAME="mainwebdav"
 REMOTE_SUBDIR="Takuya/Documents/WorkDocs"
 
 # ★5. サーバーのURL（疎通確認用。rclone configで設定したURLのベース）
-SERVER_URL="http://webdav.home.arpa/"
+SERVER_URL="http://192.168.179.101:8080"
 
 # ★6. ログファイルのパス
 LOG_FILE="/tmp/rclone_sync.log"

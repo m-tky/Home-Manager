@@ -2,6 +2,7 @@
 {
   gtk = {
     enable = true;
+    colorScheme = "dark";
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
@@ -14,6 +15,13 @@
       package = pkgs.ibm-plex;
       size = 10;
       name = "IBM Plex Sans Regular";
+    };
+  };
+  dconf.settings = {
+    "org/gnome/settings-daemon/plugins/xsettings" = {
+      antialiasing = "rgba";
+      hinting = "full";
+      rgba-order = "rgb";
     };
   };
   # install nwg-look

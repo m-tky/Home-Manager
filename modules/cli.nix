@@ -121,6 +121,7 @@
     };
     zsh = {
       enable = true;
+      dotDir = "${config.xdg.configHome}/zsh";
       history = {
         size = 1000;
         path = "${config.xdg.dataHome}/zsh/history";

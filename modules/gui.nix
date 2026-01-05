@@ -60,7 +60,7 @@ in
     myObsidian
     anki-bin
     spotify
-    webcord
+    # webcord
     slack
     freetube
     bitwarden-cli
