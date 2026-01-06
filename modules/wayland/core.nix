@@ -89,11 +89,13 @@ return config";
         playerctl
         jq
         selectdefaultapplication
-        workstyle
         power-profiles-daemon
         killall
         hyprshot
+        hyprpicker
+        hyprpaper
         fuzzel
+        cliphist
         wlvncc
         nwg-displays
         pavucontrol
@@ -134,8 +136,5 @@ return config";
         recursive = true;
       };
     };
-  };
-  services = {
-    # copyq.enable = true;
   };
 }

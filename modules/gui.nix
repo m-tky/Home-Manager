@@ -79,10 +79,10 @@ in
     mission-center
     kdePackages.kalgebra
     feishin
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
-    xfce.thunar-media-tags-plugin
+    thunar
+    thunar-volman
+    thunar-archive-plugin
+    thunar-media-tags-plugin
     xournalpp
     vdhcoapp
     scrcpy

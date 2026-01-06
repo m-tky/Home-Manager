@@ -33,7 +33,7 @@
     ];
     settings = {
       # 変数定義
-      "$terminal" = "kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes";
+      "$terminal" = "kitty";
       "$fileManager" = "thunar";
       "$menu" = "fuzzel";
       "$browser" = "firefox";
@@ -43,15 +43,11 @@
 
       # 自動起動
       exec-once = [
-        "hyprpaper"
-        "waybar"
-        "swaync"
         "udiskie"
-        "workstyle &> /tmp/workstyle.log"
-        "systemctl --user start hyprpolkitagent"
         "nm-applet --sm-disable &"
-        "nextcloud --background"
         "wayvnc_server.sh"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
         "start.sh"
         # "hyprctl plugin load ${inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo}/lib/libhyprexpo.so"
         # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprfocus}/lib/libhyprfocus.so"
@@ -72,11 +68,9 @@
 
       # 外観 (General)
       general = {
-        gaps_in = 3;
-        gaps_out = 6;
-        border_size = 2;
-        # "col.active_border" = "rgba(2892c2aa) rgba(2850c2aa) 90deg";
-        # "col.inactive_border" = "rgba(595959aa)";
+        gaps_in = 2;
+        gaps_out = 4;
+        border_size = 1;
         resize_on_border = true;
         allow_tearing = false;
         layout = "master";
@@ -87,14 +81,15 @@
         rounding = 5;
 
         active_opacity = 1.0;
-        inactive_opacity = 0.95;
+        dim_inactive = true;
+        dim_strength = 0.15;
 
-        # shadow = {
-        #   enabled = true;
-        #   range = 4;
-        #   render_power = 3;
-        #   color = "rgba(1a1a1aee)";
-        # };
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
+        };
 
         blur = {
           enabled = true;
@@ -138,19 +133,12 @@
       plugin = {
         hyprexpo = {
           columns = 3;
-          gap_size = 5;
+          gap_size = 3;
           bg_col = "rgb(89b4fa)";
           workspace_method = "center current";
           gesture_distance = 300;
         };
       };
-      # plugin = {
-      #   hyprfocus = {
-      #     enabled = true;
-      #     mode = "bounce";
-      #     bounce_strength = 0.98;
-      #   };
-      # };
 
       # レイアウト
       dwindle = {
@@ -159,9 +147,8 @@
       };
 
       master = {
-        new_is_master = false;
         new_on_top = true;
-        mfact = 0.65;
+        mfact = 0.62;
         orientation = "left";
       };
 
@@ -172,6 +159,8 @@
         kb_model = "";
         kb_options = "";
         kb_rules = "";
+        repeat_delay = 250;
+        repeat_rate = 25;
         follow_mouse = 1;
         sensitivity = 0;
         touchpad = {
@@ -185,58 +174,47 @@
           name = "epic-mouse-v1";
           sensitivity = -0.5;
         }
-        {
-          name = "touch-passthrough-1";
-          output = "HEADLESS-2";
-        }
-        {
-          name = "pen-passthrough";
-          output = "HEADLESS-2";
-        }
-        {
-          name = "mouse-passthrough-(absolute)";
-          output = "HEADLESS-2";
-        }
       ];
 
       # キーバインド
       bind = [
-        "$mainMod CTRL, Q, exec, $terminal"
         "$mainMod, W, exec, $browser"
         "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
+        # "$mainMod, M, exit,"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu"
-        "$mainMod, SPACE, exec, $HOME/.local/bin/raycast.sh"
-        "$mainMod, P, pseudo,"
-        "$mainMod, T, togglesplit,"
-        "$mainMod, F, fullscreen"
-        "$mainMod, H, movefocus, l"
-        "$mainMod, L, movefocus, r"
-        "$mainMod, K, movefocus, u"
-        "$mainMod, J, movefocus, d"
+        "$mainMod, F, fullscreen, 1"
+        "$mainMod SHIFT, F, fullscreen, 0"
+
+        "$mainMod, K, layoutmsg, cycleprev"
+        "$mainMod, J, layoutmsg, cyclenext"
+
+        "$mainMod SHIFT, K, layoutmsg, swapprev"
+        "$mainMod SHIFT, J, layoutmsg, swapnext"
+        "$mainMod, SPACE, layoutmsg, swapwithmaster"
+
+        "$mainMod CTRL, O, layoutmsg, orientationnext"
+        "$mainMod SHIFT, M, layoutmsg, addmaster"
+        "$mainMod SHIFT, N, layoutmsg, removemaster"
 
         # my custom keybinds
         "$mainMod, O, exec, hyprctl clients | grep -q 'initialClass: obsidian' && hyprctl dispatch togglespecialworkspace obsidian || obsidian &"
         "$mainMod SHIFT, O, movetoworkspace, special:obsidian"
-        "$mainMod, Q, exec, hyprctl clients | grep -q 'initialClass: specialterm' && hyprctl dispatch togglespecialworkspace terminal || kitty --class specialterm --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes &"
-        "$mainMod SHIFT, Q, movetoworkspace, special:terminal"
+        "$mainMod, Q, exec, $terminal"
         "$mainMod CTRL, F, exec, kitty --class terminal_yazi yazi"
         "$mainMod, N, exec, $HOME/.local/bin/notevim.sh"
         "$mainMod, B, exec, $HOME/.local/bin/toggle_blur.sh"
+        "$mainMod CTRL, SPACE, exec, $HOME/.local/bin/raycast.sh"
         "$mainMod CTRL, T, exec, kitty --class task_manager $HOME/.local/bin/tm.sh"
+        "$mainMod CTRL, C, exec, hyprpicker -a"
+
         # screenshot
         "$mainMod SHIFT, P, exec, hyprshot -m window --clipboard-only"
         "$mainMod CTRL, P, exec, hyprshot -m region --clipboard-only"
-        # toggle copyq
-        "$mainMod CTRL, V, exec, copyq toggle"
+
+        "$mainMod CTRL, V, exec, cliphist list | fuzzel --dmenu --width 50 --lines 15 | cliphist decode | wl-copy"
         # lock
         "$mainMod CTRL, L, exec, hyprlock"
-
-        "$mainMod SHIFT, H, movewindow, l"
-        "$mainMod SHIFT, L, movewindow, r"
-        "$mainMod SHIFT, K, movewindow, u"
-        "$mainMod SHIFT, J, movewindow, d"
 
         "$mainMod, 1, workspace, 1"
         "$mainMod, 2, workspace, 2"
@@ -273,6 +251,11 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      binde = [
+        "$mainMod, H, layoutmsg, mfact -0.01"
+        "$mainMod, L, layoutmsg, mfact +0.01"
+      ];
+
       bindel = [
         ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -297,8 +280,13 @@
 
       # extraConfig = ''
       windowrule = [
-        # "match: title (Floating Window - Show Me The Key) float on"
-        # "match:class kitty, opacity 0.70"
+        "match:title (Floating Window - Show Me The Key), float on"
+        "match:class .*, suppress_event maximize"
+        "match:class ^(matplotlib)$, float on"
+        "match:class ^(viewnior)$, float on"
+        "match:title ^(Open File)$ float on"
+        "match:title ^(Choose File)$ float on"
+        "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
         "match:title ^(Network Connection)$, float on, center on"
         "match:title ^(clipse)$, float on, center on, size 50% 80%"
         "match:class ^(Thunar)$, float on, size 60% 70%"
