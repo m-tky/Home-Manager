@@ -29,7 +29,7 @@
     kitty.enable = true;
     yazi.enable = true;
     hyprlock.enable = true;
-    vscode.profiles.default.enable = true;
+    # vscode.profiles.default.enable = true;
     zathura.enable = true;
     zellij.enable = true;
     zed.enable = true;
