@@ -207,6 +207,7 @@
       EDITOR = "vim";
       TERMINAL = "kitty"; # footは別途インストールが必要
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
+      GDK_BACKEND = "wayland";
     };
     sessionPath = [
       "$HOME/.local/bin"

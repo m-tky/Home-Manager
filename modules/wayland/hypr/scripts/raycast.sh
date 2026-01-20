@@ -3,7 +3,7 @@ set -e
 
 # === メニュー構築 ===
 # Zshの配列はシンプルに書けます
-options=(
+items=(
   " Web Search"
   " Calculator"
   "⏻ System"
@@ -14,7 +14,7 @@ options=(
 )
 
 # Bashの `printf` ループの代わりに、Zsh特有の `print -l` (行ごとに表示) を使用
-choice=$(print -l $options | fuzzel --dmenu --prompt "Menu:")
+choice=$(printf "%s\n" "${items[@]}" | fuzzel --dmenu --prompt "Menu:")
 
 case "$choice" in
   *"Web Search"*)
@@ -26,7 +26,7 @@ case "$choice" in
     # 元コードの `]] then` のエラーを `]]; then` に修正
     if [[ -n "$expr" ]]; then
       # Pythonでの計算ロジックはそのまま維持
-      result=$(python3 -c "import numpy as np; print(np.round(eval('$expr'), 3))" 2>/dev/null || echo "Error")
+      result=$(python3 -c "import numpy as np; print(np.round(eval(\"$expr\"), 3))" 2>/dev/null || echo "Error")
       notify-send "󰪚 Result" "$expr = $result"
     fi
     ;;

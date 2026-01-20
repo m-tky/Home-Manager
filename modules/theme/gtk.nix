@@ -7,10 +7,10 @@
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-    theme = {
-      name = "Catppuccin-GTK-Dark";
-      package = pkgs.magnetic-catppuccin-gtk;
-    };
+    # theme = {
+    #   name = "Catppuccin-GTK-Dark";
+    #   package = pkgs.magnetic-catppuccin-gtk;
+    # };
     font = {
       package = pkgs.ibm-plex;
       size = 10;

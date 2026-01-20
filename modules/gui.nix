@@ -53,6 +53,8 @@ in
     };
   };
   home.packages = with pkgs; [
+    gnome-control-center
+    glib
     heroic
     antigravity
     ryubing
@@ -60,7 +62,7 @@ in
     myObsidian
     anki-bin
     spotify
-    # webcord
+    # vesktop
     slack
     freetube
     bitwarden-cli

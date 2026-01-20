@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,33 +15,24 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # Hyprspace = {
-    #   url = "github:KZDKM/Hyprspace";
-    #   # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    # astal.url = "github:aylur/astal";
-    # ags.url = "github:aylur/ags";
-    # nixvim = {
-    #   url = "github:nix-community/nixvim";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     catppuccin.url = "github:catppuccin/nix";
     nixCats-nvim = {
       url = "github:m-tky/Nixcats";
+    };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
     {
       nixpkgs,
-      nixpkgs-stable,
       home-manager,
+      noctalia,
       ...
     }@inputs:
     let
@@ -86,31 +76,28 @@
         let
           fullName = "${cfg.username}@${machine}";
           system = cfg.system;
-          pkgsStable = import nixpkgs-stable {
-            inherit system;
-            config.allowUnfree = true;
-          };
         in
         {
           name = fullName;
           value = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
+              # hostPlatform = system;
               inherit system;
               config.allowUnfree = true;
             };
-            extraSpecialArgs = { inherit inputs pkgsStable; };
             modules = [
-              # inputs.nixvim.homeModules.nixvim
               inputs.catppuccin.homeModules.catppuccin
+              inputs.niri-flake.homeModules.niri
               cfg.path
               {
                 home = {
                   username = cfg.username;
                   homeDirectory = cfg.homeDirectory;
-                  stateVersion = "25.05";
+                  stateVersion = "26.05";
                 };
               }
             ];
+            extraSpecialArgs = { inherit inputs; };
           };
         }
       ) userMachines;

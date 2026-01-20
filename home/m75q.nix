@@ -7,6 +7,7 @@
 {
   home.packages = with pkgs; [
     ryubing
+    arduino-ide
   ];
   services.ollama = {
     enable = true;

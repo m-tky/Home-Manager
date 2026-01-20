@@ -20,7 +20,7 @@
     ".local/bin/tm.sh".source = ./scripts/tm.sh;
   };
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = false;
     package = null;
     portalPackage = null;
     plugins = [
@@ -44,6 +44,7 @@
       # 自動起動
       exec-once = [
         "udiskie"
+        "waybar"
         "nm-applet --sm-disable &"
         "wayvnc_server.sh"
         "wl-paste --type text --watch cliphist store"
@@ -148,7 +149,7 @@
 
       master = {
         new_on_top = true;
-        mfact = 0.62;
+        mfact = 0.40;
         orientation = "left";
       };
 
@@ -274,45 +275,39 @@
 
       # ウィンドウ ルール
       # windowrule = [
-      #   "suppressevent maximize, class:.*"
-      #   "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      #   "match:title \"^(Floating Window - Show Me The Key)$, float on"
+      #   "match:class ^.*, suppress_event maximize"
+      #   "match:class ^(matplotlib)$, float on"
+      #   "match:class ^(viewnior)$, float on"
+      #   "match:title ^(Open File)$, float on"
+      #   "match:title ^(Choose File)$, float on"
+      #   "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
+      #   "match:title ^(Network Connection)$, float on, center on"
+      #   "match:title ^(clipse)$, float on, center on, size 50% 80%"
+      #   "match:class ^(Thunar)$, float on, size 60% 70%"
+      #   "match:class ^(blueman-manager)$, float on"
+      #   "match:class ^(pavucontrol)$, float on"
+      #   "match:title ^(pop-up|bubble|dialog|task_dialog|menu|floating|floating_update)$, float on"
+      #   "match:class ^(obsidian)$, workspace special:obsidian"
+      #   "match:class ^(specialterm)$, workspace special:terminal"
+      #   "match:class ^(pinentry)$, float on"
+      #   "match:title ^(Administrator privileges required|Extension:|About Mozilla Firefox|About|Library|Pomodorolm)$, float on"
+      #   "match:class ^(terminal_shutdown)$, float on, size 18% 10%, center on"
+      #   "match:class ^(terminal_yazi)$, float on"
+      #   "match:class ^(task_manager)$, float on, size 30% 30%"
+      #   "match:class ^(note)$, float on"
+      #   "match:class ^(=translation_kitty)$, float on, center on, size 35% 70%"
+      #   "match:class ^(=select_language)$, float on, center on, size 17% 10%"
+      #   "match:title ^(=floating-study-terminal)$, float on, center on, size 30% 30%"
+      #   "match:title ^(launcher)$, float on, center on"
+      #   "match:class ^(com.github.hluk.copyq)$, float on"
+      #   "match:class ^(=terminal-bottom)$, float on"
+      #   "match:class ^(foot)$, opacity 0.87 0.8"
+      #   "match:class ^(nm-connection-editor)$, float on"
+      #   "match:class ^(org.pulseaudio.pavucontrol)$, float on"
+      #   "match:class ^(FindFile)$, float on, center on, size 60% 60%"
+      #   "match:class ^(FindContent)$, float on, center on, size 60% 60%"
       # ];
-
-      # extraConfig = ''
-      windowrule = [
-        "match:title (Floating Window - Show Me The Key), float on"
-        "match:class .*, suppress_event maximize"
-        "match:class ^(matplotlib)$, float on"
-        "match:class ^(viewnior)$, float on"
-        "match:title ^(Open File)$ float on"
-        "match:title ^(Choose File)$ float on"
-        "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_focus true"
-        "match:title ^(Network Connection)$, float on, center on"
-        "match:title ^(clipse)$, float on, center on, size 50% 80%"
-        "match:class ^(Thunar)$, float on, size 60% 70%"
-        "match:class ^(blueman-manager)$, float on"
-        "match:class ^(pavucontrol)$, float on"
-        "match:title ^(pop-up|bubble|dialog|task_dialog|menu|floating|floating_update)$, float on"
-        "match:class ^(obsidian)$, workspace special:obsidian"
-        "match:class ^(specialterm)$, workspace special:terminal"
-        "match:class ^(pinentry)$, float on"
-        "match:title ^(Administrator privileges required|Extension:|About Mozilla Firefox|About|Library|Pomodorolm)$, float on"
-        "match:class ^(terminal_shutdown)$, float on, size 18% 10%, center on"
-        "match:class ^(terminal_yazi)$, float on"
-        "match:class ^(task_manager)$, float on, size 30% 30%"
-        "match:class ^(note)$, float on"
-        "match:class ^(=translation_kitty)$, float on, center on, size 35% 70%"
-        "match:class ^(=select_language)$, float on, center on, size 17% 10%"
-        "match:title ^(=floating-study-terminal)$, float on, center on, size 30% 30%"
-        "match:title ^(launcher)$, float on, center on"
-        "match:class ^(com.github.hluk.copyq)$, float on"
-        "match:class ^(=terminal-bottom)$, float on"
-        "match:class ^(foot)$, opacity 0.87 0.8"
-        "match:class ^(nm-connection-editor)$, float on"
-        "match:class ^(org.pulseaudio.pavucontrol)$, float on"
-        "match:class ^(FindFile)$, float on, center on, size 60% 60%"
-        "match:class ^(FindContent)$, float on, center on, size 60% 60%"
-      ];
       # windowrule = match: class ^$, match: class ^$, xwayland 1, float on, noblur on, fullscreen off, pinned off
       # windowrule = match: class .* suppressevent maximize
       # windowrule = match: title ^(Floating Window - Show Me The Key)$, float on
@@ -343,67 +338,68 @@
       # windowrule = match: class ^(FindFile)$, float on, center on, size 60% 60%
       # windowrule = match: class ^(FindContent)$, float on, center on, size 60% 60%
       # '';
-      # windowrulev2 = [
-      #   "float, initialClass:^(=terminal-bottom)$"
-      #   "opacity 0.87 0.8,class:^(foot)$"
-      #   "float, class:^(nm-connection-editor)$"
-      #   "float,class: ^(org.pulseaudio.pavucontrol)$"
-      #
-      #   "float, class:^(FindFile)$"
-      #   "center, class:^(FindFile)$"
-      #   "size 60% 60%, class:^(FindFile)$"
-      #
-      #   "float, class:^(FindContent)$"
-      #   "center, class:^(FindContent)$"
-      #   "size 60% 60%, class:^(FindContent)$"
-      #   # "opacity 0.70, class:^(specialterm)$"
-      #   # "opacity 0.70, class:^(kitty)$"
-      #   # "float, title:^(Network Connection)$"
-      #   # "center, title:^(Network Connection)$"
-      #   # "float, title:^(Floating Window - Show Me The Key)$"
-      #   # "float, title:^(clipse)$"
-      #   # "center, title:^(clipse)$"
-      #   # "size 50% 80%, title:^(clipse)$"
-      #   # "float, class:^(Thunar)$"
-      #   # "size 60% 70%, class:^(Thunar)$"
-      #   # "float, class:^(blueman-manager)$"
-      #   # "workspace special:terminal, class:specialterm"
-      #   # "opacity 0.87 0.8,class:^(specialfoot)$"
-      #   # "noblur, class:^(specialfoot)$"
-      #   # "workspace special:obsidian, class:^(obsidian)$"
-      #   # "float, title:^(pop-up)$"
-      #   # "float, title:^(bubble)$"
-      #   # "float, title:^(dialog)$"
-      #   # "float, title:^(dialog)$"
-      #   # "float, title:^(task_dialog)$"
-      #   # "float, title:^(menu)$"
-      #   # "float, title:^(floating)$"
-      #   # "float, title:^(floating_update)$"
-      #   # "size 1000 600, title:^(floating_update)$"
-      #   # "float, class:^(pinentry)$"
-      #   # "float, title:^(Administrator privileges required)$"
-      #   # "float, title:^(Extension:)$"
-      #   # "float, title:^(About Mozilla Firefox)$"
-      #   # "float, title:^(About)$"
-      #   # "float, title:^(Library)$"
-      #   # "float, title:^(Pomodorolm)$"
-      #   # "float, class:terminal_shutdown$"
-      #   # "size 18% 10%, title:terminal_shutdown$"
-      #   # "center, class:terminal_shutdown$"
-      #   # "float, class:terminal_yazi$"
-      #   # "float, class:task_manager$"
-      #   # "size 30% 30%, class:task_manager$"
-      #   # "float, class:^(note)$"
-      #   # "float, class:^(=translation_kitty)$"
-      #   # "size 35% 70%, title:^(=translation_kitty)$"
-      #   # "center, class:^(=translation_kitty)$"
-      #   # "float, class:^(=select_language)$"
-      #   # "size 17% 10%, class:^(=select_language)$"
-      #   # "center, class:^(=select_language)$"
-      #   # "float, title:^(launcher)$"
-      #   # "center, title:^(launcher)$"
-      #   # "float, class:^(com.github.hluk.copyq)$"
-      # ];
+      windowrulev2 = [
+
+        "suppressevent maximize, class:.*"
+        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        "float, initialClass:^(=terminal-bottom)$"
+        "opacity 0.87 0.8,class:^(foot)$"
+        "float, class:^(nm-connection-editor)$"
+        "float,class: ^(org.pulseaudio.pavucontrol)$"
+
+        "float, class:^(FindFile)$"
+        "center, class:^(FindFile)$"
+        "size 60% 60%, class:^(FindFile)$"
+
+        "float, class:^(FindContent)$"
+        "center, class:^(FindContent)$"
+        "size 60% 60%, class:^(FindContent)$"
+        "float, title:^(Network Connection)$"
+        "center, title:^(Network Connection)$"
+        "float, title:^(Floating Window - Show Me The Key)$"
+        "float, title:^(clipse)$"
+        "center, title:^(clipse)$"
+        "size 50% 80%, title:^(clipse)$"
+        "float, class:^(Thunar)$"
+        "size 60% 70%, class:^(Thunar)$"
+        "float, class:^(blueman-manager)$"
+        "workspace special:terminal, class:specialterm"
+        "opacity 0.87 0.8,class:^(specialfoot)$"
+        "noblur, class:^(specialfoot)$"
+        "workspace special:obsidian, class:^(obsidian)$"
+        "float, title:^(pop-up)$"
+        "float, title:^(bubble)$"
+        "float, title:^(dialog)$"
+        "float, title:^(dialog)$"
+        "float, title:^(task_dialog)$"
+        "float, title:^(menu)$"
+        "float, title:^(floating)$"
+        "float, title:^(floating_update)$"
+        "size 1000 600, title:^(floating_update)$"
+        "float, class:^(pinentry)$"
+        "float, title:^(Administrator privileges required)$"
+        "float, title:^(Extension:)$"
+        "float, title:^(About Mozilla Firefox)$"
+        "float, title:^(About)$"
+        "float, title:^(Library)$"
+        "float, title:^(Pomodorolm)$"
+        "float, class:terminal_shutdown$"
+        "size 18% 10%, title:terminal_shutdown$"
+        "center, class:terminal_shutdown$"
+        "float, class:terminal_yazi$"
+        "float, class:task_manager$"
+        "size 30% 30%, class:task_manager$"
+        "float, class:^(note)$"
+        "float, class:^(=translation_kitty)$"
+        "size 35% 70%, title:^(=translation_kitty)$"
+        "center, class:^(=translation_kitty)$"
+        "float, class:^(=select_language)$"
+        "size 17% 10%, class:^(=select_language)$"
+        "center, class:^(=select_language)$"
+        "float, title:^(launcher)$"
+        "center, title:^(launcher)$"
+        "float, class:^(com.github.hluk.copyq)$"
+      ];
     };
   };
 }
