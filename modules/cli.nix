@@ -22,6 +22,10 @@
     bat.enable = true;
     git = {
       enable = true;
+      aliases = {
+        lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
+        l = "log --oneline --graph --decorate --all";
+      };
       settings = {
         core = {
           pager = "delta --side-by-side";
@@ -41,7 +45,7 @@
         gui.showIcons = true;
         git = {
           allBranchesLogCmds = [
-            "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --"
+            "git log --oneline --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --"
           ];
           branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' $branchName --";
           pagers = [
@@ -137,7 +141,6 @@
         ls = "ei";
         la = "ea";
         ll = "ee";
-        jutty = "kitty --listen-on=unix:@\"$(date +%s%N)\" -o allow_remote_control=yes";
         l = "clear && ls";
       };
 

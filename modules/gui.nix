@@ -86,7 +86,6 @@ in
     thunar-archive-plugin
     thunar-media-tags-plugin
     xournalpp
-    vdhcoapp
     scrcpy
 
     (pkgs.makeDesktopItem {

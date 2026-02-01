@@ -9,7 +9,7 @@ let
   wrappedNoctalia = pkgs.symlinkJoin {
     name = "noctalia-shell-wrapped";
     # inputs.noctalia からビルドされた元のパッケージを指定
-    paths = [ inputs.noctalia.packages.${pkgs.system}.default ];
+    paths = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/noctalia-shell \

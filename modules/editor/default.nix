@@ -39,7 +39,7 @@
       # ★★★ここが修正点★★★
       # nixCatsモジュールがビルドした "nixCats" パッケージのパスを指定
       "vscode-neovim.neovimExecutablePaths.linux" = "${
-        inputs.nixCats-nvim.packages.${pkgs.system}.nixCats
+        inputs.nixCats-nvim.packages.${pkgs.stdenv.hostPlatform.system}.nixCats
       }/bin/nixCats";
       # その他の推奨設定
       "vscode-neovim.useCtrlKeysForNormalMode" = true;
