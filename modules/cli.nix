@@ -7,7 +7,6 @@
     jq
     tree
     tesseract
-    gemini-cli
     neofetch
     delta
     unzip

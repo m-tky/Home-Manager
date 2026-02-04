@@ -53,7 +53,6 @@ in
     thunar-volman
     thunar-archive-plugin
     thunar-media-tags-plugin
-
   ];
   # Enable the GUI applications to run in the home-manager environment
   xdg.enable = true;
