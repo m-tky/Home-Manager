@@ -57,7 +57,6 @@ in
     glib
     heroic
     antigravity
-    ryubing
     zoom-us
     myObsidian
     anki-bin

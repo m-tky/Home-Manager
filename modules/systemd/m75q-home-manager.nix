@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
-  flakePath = "/home/user/hm";
-  username = "user";
-in {
+  flakePath = config.home.homeDirectory + "/.config/home-manager";
+  username = config.home.username;
+in
+{
   systemd.user.services.home-manager = {
     Unit = {
       Description = "Home Manager";
