@@ -56,5 +56,6 @@
     ../modules/systemd/m75q-home-manager.nix
     ../modules/cad/default.nix
     ../modules/cloud/default.nix
+    ../modules/openclaw.nix
   ];
 }

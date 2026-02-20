@@ -97,7 +97,10 @@
                 };
               }
             ];
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = {
+              inherit inputs;
+              hostName = machine;
+            };
           };
         }
       ) userMachines;
