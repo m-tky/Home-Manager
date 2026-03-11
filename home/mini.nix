@@ -18,7 +18,7 @@
     ../modules/wayland/hypr/default.nix
     ../modules/wayland/hypr/monitor/hyprland-monitor-mini.nix
     ../modules/systemd/mini-home-manager.nix
-    ../modules/openclaw.nix
+    ../modules/zeroclaw.nix
   ];
   home.packages = with pkgs; [
     pandoc

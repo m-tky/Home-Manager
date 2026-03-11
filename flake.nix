@@ -26,6 +26,16 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zeroclaw = {
+      url = "git+ssh://forgejo/takuya/zeroclaw.git";
+    };
+    antigravity-discord-bot = {
+      url = "github:harunamitrader/antigravity-discord-bot";
+      flake = false;
+    };
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+    };
   };
 
   outputs =
@@ -33,6 +43,9 @@
       nixpkgs,
       home-manager,
       noctalia,
+      zeroclaw,
+      antigravity-discord-bot,
+      antigravity-nix,
       ...
     }@inputs:
     let
@@ -98,7 +111,13 @@
               }
             ];
             extraSpecialArgs = {
-              inherit inputs;
+              inherit
+                inputs
+                zeroclaw
+                antigravity-discord-bot
+                antigravity-nix
+                noctalia
+                ;
               hostName = machine;
             };
           };

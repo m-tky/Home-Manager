@@ -12,6 +12,8 @@
     unzip
     python3Packages.jupytext
     imagemagick
+    gemini-cli
+    crush
   ];
 
   programs = {
