@@ -7,13 +7,12 @@
     jq
     tree
     tesseract
-    neofetch
+    fastfetch
     delta
     unzip
     python3Packages.jupytext
     imagemagick
     gemini-cli
-    crush
   ];
 
   programs = {

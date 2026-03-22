@@ -29,13 +29,10 @@
     zeroclaw = {
       url = "git+ssh://forgejo/takuya/zeroclaw.git";
     };
-    antigravity-discord-bot = {
-      url = "github:harunamitrader/antigravity-discord-bot";
-      flake = false;
-    };
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
     };
+    ik-llama-cpp.url = "github:ikawrakow/ik_llama.cpp";
   };
 
   outputs =
@@ -44,7 +41,6 @@
       home-manager,
       noctalia,
       zeroclaw,
-      antigravity-discord-bot,
       antigravity-nix,
       ...
     }@inputs:
@@ -114,7 +110,6 @@
               inherit
                 inputs
                 zeroclaw
-                antigravity-discord-bot
                 antigravity-nix
                 noctalia
                 ;

@@ -116,7 +116,6 @@ return config";
       wayvnc
       wf-recorder
       wl-clipboard
-      helvum
       foot
       libnotify
       translate-shell
