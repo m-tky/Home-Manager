@@ -30,7 +30,6 @@ in
     ../modules/theme/default.nix
     ../modules/wayland/core.nix
     ../modules/wayland/niri/default.nix
-    ../modules/systemd/m75q-home-manager.nix
   ];
 
   programs = {
@@ -41,23 +40,9 @@ in
     };
   };
   home.packages = with pkgs; [
-    gnome-control-center
-    glib
-    mpv
-    zathura
-    ffmpegthumbnailer
-    android-file-transfer
-    networkmanagerapplet
-    mission-center
-    thunar
-    thunar-volman
-    thunar-archive-plugin
-    thunar-media-tags-plugin
+    (pkgs.llama-cpp.override {
+      cudaSupport = true;
+    })
   ];
-  # Enable the GUI applications to run in the home-manager environment
   xdg.enable = true;
-  # Optional: Set up a desktop entry for Obsidian
-  home.file = {
-    ".config/zathura/zathurarc".source = ./config/zathura/zathurarc;
-  };
 }
