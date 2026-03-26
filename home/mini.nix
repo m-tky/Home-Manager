@@ -43,11 +43,7 @@ in
     ../modules/localization/fcitx5.nix
     ../modules/theme/default.nix
     ../modules/wayland/core.nix
-    ../modules/wayland/wlogout/default.nix
-    ../modules/wayland/hypr/default.nix
-    ../modules/wayland/hypr/monitor/hyprland-monitor-mini.nix
-    ../modules/systemd/mini-home-manager.nix
-    # ../modules/zeroclaw.nix
+    ../modules/wayland/niri/default.nix
   ];
   home.packages = with pkgs; [
     pandoc

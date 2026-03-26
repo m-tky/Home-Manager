@@ -84,9 +84,7 @@ in
     ../modules/localization/fcitx5.nix
     ../modules/theme/default.nix
     ../modules/wayland/core.nix
-    ../modules/wayland/wlogout/default.nix
-    ../modules/wayland/hypr/default.nix
-    ../modules/wayland/hypr/monitor/hyprland-monitor-m75q.nix
+    ../modules/wayland/niri/default.nix
     ../modules/systemd/m75q-home-manager.nix
     ../modules/cad/default.nix
     ../modules/cloud/default.nix
