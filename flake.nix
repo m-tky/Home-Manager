@@ -26,9 +26,6 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zeroclaw = {
-      url = "git+ssh://forgejo/takuya/zeroclaw.git";
-    };
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
     };
@@ -41,7 +38,6 @@
       nixpkgs,
       home-manager,
       noctalia,
-      zeroclaw,
       antigravity-nix,
       ...
     }@inputs:
@@ -116,7 +112,6 @@
             extraSpecialArgs = {
               inherit
                 inputs
-                zeroclaw
                 antigravity-nix
                 noctalia
                 ;
