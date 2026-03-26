@@ -78,6 +78,12 @@
           username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
         };
+        minawa = {
+          path = ./home/minawa.nix;
+          system = "x86_64-linux";
+          username = "takuya";
+          homeDirectory = "/home/takuya";
+        };
       };
     in
     {
