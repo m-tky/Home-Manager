@@ -33,6 +33,7 @@
       url = "github:jacopone/antigravity-nix";
     };
     ik-llama-cpp.url = "github:ikawrakow/ik_llama.cpp";
+    powerinfer.url = "github:Tiiny-AI/PowerInfer";
   };
 
   outputs =
