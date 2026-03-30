@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    readest
     gnome-control-center
     glib
     heroic
@@ -63,7 +64,6 @@ in
     spotify
     # vesktop
     slack
-    freetube
     bitwarden-cli
     calibre
     inkscape
@@ -79,7 +79,6 @@ in
     networkmanagerapplet
     mission-center
     kdePackages.kalgebra
-    feishin
     thunar
     thunar-volman
     thunar-archive-plugin
