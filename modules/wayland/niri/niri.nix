@@ -25,6 +25,7 @@
     ".local/bin/tm.sh".source = ./scripts/tm.sh;
   };
   programs.niri.settings = {
+    prefer-no-csd = true;
     # 入力設定
     input = {
       keyboard.numlock = true;
@@ -79,7 +80,7 @@
         { proportion = 0.7; }
       ];
       default-column-width = {
-        proportion = 0.5;
+        proportion = 0.3;
       };
       focus-ring = {
         width = 2;
@@ -91,6 +92,7 @@
         };
       };
       border.enable = false;
+
       shadow = {
         enable = true;
         softness = 30;
@@ -154,6 +156,9 @@
     # ウィンドウ・レイヤールール
     window-rules = [
       {
+        draw-border-with-background = false;
+      }
+      {
         matches = [
           {
             app-id = "^org\\.wezfurlong\\.wezterm$";
@@ -168,7 +173,7 @@
             title = "^Picture-in-Picture$";
           }
         ];
-        open-floating = true;
+        open-floating = false;
       }
       {
         # geometry-corner-radius = 6;

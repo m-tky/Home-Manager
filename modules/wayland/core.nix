@@ -120,7 +120,6 @@ return config";
       libnotify
       translate-shell
       wiki-tui
-      swaynotificationcenter
       (writeShellScriptBin "pwec" ''
         # PATHに fzf, pulseaudio, gawk, gnused を通す
         PATH=${pkgs.pulseaudio}/bin:${pkgs.fzf}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin:$PATH
