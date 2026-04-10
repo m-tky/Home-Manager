@@ -54,6 +54,7 @@ in
   };
   home.packages = with pkgs; [
     readest
+    vesktop
     gnome-control-center
     glib
     heroic

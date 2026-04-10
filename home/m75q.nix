@@ -6,7 +6,7 @@
 }:
 let
   llama-cpu =
-    (inputs.ik-llama-cpp.packages.${pkgs.system}.default.override {
+    (inputs.ik-llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
       useVulkan = false;
       useCuda = false;
     }).overrideAttrs
@@ -40,7 +40,6 @@ in
     ryubing
     arduino-ide
     customJan
-    # inputs.powerinfer.packages.${pkgs.system}.default
     llama-cpu
   ];
   services.ollama = {

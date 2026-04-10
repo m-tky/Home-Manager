@@ -6,7 +6,7 @@
 }:
 let
   llama-vulkan =
-    (inputs.ik-llama-cpp.packages.${pkgs.system}.default.override {
+    (inputs.ik-llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
       # もし iGPU を活用したいならここを true に（要ハードウェア設定）
       useVulkan = true;
     }).overrideAttrs

@@ -4,6 +4,7 @@
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ numpy ]))
+    gh
     jq
     tree
     tesseract
@@ -13,6 +14,7 @@
     python3Packages.jupytext
     imagemagick
     gemini-cli
+    claude-code
   ];
 
   programs = {

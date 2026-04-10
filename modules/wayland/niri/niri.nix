@@ -33,7 +33,10 @@
         tap = true;
         natural-scroll = true;
       };
-      warp-mouse-to-focus.mode = "center-xy";
+      warp-mouse-to-focus = {
+        enable = true;
+        # mode = "center-xy";
+      };
       focus-follows-mouse.enable = true;
     };
 
