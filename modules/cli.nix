@@ -4,6 +4,10 @@
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ numpy ]))
+    rustc
+    cargo
+    clippy
+    rustfmt
     gh
     jq
     tree

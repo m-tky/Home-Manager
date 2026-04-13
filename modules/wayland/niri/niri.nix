@@ -37,7 +37,7 @@
         enable = true;
         # mode = "center-xy";
       };
-      focus-follows-mouse.enable = true;
+      # focus-follows-mouse.enable = true;
     };
 
     # 出力設定 (マルチモニター)

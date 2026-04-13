@@ -19,11 +19,11 @@ let
     '';
   };
   mychromium = pkgs.symlinkJoin {
-    name = "chromium-with-flags";
-    paths = [ pkgs.chromium ];
+    name = "chrome-with-flags";
+    paths = [ pkgs.google-chrome ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
-      wrapProgram $out/bin/chromium \
+      wrapProgram $out/bin/google-chrome \
         --add-flags "--enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,UseOzonePlatform" \
         --add-flags "--ozone-platform=wayland" \
         --add-flags "--wayland-text-input-version=3" \
@@ -90,7 +90,7 @@ in
     (pkgs.makeDesktopItem {
       name = "Messenger";
       desktopName = "Messenger";
-      exec = "${pkgs.chromium}/bin/chromium --enable-features=UseOzonePlatform --ozone-platform-hint=wayland --wayland-text-input-version=3 --enable-wayland-ime --app=https://messenger.com";
+      exec = "${pkgs.google-chrome}/bin/google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform-hint=wayland --wayland-text-input-version=3 --enable-wayland-ime --app=https://messenger.com";
       icon = "fbmessenger";
       categories = [
         "Network"
