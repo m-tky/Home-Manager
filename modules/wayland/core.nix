@@ -55,10 +55,62 @@ in
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
       bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
       font_size = "10";
-      background_opacity = "0.80";
+      background_opacity = "0.85";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";
       enable_audio_bell = "no";
+
+      # The basic colors
+      foreground = "#a0a8b7";
+      background = "#1f2329";
+      selection_foreground = "#1f2329";
+      selection_background = "#a0a8b7";
+
+      # Cursor colors
+      cursor = "#a0a8b7";
+      cursor_text_color = "#1f2329";
+
+      # URL underline color when hovering with mouse
+      url_color = "#4fa6ed";
+
+      # Tab bar colors
+      active_tab_foreground = "#1f2329";
+      active_tab_background = "#a0a8b7";
+      inactive_tab_foreground = "#a0a8b7";
+      inactive_tab_background = "#181b20";
+
+      # The 16 terminal colors
+      # black
+      color0 = "#30363f";
+      color8 = "#535965";
+
+      # red
+      color1 = "#e55561";
+      color9 = "#e55561";
+
+      # green
+      color2 = "#8ebd6b";
+      color10 = "#8ebd6b";
+
+      # yellow
+      color3 = "#e2b86b";
+      color11 = "#cc9057";
+
+      # blue
+      color4 = "#4fa6ed";
+      color12 = "#4fa6ed";
+
+      # purple
+      color5 = "#bf68d9";
+      color13 = "#bf68d9";
+
+      # cyan
+      color6 = "#48b0bd";
+      color14 = "#48b0bd";
+
+      # white
+      color7 = "#a0a8b7";
+      color15 = "#7a818e";
     };
   };
   programs.wezterm = {

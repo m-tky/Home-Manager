@@ -25,7 +25,16 @@
     };
   };
   # install nwg-look
-  home.packages = with pkgs; [
-    nwg-look
-  ];
+  home = {
+    packages = with pkgs; [
+      nwg-look
+    ];
+  };
+  # xdg.configFile = {
+  #   # ~/.config/gtk-3.0/gtk.css にリンクを張る
+  #   "gtk-3.0/gtk.css".source = ./gtk/Adwaita-One-Dark/colors/gtk-dark.css;
+  #
+  #   # ~/.config/gtk-4.0/gtk.css にリンクを張る
+  #   "gtk-4.0/gtk.css".source = ./gtk/Adwaita-One-Dark/colors/gtk-dark.css;
+  # };
 }

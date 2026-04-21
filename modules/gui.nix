@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    planify
     readest
     vesktop
     gnome-control-center
@@ -99,7 +100,35 @@ in
     })
   ];
   # Enable the GUI applications to run in the home-manager environment
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    desktopEntries = {
+      antigravity = {
+        name = "Antigravity";
+        genericName = "Text Editor";
+        exec = "antigravity --remote-debugging-port=9222 %F";
+        icon = "antigravity";
+        comment = "Code Editing. Redefined.";
+        categories = [
+          "Utility"
+          "TextEditor"
+          "Development"
+          "IDE"
+        ];
+        settings = {
+          StartupWMClass = "Antigravity";
+          Keywords = "vscode";
+        };
+        actions = {
+          new-empty-window = {
+            name = "New Empty Window";
+            exec = "antigravity --new-window --remote-debugging-port=9222 %F";
+            icon = "antigravity";
+          };
+        };
+      };
+    };
+  };
   # Optional: Set up a desktop entry for Obsidian
   home.file = {
     ".config/zathura/zathurarc".source = ./config/zathura/zathurarc;

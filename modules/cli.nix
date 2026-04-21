@@ -48,12 +48,32 @@
     lazygit = {
       enable = true;
       settings = {
+        theme = {
+          "241" = [ "#bf68d9" ];
+          activeBorderColor = [
+            "#8ebd6b"
+            "bold"
+          ];
+          inactiveBorderColor = [ "#535965" ];
+          searchingActiveBorderColor = [
+            "#8ebd6b"
+            "bold"
+          ];
+          optionsTextColor = [ "#4fa6ed" ];
+          selectedLineBgColor = [ "#323641" ];
+          cherryPickedCommitFgColor = [ "#4fa6ed" ];
+          cherryPickedCommitBgColor = [ "#bf68d9" ];
+          markedBaseCommitFgColor = [ "#4fa6ed" ];
+          markedBaseCommitBgColor = [ "#e2b86b" ];
+          unstagedChangesColor = [ "#e55561" ];
+          defaultFgColor = [ "#a0a8b7" ];
+        };
         gui.showIcons = true;
         git = {
           allBranchesLogCmds = [
-            "git log --oneline --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' --"
+            "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' --"
           ];
-          branchLogCmd = "git log --graph --color=always --date=format:'%Y-%m-%d %H:%M' --pretty=format:'%C(#9399b2 reverse)%h%Creset %C(cyan)%ad%Creset %C(#f38ba8)%ae%Creset %C(yellow reverse)%d%Creset %n%C(white bold)%s%Creset%n' $branchName --";
+          branchLogCmd = "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' $branchName --";
           pagers = [
             {
               colorArg = "always";
@@ -80,6 +100,7 @@
     eza = {
       enable = true;
       enableZshIntegration = true;
+      icons = "auto";
       colors = "auto";
       git = true;
     };
@@ -116,6 +137,35 @@
       enable = true;
       settings = {
         pane_frames = false;
+        theme = "onedarkpro-darker";
+        themes = {
+          onedarkpro = {
+            fg = "#abb2bf";
+            bg = "#282c34";
+            black = "#282c34";
+            red = "#e06c75";
+            green = "#98c379";
+            yellow = "#e5c07b";
+            blue = "#61afef";
+            magenta = "#c678dd";
+            cyan = "#56b6c2";
+            white = "#abb2bf";
+            orange = "#d19a66";
+          };
+          onedarkpro-darker = {
+            fg = "#a0a8b7";
+            bg = "#1f2329";
+            black = "#1f2329";
+            red = "#e55561";
+            green = "#8ebd6b";
+            yellow = "#e2b86b";
+            blue = "#4fa6ed";
+            magenta = "#bf68d9";
+            cyan = "#48b0bd";
+            white = "#a0a8b7";
+            orange = "#cc9057";
+          };
+        };
       };
     };
 
@@ -131,6 +181,7 @@
     };
     zsh = {
       enable = true;
+      autosuggestion.enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
       history = {
         size = 1000;
@@ -141,9 +192,9 @@
       shellAliases = {
         grep = "grep --color=auto";
         # ezaのエイリアス群
-        ei = "eza --icons --git --group-directories-first --sort=type";
-        ea = "eza -a --icons --git --group-directories-first --sort=type";
-        ee = "eza -aahl --icons --git --group-directories-first --sort=type";
+        ei = "eza -G --icons --git --group-directories-first --sort=type";
+        ea = "eza -G -a --icons --git --group-directories-first --sort=type";
+        ee = "eza -G -aahl --icons --git --group-directories-first --sort=type";
         ls = "ei";
         la = "ea";
         ll = "ee";
@@ -161,22 +212,13 @@
           name = "zsh-history-substring-search";
           src = pkgs.zsh-history-substring-search;
         }
-        {
-          name = "zsh-syntax-highlighting";
-          src = pkgs.zsh-syntax-highlighting;
-        }
-        {
-          name = "zsh-autosuggestions";
-          src = pkgs.zsh-autosuggestions;
-        }
       ];
 
       # その他のカスタム設定
       initContent = ''
-        # compinstallによる設定 (多くはデフォルトですが明示的に記述)
         hms() {
           local host=$(hostname | cut -d. -f1)
-          home-manager switch --flake "/home/user/hm#user@$host"
+          home-manager switch --flake "/home/user/.config/home-manager/#$(whoami)@$host"
         }
         autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'l:|=* r:|=*'
@@ -207,10 +249,14 @@
         # history-substring-searchのキーバインド
         bindkey -M vicmd 'k' history-substring-search-up
         bindkey -M vicmd 'j' history-substring-search-down
+        source ~/.zsh/zsh-syntax-highlighting.zsh
       '';
     };
   };
   home = {
+    file = {
+      ".zsh/zsh-syntax-highlighting.zsh".source = ./config/zsh-syntax-highlighting.zsh;
+    };
     sessionVariables = {
       BROWSER = "firefox"; # zen-browserは別途インストールが必要
       EDITOR = "vim";
