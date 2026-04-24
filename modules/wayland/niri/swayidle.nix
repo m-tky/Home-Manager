@@ -21,12 +21,11 @@
       }
     ];
 
-    # スリープ直前の動作
-    events = [
-      {
-        event = "before-sleep";
-        command = "hyprlock";
-      }
-    ];
+    # ここを修正：リスト [ { event = "..."; command = "..."; } ]
+    # ではなく、アトリビュートセット { eventName = "command"; } に変更
+    events = {
+      before-sleep = "hyprlock";
+      lock = "hyprlock"; # 必要であれば追加
+    };
   };
 }
