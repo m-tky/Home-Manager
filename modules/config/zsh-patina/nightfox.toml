@@ -1,0 +1,52 @@
+# ブレース・括弧類はなるべく引っ込める
+"punctuation.section"    = "#39506d"
+"punctuation.terminator" = "#39506d"
+
+# ── コメント ──────────────────────────────────────────
+# dim + italic で完全に背景に退かせる
+"comment" = "#738091"
+
+# ── キーワード・制御構文 ──────────────────────────────
+# purple 系で統一。modifier だけ少し明るく区別
+"keyword"          = "#9d79d6"
+"storage.modifier" = "#baa1e2"
+
+# ── 演算子 ────────────────────────────────────────────
+# teal は blue とも purple とも被らず演算子に最適
+"keyword.operator"        = "#63cdcf"
+"keyword.operator.regexp" = "#7ad5d6"
+
+# ── 型・定数 ──────────────────────────────────────────
+# orange は暖色で「値そのもの」感がある
+"constant"           = "#f4a261"
+"constant.character" = "#d67ad2"   # エスケープ文字は pink で区別
+
+# ── 変数 ──────────────────────────────────────────────
+# 代入対象 (storage) は yellow で「書き込まれる場所」感
+"storage"                         = "#dbc074"
+# パラメータは yellow の明るい側
+"variable.parameter"              = "#e0c989"
+# 環境変数・特殊変数は赤系で「外部からの注入」感
+"variable.other"                  = "#d16983"
+"punctuation.definition.variable" = "#d16983"
+"variable.language.tilde"         = "#c94f6d"
+
+# ── 関数・コマンド ────────────────────────────────────
+# blue 系で統一。定義名は bright blue、呼び出しは通常 blue
+"entity.name.function"    = "#86abdc"
+"variable.function"       = "#719cd6"
+"dynamic.callable"        = "#719cd6"
+"dynamic.callable.missing"= "#c94f6d"   # 未定義は赤で警告
+
+# ── 文字列 ────────────────────────────────────────────
+# green は「データ」の色。落ち着いた green で目に優しく
+"string" = "#81b29a"
+
+# ── サポート・組み込み ────────────────────────────────
+"support" = "#86abdc"
+
+# ── パス ──────────────────────────────────────────────
+"dynamic.path" = { underline = true }
+
+# ── 履歴展開 ──────────────────────────────────────────
+"meta.group.expansion.history" = "#c94f6d"

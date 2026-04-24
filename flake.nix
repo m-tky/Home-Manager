@@ -17,7 +17,8 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     nixCats-nvim = {
-      url = "github:m-tky/Nixcats";
+      type = "git";
+      url = "ssh://forgejo/takuya/Nixcats";
     };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
@@ -31,6 +32,10 @@
     };
     ik-llama-cpp.url = "github:ikawrakow/ik_llama.cpp";
     powerinfer.url = "github:Tiiny-AI/PowerInfer";
+    zsh-patina = {
+      url = "github:michel-kraemer/zsh-patina";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

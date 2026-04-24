@@ -558,18 +558,18 @@
     "jovian-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1765800704,
-        "narHash": "sha256-c0g1Oikvaw1WBo28DwCA6s+BpExZ5D6F3iXMzfRrUp0=",
+        "lastModified": 1776797450,
+        "narHash": "sha256-FQUQFGElGQywkCoM0Ru3tYR4X/BEYf8QSfRwfF6l1LY=",
         "ref": "dev",
-        "rev": "20222ff49e62db7e512db510eee012d4d8466cba",
-        "revCount": 116,
+        "rev": "43dca0aa051107188bc02e480d9a9e7a4a7a72ca",
+        "revCount": 117,
         "type": "git",
-        "url": "https://github.com/m-tky/jovian.nvim"
+        "url": "ssh://forgejo/takuya/jovian.nvim.git"
       },
       "original": {
         "ref": "dev",
         "type": "git",
-        "url": "https://github.com/m-tky/jovian.nvim"
+        "url": "ssh://forgejo/takuya/jovian.nvim.git"
       }
     },
     "jupytext-nvim": {
@@ -685,17 +685,17 @@
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects"
       },
       "locked": {
-        "lastModified": 1770353239,
-        "narHash": "sha256-J+TPeHvM6v0turcpAuzcN4vmbJbH3Xe51oxAz+ro9W8=",
-        "owner": "m-tky",
-        "repo": "Nixcats",
-        "rev": "3edd144b9ece9daff470723c39f8b4f941d136a1",
-        "type": "github"
+        "lastModified": 1776957547,
+        "narHash": "sha256-aKm3B+hBiPers5i7dBhTwsUGxGHEjhgBuX2hBCfrWts=",
+        "ref": "refs/heads/main",
+        "rev": "6ddb86fc79cfc33133d84d1e3865f5be2eb4308c",
+        "revCount": 115,
+        "type": "git",
+        "url": "ssh://forgejo/takuya/Nixcats"
       },
       "original": {
-        "owner": "m-tky",
-        "repo": "Nixcats",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://forgejo/takuya/Nixcats"
       }
     },
     "nixpkgs": {
@@ -987,7 +987,8 @@
         "nixpkgs": "nixpkgs_6",
         "noctalia": "noctalia",
         "powerinfer": "powerinfer",
-        "xremap-flake": "xremap-flake"
+        "xremap-flake": "xremap-flake",
+        "zsh-patina": "zsh-patina"
       }
     },
     "systems": {
@@ -1181,6 +1182,26 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zsh-patina": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1776771421,
+        "narHash": "sha256-C3j1l/QWXXOuPXhIgB5tToFO1cbfnaFGaXDlb4x7pFE=",
+        "owner": "michel-kraemer",
+        "repo": "zsh-patina",
+        "rev": "63a91f9f7740fe9b430d2edf166918992b45cb50",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michel-kraemer",
+        "repo": "zsh-patina",
         "type": "github"
       }
     }

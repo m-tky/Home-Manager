@@ -1,9 +1,16 @@
-{ config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ numpy ]))
+    inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
+    typst
     rustc
     cargo
     clippy
@@ -137,7 +144,7 @@
       enable = true;
       settings = {
         pane_frames = false;
-        theme = "onedarkpro-darker";
+        theme = "nightfox";
         themes = {
           onedarkpro = {
             fg = "#abb2bf";
@@ -164,6 +171,19 @@
             cyan = "#48b0bd";
             white = "#a0a8b7";
             orange = "#cc9057";
+          };
+          nightfox = {
+            bg = "#2b3b51";
+            fg = "#cdcecf";
+            red = "#c94f6d";
+            green = "#81b29a";
+            blue = "#719cd6";
+            yellow = "#dbc074";
+            magenta = "#9d79d6";
+            orange = "#f4a261";
+            cyan = "#63cdcf";
+            black = "#29394f";
+            white = "#aeafb0";
           };
         };
       };
@@ -249,14 +269,18 @@
         # history-substring-searchのキーバインド
         bindkey -M vicmd 'k' history-substring-search-up
         bindkey -M vicmd 'j' history-substring-search-down
-        source ~/.zsh/zsh-syntax-highlighting.zsh
+
+        # Reference the executable direcly zsh-patina
+        eval "$(${
+          inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/bin/zsh-patina activate)"
       '';
     };
   };
   home = {
-    file = {
-      ".zsh/zsh-syntax-highlighting.zsh".source = ./config/zsh-syntax-highlighting.zsh;
-    };
+    # file = {
+    #   ".zsh/zsh-syntax-highlighting.zsh".source = ./config/zsh-syntax-highlighting.zsh;
+    # };
     sessionVariables = {
       BROWSER = "firefox"; # zen-browserは別途インストールが必要
       EDITOR = "vim";
@@ -271,6 +295,8 @@
   };
 
   # place lazygit configfile
-  # xdg.configFile = {
-  # };
+  xdg.configFile = {
+    "zsh-patina/nightfox.toml".source = ./config/zsh-patina/nightfox.toml;
+    "zsh-patina/config.toml".source = ./config/zsh-patina/config.toml;
+  };
 }

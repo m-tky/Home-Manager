@@ -1,0 +1,200 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# : Manager {{{
+
+[mgr]
+cwd = { fg = "#719cd6" } # color4 (blue)
+
+# Find
+find_keyword  = { fg = "#f4a261", bold = true, italic = true, underline = true } # color16 (orange)
+find_position = { fg = "#9d79d6", bg = "reset", bold = true, italic = true } # color5 (purple)
+
+# Marker
+marker_copied   = { fg = "#81b29a", bg = "#81b29a" } # color2 (green)
+marker_cut      = { fg = "#c94f6d", bg = "#c94f6d" } # color1 (red)
+marker_marked   = { fg = "#63cdcf", bg = "#63cdcf" } # color6 (cyan)
+marker_selected = { fg = "#dbc074", bg = "#dbc074" } # color3 (yellow)
+
+# Count
+count_copied   = { fg = "#192330", bg = "#81b29a" } # background / color2
+count_cut      = { fg = "#192330", bg = "#c94f6d" } # background / color1
+count_selected = { fg = "#192330", bg = "#dbc074" } # background / color3
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "#39506d" } # inactive_border_color
+
+# : }}}
+
+
+# : Tabs {{{
+
+[tabs]
+active   = { fg = "#131a24", bg = "#719cd6", bold = true } # active_tab_foreground / active_tab_background
+inactive = { fg = "#738091", bg = "#2b3b51" } # inactive_tab_foreground / inactive_tab_background
+
+# : }}}
+
+
+# : Mode {{{
+
+[mode]
+
+normal_main = { fg = "#131a24", bg = "#719cd6", bold = true } # active_tab_foreground / active_tab_background
+normal_alt  = { fg = "#719cd6", bg = "#2b3b51" } # color4 / selection_background
+
+# Select mode
+select_main = { fg = "#192330", bg = "#81b29a", bold = true } # background / color2
+select_alt  = { fg = "#81b29a", bg = "#2b3b51" } # color2 / selection_background
+
+# Unset mode
+unset_main = { fg = "#192330", bg = "#9d79d6", bold = true } # background / color5
+unset_alt  = { fg = "#9d79d6", bg = "#2b3b51" } # color5 / selection_background
+
+# : }}}
+
+
+# : Status bar {{{
+
+[status]
+overall = { fg = "#719cd6" } # color4
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Progress
+progress_label = { fg = "#192330", bold = true } # background
+progress_normal = { fg = "#719cd6", bg = "#2b3b51" } # color4 / selection_background
+progress_error = { fg = "#c94f6d", bg = "#2b3b51" } # color1 / selection_background
+
+# Permissions
+perm_sep   = { fg = "#39506d" } # inactive_border_color
+perm_type  = { fg = "#719cd6" } # color4 (blue - directory etc)
+perm_read  = { fg = "#81b29a" } # color2 (green)
+perm_write = { fg = "#c94f6d" } # color1 (red)
+perm_exec  = { fg = "#dbc074" } # color3 (yellow)
+
+
+# : }}}
+
+# : Pick {{{
+
+[pick]
+border = { fg = "#719cd6" } # active_border_color
+active = { fg = "#9d79d6", bold = true } # color5
+inactive = {}
+
+# : }}}
+
+
+# : Input {{{
+
+[input]
+border   = { fg = "#719cd6" } # active_border_color
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# : }}}
+
+
+# : Completion {{{
+
+[cmp]
+border = { fg = "#719cd6" } # active_border_color
+
+# : }}}
+
+
+# : Tasks {{{
+
+[tasks]
+border  = { fg = "#719cd6" } # active_border_color
+title   = {}
+hovered = { fg = "#9d79d6", underline = true } # color5
+
+# : }}}
+
+
+# : Which {{{
+
+[which]
+mask            = { bg = "#2b3b51" } # selection_background
+cand            = { fg = "#63cdcf" } # color6
+rest            = { fg = "#738091" } # inactive_tab_foreground
+desc            = { fg = "#9d79d6" } # color5
+separator       = "  "
+separator_style = { fg = "#575860" } # color8 (bright black/grey)
+
+# : }}}
+
+
+# : Help {{{
+
+[help]
+on      = { fg = "#81b29a" } # color2
+run     = { fg = "#9d79d6" } # color5
+hovered = { reversed = true, bold = true }
+footer  = { fg = "#192330", bg = "#cdcecf" } # background / foreground
+
+# : }}}
+
+
+# : Spotter {{{
+
+[spot]
+border   = { fg = "#719cd6" } # active_border_color
+title    = { fg = "#719cd6" } # color4
+tbl_col  = { fg = "#81b29a" } # color2
+tbl_cell = { fg = "#9d79d6", bg = "#2b3b51" } # color5 / selection_background
+
+# : }}}
+
+
+# : Notify {{{
+
+[notify]
+title_info  = { fg = "#81b29a" } # color2
+title_warn  = { fg = "#dbc074" } # color3
+title_error = { fg = "#c94f6d" } # color1
+
+# : }}}
+
+
+# : File-specific styles {{{
+
+[filetype]
+
+rules = [
+    # Images
+    { mime = "image/*", fg = "#f4a261" }, # color16 (orange)
+
+    # Media
+    { mime = "video/*", fg = "#9d79d6" }, # color5 (purple)
+    { mime = "audio/*", fg = "#9d79d6" }, # color5 (purple)
+
+    # Archives
+   { mime = "application/zip",             fg = "#c94f6d" }, # color1 (red)
+    { mime = "application/x-tar",           fg = "#c94f6d" },
+    { mime = "application/x-bzip*",         fg = "#c94f6d" },
+    { mime = "application/x-bzip2",         fg = "#c94f6d" },
+    { mime = "application/x-7z-compressed", fg = "#c94f6d" },
+    { mime = "application/x-rar",           fg = "#c94f6d" },
+    { mime = "application/x-xz",            fg = "#c94f6d" },
+
+    # Documents
+    { mime = "application/doc",        fg = "#81b29a" }, # color2 (green)
+    { mime = "application/epub+zip",   fg = "#81b29a" },
+    { mime = "application/pdf",        fg = "#81b29a" },
+    { mime = "application/rtf",        fg = "#81b29a" },
+    { mime = "application/vnd.*",      fg = "#81b29a" },
+
+  # Special files
+  { mime = "*", is = "orphan", fg = "#192330", bg = "#c94f6d" }, # background / color1
+  { mime = "application/*exec*", fg = "#63cdcf" }, # color6 (cyan)
+
+    # Fallback
+    { url = "*", fg = "#cdcecf" }, # foreground
+    { url = "*/", fg = "#719cd6" }, # color4 (blue)
+]
+
+# : }}}

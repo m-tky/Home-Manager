@@ -60,57 +60,52 @@ in
       enabled_layouts = "splits:split_axis=horizontal";
       enable_audio_bell = "no";
 
-      # The basic colors
-      foreground = "#a0a8b7";
-      background = "#1f2329";
-      selection_foreground = "#1f2329";
-      selection_background = "#a0a8b7";
+      background = "#192330";
+      foreground = "#cdcecf";
+      selection_background = "#2b3b51";
+      selection_foreground = "#cdcecf";
+      cursor_text_color = "#192330";
+      url_color = "#81b29a";
 
-      # Cursor colors
-      cursor = "#a0a8b7";
-      cursor_text_color = "#1f2329";
+      # Cursor
+      # uncomment for reverse background
+      # cursor none
+      cursor = "#cdcecf";
 
-      # URL underline color when hovering with mouse
-      url_color = "#4fa6ed";
+      # Border
+      active_border_color = "#719cd6";
+      inactive_border_color = "#39506d";
+      bell_border_color = "#f4a261";
 
-      # Tab bar colors
-      active_tab_foreground = "#1f2329";
-      active_tab_background = "#a0a8b7";
-      inactive_tab_foreground = "#a0a8b7";
-      inactive_tab_background = "#181b20";
+      # Tabs
+      active_tab_background = "#719cd6";
+      active_tab_foreground = "#131a24";
+      inactive_tab_background = "#2b3b51";
+      inactive_tab_foreground = "#738091";
 
-      # The 16 terminal colors
-      # black
-      color0 = "#30363f";
-      color8 = "#535965";
+      # normal
+      color0 = "#393b44";
+      color1 = "#c94f6d";
+      color2 = "#81b29a";
+      color3 = "#dbc074";
+      color4 = "#719cd6";
+      color5 = "#9d79d6";
+      color6 = "#63cdcf";
+      color7 = "#dfdfe0";
 
-      # red
-      color1 = "#e55561";
-      color9 = "#e55561";
+      # bright
+      color8 = "#575860";
+      color9 = "#d16983";
+      color10 = "#8ebaa4";
+      color11 = "#e0c989";
+      color12 = "#86abdc";
+      color13 = "#baa1e2";
+      color14 = "#7ad5d6";
+      color15 = "#e4e4e5";
 
-      # green
-      color2 = "#8ebd6b";
-      color10 = "#8ebd6b";
-
-      # yellow
-      color3 = "#e2b86b";
-      color11 = "#cc9057";
-
-      # blue
-      color4 = "#4fa6ed";
-      color12 = "#4fa6ed";
-
-      # purple
-      color5 = "#bf68d9";
-      color13 = "#bf68d9";
-
-      # cyan
-      color6 = "#48b0bd";
-      color14 = "#48b0bd";
-
-      # white
-      color7 = "#a0a8b7";
-      color15 = "#7a818e";
+      # extended colors
+      color16 = "#f4a261";
+      color17 = "#d67ad2";
     };
   };
   programs.wezterm = {
