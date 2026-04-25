@@ -76,6 +76,7 @@
       "python.experiments.enabled" = false;
       "python.terminal.activateEnvironment" = false;
       "python.venvFolders" = [ ];
+      "nixEnvSelector.useFlakes" = true;
     };
   };
 }
