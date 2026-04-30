@@ -77,6 +77,7 @@
       "python.terminal.activateEnvironment" = false;
       "python.venvFolders" = [ ];
       "nixEnvSelector.useFlakes" = true;
+      "workbench.colorTheme" = "Nightfox";
     };
   };
 }
