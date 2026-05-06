@@ -17,8 +17,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     nixCats-nvim = {
-      type = "git";
-      url = "ssh://forgejo/takuya/Nixcats";
+      url = "github:m-tky/Nixcats";
     };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
@@ -35,6 +34,22 @@
     zsh-patina = {
       url = "github:michel-kraemer/zsh-patina";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stream-pi-server-src = {
+      url = "github:stream-pi/server";
+      flake = false;
+    };
+    stream-pi-util-src = {
+      url = "github:stream-pi/util";
+      flake = false;
+    };
+    stream-pi-action-api-src = {
+      url = "github:stream-pi/action-api";
+      flake = false;
+    };
+    stream-pi-theme-api-src = {
+      url = "github:stream-pi/theme-api";
+      flake = false;
     };
   };
 
@@ -101,6 +116,13 @@
               # hostPlatform = system;
               inherit system;
               config.allowUnfree = true;
+              overlays = [
+                (_: prev: {
+                  openldap = prev.openldap.overrideAttrs {
+                    doCheck = false;
+                  };
+                })
+              ];
             };
             modules = [
               inputs.catppuccin.homeModules.catppuccin
