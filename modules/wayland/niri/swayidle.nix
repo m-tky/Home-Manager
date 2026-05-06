@@ -11,7 +11,7 @@
     enable = true;
 
     # niriなどのWayland環境でグラフィカルセッションに紐付ける
-    systemdTarget = "graphical-session.target";
+    systemdTargets = [ "graphical-session.target" ];
 
     # タイムアウト設定
     timeouts = [

@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    streamcontroller
     planify
     readest
     vesktop
