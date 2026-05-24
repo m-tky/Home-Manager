@@ -53,6 +53,8 @@ in
     };
   };
   home.packages = with pkgs; [
+    czkawka
+    baobab
     streamcontroller
     planify
     readest
@@ -83,6 +85,7 @@ in
     mission-center
     kdePackages.kalgebra
     thunar
+    gvfs
     thunar-volman
     thunar-archive-plugin
     thunar-media-tags-plugin
