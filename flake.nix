@@ -20,7 +20,7 @@
       url = "github:m-tky/Nixcats";
     };
     niri-flake = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake/very-refactor";
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";

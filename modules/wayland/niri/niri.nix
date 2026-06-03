@@ -25,6 +25,9 @@
     ".local/bin/tm.sh".source = ./scripts/tm.sh;
   };
   programs.niri.settings = {
+    includes = lib.mkAfter [
+      (./blur.kdl)
+    ];
     prefer-no-csd = true;
     # 入力設定
     input = {
