@@ -1,4 +1,0 @@
-{
-  oxocarbon.enable = true;
-}
-

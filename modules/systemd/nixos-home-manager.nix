@@ -6,8 +6,8 @@
 }:
 
 let
-  flakePath = "/home/user/hm";
-  username = "user";
+  flakePath = config.home.homeDirectory + "/.config/home-manager";
+  username = config.home.username;
 in
 {
   systemd.user.services.home-manager = {
@@ -18,7 +18,7 @@ in
     };
 
     Service = {
-      ExecStart = "${config.home.profileDirectory}/bin/home-manager switch --flake ${flakePath}#${username}@mini";
+      ExecStart = "${config.home.profileDirectory}/bin/home-manager switch --flake ${flakePath}#${username}@nixos";
       Restart = "on-failure";
       Environment = [
         "HOME=/home/${username}"

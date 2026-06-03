@@ -7,17 +7,17 @@
     hyprpolkitagent.enable = true;
   };
   home.file = {
-    ".local/bin/translate.sh".source = ./scripts/translate.sh;
-    ".local/bin/select_language.sh".source = ./scripts/select_language.sh;
-    ".local/bin/wayvnc_server.sh".source = ./scripts/wayvnc_server.sh;
-    ".local/bin/wiki.sh".source = ./scripts/wiki.sh;
-    ".local/bin/notevim.sh".source = ./scripts/notevim.sh;
-    ".local/bin/raycast.sh".source = ./scripts/raycast.sh;
-    ".local/bin/findfile.sh".source = ./scripts/findfile.sh;
-    ".local/bin/findcontent.sh".source = ./scripts/findcontent.sh;
-    ".local/bin/rcloneObsidianDocuments.sh".source = ./scripts/rcloneObsidianDocuments.sh;
-    ".local/bin/toggle_blur.sh".source = ./scripts/toggle_blur.sh;
-    ".local/bin/tm.sh".source = ./scripts/tm.sh;
+    ".local/bin/translate.sh".source = ../scripts/translate.sh;
+    ".local/bin/select_language.sh".source = ../scripts/select_language.sh;
+    ".local/bin/wayvnc_server.sh".source = ../scripts/wayvnc_server.sh;
+    ".local/bin/wiki.sh".source = ../scripts/wiki.sh;
+    ".local/bin/notevim.sh".source = ../scripts/notevim.sh;
+    ".local/bin/raycast.sh".source = ../scripts/raycast.sh;
+    ".local/bin/findfile.sh".source = ../scripts/findfile.sh;
+    ".local/bin/findcontent.sh".source = ../scripts/findcontent.sh;
+    ".local/bin/rcloneObsidianDocuments.sh".source = ../scripts/rcloneObsidianDocuments.sh;
+    ".local/bin/toggle_blur.sh".source = ../scripts/toggle_blur.sh;
+    ".local/bin/tm.sh".source = ../scripts/tm.sh;
   };
   wayland.windowManager.hyprland = {
     enable = false;

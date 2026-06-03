@@ -20,7 +20,7 @@
       layout = {
         "bar.layouts" =
           let
-            layout ={
+            layout = {
               "left" = [
                 "dashboard"
                 "workspaces"
