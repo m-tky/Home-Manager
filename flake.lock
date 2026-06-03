@@ -578,11 +578,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1780463035,
-        "narHash": "sha256-AyHiIU/UZ4GL9BPXDUt9ACKPY63xKUklZNEit8uyFBs=",
+        "lastModified": 1780474865,
+        "narHash": "sha256-XMpCw050j5yI+MC3LnqZUNyb5971BprutqBFmtEw/rs=",
         "owner": "m-tky",
         "repo": "jovian.nvim",
-        "rev": "9c877b6027b46a91658a2f0826a7cada25eed4ba",
+        "rev": "8b712d81048bfcc4e969e5315ea112ba882ad692",
         "type": "github"
       },
       "original": {
@@ -725,11 +725,11 @@
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects"
       },
       "locked": {
-        "lastModified": 1780463139,
-        "narHash": "sha256-tuPYuVR/j/omIrg6t5znlTWGncJ5ViD30bXt6nAUVq8=",
+        "lastModified": 1780491400,
+        "narHash": "sha256-ABOeh+g1SaQh3Zk4eCGQIFBXPQ8grA1uIKJkzRjyqJ4=",
         "owner": "m-tky",
         "repo": "Nixcats",
-        "rev": "26f02bf4fd33ac4ae824bbdc98492c1fc911f70d",
+        "rev": "07691cb7316b58773493ec35355c45c3957c8295",
         "type": "github"
       },
       "original": {
