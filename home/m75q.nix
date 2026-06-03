@@ -85,7 +85,6 @@ in
     ../modules/wayland/core.nix
     ../modules/wayland/niri/default.nix
     ../modules/wayland/niri/monitor/m75q.nix
-    ../modules/systemd/m75q-home-manager.nix
     ../modules/cad/default.nix
     ../modules/cloud/default.nix
   ];
