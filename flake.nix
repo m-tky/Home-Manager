@@ -10,12 +10,6 @@
 
     xremap-flake.url = "github:xremap/nix-flake";
 
-    # settings for hyprland
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    catppuccin.url = "github:catppuccin/nix";
     nixCats-nvim = {
       url = "github:m-tky/Nixcats";
     };
@@ -30,26 +24,13 @@
       url = "github:jacopone/antigravity-nix";
     };
     ik-llama-cpp.url = "github:ikawrakow/ik_llama.cpp";
-    powerinfer.url = "github:Tiiny-AI/PowerInfer";
     zsh-patina = {
       url = "github:michel-kraemer/zsh-patina";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stream-pi-server-src = {
-      url = "github:stream-pi/server";
-      flake = false;
-    };
-    stream-pi-util-src = {
-      url = "github:stream-pi/util";
-      flake = false;
-    };
-    stream-pi-action-api-src = {
-      url = "github:stream-pi/action-api";
-      flake = false;
-    };
-    stream-pi-theme-api-src = {
-      url = "github:stream-pi/theme-api";
-      flake = false;
+    skk-mozc = {
+      url = "github:m-tky/skk-mozc";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -125,7 +106,6 @@
               ];
             };
             modules = [
-              inputs.catppuccin.homeModules.catppuccin
               inputs.niri-flake.homeModules.niri
               cfg.path
               {

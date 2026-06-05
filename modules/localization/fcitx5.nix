@@ -2,17 +2,22 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
+  imports = [ inputs.skk-mozc.homeManagerModules.default ];
+
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
     fcitx5 = {
       addons = with pkgs; [
-        fcitx5-skk
+        # fcitx5-skk は skk-mozc に置き換え (どちらも skk.so を提供するので
+        # 同居不可)。skk-mozc 側がアドオンを programs.fcitx5-skk-mozc.enable
+        # 経由で自動追加するので、ここにはもう書かない。
         libskk
-        fcitx5-mozc
+        fcitx5-mozc # Mozc を単独 IM として切り替えたい場合に残す
         fcitx5-gtk
         kdePackages.fcitx5-qt
         libsForQt5.fcitx5-qt
@@ -21,6 +26,16 @@
       waylandFrontend = true;
     };
   };
+
+  programs.fcitx5-skk-mozc = {
+    enable = true;
+    mozc = {
+      ipcTimeoutMs = 50;
+      maxCandidates = 20;
+    };
+    debug = true; # ~/.cache/skk-mozc/log にログを書き出す
+  };
+
   home.sessionVariables = {
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
@@ -28,14 +43,21 @@
     DefaultIMModule = "fcitx";
     NIXOS_OZONE_WL = "1";
   };
-  home.file = {
-    ".local/share/fcitx5/skk/dictionary_list".text = with pkgs; ''
-      file=${libskk}/share/skk/SKK-JISYO.L,mode=readonly,type=file
-    '';
+
+  # SKK system dictionaries. skk-mozc reads this file the standard
+  # fcitx5-skk way; the dictionary contents themselves are pure SKK.
+  home.file.".local/share/fcitx5/skk/dictionary_list".text = with pkgs; ''
+    file=${skkDictionaries.l}/share/skk/SKK-JISYO.L,mode=readonly,type=file
+    file=${skkDictionaries.jinmei}/share/skk/SKK-JISYO.jinmei,mode=readonly,type=file
+  '';
+
+  # fcitx5 personal config (hotkeys, default IM, skk.conf etc.) sourced
+  # from this repo's modules/config/fcitx5/. `recursive = true` symlinks
+  # each file individually so other home-manager modules (skk-mozc,
+  # input-method overlays, theming addons, …) can add their own files
+  # under ~/.config/fcitx5/* without colliding with this directory.
+  xdg.configFile."fcitx5" = {
+    source = ../config/fcitx5;
+    recursive = true;
   };
-  xdg.configFile."fcitx5".source = lib.mkForce ../config/fcitx5;
-  # xdg.configFile."fcitx5" = {
-  #   source = ../config/fcitx5;
-  #   recursive = true;
-  # };
 }
