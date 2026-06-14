@@ -9,6 +9,7 @@
   # 両方のOSで使うパッケージ
   home.packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ numpy ]))
+    inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
     typst
     rustc
@@ -125,14 +126,16 @@
         plugin = {
           prepend_fetchers = [
             {
-              id = "git";
+              url = "*";
               name = "*";
               run = "git";
+              group = "git";
             }
             {
-              id = "git";
+              url = "*";
               name = "*/";
               run = "git";
+              group = "git";
             }
           ];
         };
@@ -287,6 +290,9 @@
       TERMINAL = "kitty"; # footは別途インストールが必要
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
       GDK_BACKEND = "wayland";
+      CODEX_CLI_PATH = "${
+        inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      }/bin/codex";
     };
     sessionPath = [
       "$HOME/.local/bin"

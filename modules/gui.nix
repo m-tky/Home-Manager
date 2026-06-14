@@ -33,7 +33,11 @@ let
   };
 in
 {
+  imports = [
+    inputs.codex-desktop-linux.homeManagerModules.default
+  ];
   programs = {
+    codexDesktopLinux.enable = true;
     firefox.enable = true;
     chromium = {
       enable = true;

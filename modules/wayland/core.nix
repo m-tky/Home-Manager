@@ -22,6 +22,7 @@ in
   imports = [
     inputs.xremap-flake.homeManagerModules.default
     inputs.noctalia.homeModules.default
+    ./fuzzel.nix
   ];
   services = {
     xremap = {
@@ -42,7 +43,6 @@ in
         }
       ];
     };
-    polkit-gnome.enable = true;
   };
 
   programs.kitty = {
@@ -55,7 +55,7 @@ in
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
       bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
       font_size = "10";
-      background_opacity = "0.85";
+      background_opacity = "0.75";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";
       enable_audio_bell = "no";

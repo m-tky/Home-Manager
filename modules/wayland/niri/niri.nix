@@ -10,7 +10,6 @@
   services = {
     hypridle.enable = true;
     hyprpaper.enable = true;
-    hyprpolkitagent.enable = true;
   };
   home.file = {
     ".local/bin/translate.sh".source = ../scripts/translate.sh;
@@ -128,7 +127,6 @@
         ];
       }
       { command = [ "udiskie" ]; }
-      { command = [ "hypridle" ]; }
       { command = [ "hypridle" ]; }
       {
         command = [

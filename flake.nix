@@ -32,6 +32,16 @@
       url = "github:m-tky/skk-mozc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wayland-conky = {
+      url = "github:m-tky/alarme-conky";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    codex-desktop-linux = {
+      url = "github:ilysenko/codex-desktop-linux";
+    };
+    codex-cli-nix = {
+      url = "github:sadjow/codex-cli-nix";
+    };
   };
 
   outputs =
