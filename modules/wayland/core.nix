@@ -4,19 +4,19 @@
   inputs,
   ...
 }:
-let
-  # python3 を PATH に含めたカスタムパッケージを作成
-  wrappedNoctalia = pkgs.symlinkJoin {
-    name = "noctalia-shell-wrapped";
-    # inputs.noctalia からビルドされた元のパッケージを指定
-    paths = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/noctalia-shell \
-        --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.python3 ]}
-    '';
-  };
-in
+# let
+#   # python3 を PATH に含めたカスタムパッケージを作成
+#   wrappedNoctalia = pkgs.symlinkJoin {
+#     name = "noctalia-shell-wrapped";
+#     # inputs.noctalia からビルドされた元のパッケージを指定
+#     paths = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+#     buildInputs = [ pkgs.makeWrapper ];
+#     postBuild = ''
+#       wrapProgram $out/bin/noctalia-shell \
+#         --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.python3 ]}
+#     '';
+#   };
+# in
 
 {
   imports = [
@@ -230,9 +230,9 @@ return config";
       };
     };
   };
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
-    package = wrappedNoctalia;
+    # package = wrappedNoctalia;
   };
   xdg.portal = {
     enable = true;
