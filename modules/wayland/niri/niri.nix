@@ -9,7 +9,6 @@
   programs.hyprlock.enable = true;
   services = {
     hypridle.enable = true;
-    hyprpaper.enable = true;
   };
   home.file = {
     ".local/bin/translate.sh".source = ../scripts/translate.sh;
@@ -114,7 +113,6 @@
     # 各種設定
     overview.zoom = 0.3;
     spawn-at-startup = [
-      { command = [ "noctalia-shell" ]; }
       {
         command = [
           "swayidle"
@@ -199,6 +197,16 @@
         open-floating = true;
       }
     ];
+    layer-rules = [
+      {
+        matches = [
+          {
+            namespace = "^noctalia-backdrop";
+          }
+        ];
+        place-within-backdrop = true;
+      }
+    ];
 
     # キーバインド
     binds = {
@@ -206,11 +214,10 @@
 
       "Mod+T".action.spawn = "kitty";
       "Mod+D".action.spawn = [
-        "noctalia-shell"
-        "ipc"
-        "call"
+        "noctalia"
+        "msg"
+        "panel-toggle"
         "launcher"
-        "toggle"
       ];
       "Super+Alt+L".action.spawn = "hyprlock";
       "Mod+B".action.spawn = "firefox";

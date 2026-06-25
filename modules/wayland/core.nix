@@ -232,7 +232,7 @@ return config";
   };
   programs.noctalia = {
     enable = true;
-    # package = wrappedNoctalia;
+    systemd.enable = true;
   };
   xdg.portal = {
     enable = true;
