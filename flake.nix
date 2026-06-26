@@ -23,7 +23,10 @@
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
     };
-    ik-llama-cpp.url = "github:ikawrakow/ik_llama.cpp";
+    ik-llama-cpp = {
+      url = "github:ikawrakow/ik_llama.cpp";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zsh-patina = {
       url = "github:michel-kraemer/zsh-patina";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -106,7 +109,10 @@
             pkgs = import nixpkgs {
               # hostPlatform = system;
               inherit system;
-              config.allowUnfree = true;
+              config = {
+                allowUnfree = true;
+                cudaSupport = true;
+              };
               overlays = [
                 (_: prev: {
                   openldap = prev.openldap.overrideAttrs {
