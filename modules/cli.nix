@@ -20,7 +20,6 @@
     jq
     tree
     tesseract
-    fastfetch
     delta
     unzip
     python3Packages.jupytext

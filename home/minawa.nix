@@ -62,7 +62,10 @@ in
   ];
 
   programs = {
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-bin;
+    };
   };
   home.packages = [
     llama-cuda
