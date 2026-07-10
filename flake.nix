@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codex-desktop-linux = {
-      url = "github:ilysenko/codex-desktop-linux";
+      url = "path:./vendor/codex-desktop-linux";
     };
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
@@ -93,6 +93,7 @@
           system = "x86_64-linux";
           username = "takuya";
           homeDirectory = "/home/takuya";
+          cudaSupport = true;
         };
       };
     in
@@ -111,10 +112,13 @@
               inherit system;
               config = {
                 allowUnfree = true;
-                cudaSupport = true;
+                cudaSupport = cfg.cudaSupport or false;
               };
               overlays = [
                 (_: prev: {
+                  gnome-control-center = prev.gnome-control-center.overrideAttrs {
+                    doCheck = false;
+                  };
                   openldap = prev.openldap.overrideAttrs {
                     doCheck = false;
                   };
