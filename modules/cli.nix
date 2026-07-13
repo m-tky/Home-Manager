@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ numpy ]))
     inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
     typst
     rustc
@@ -24,8 +25,6 @@
     unzip
     python3Packages.jupytext
     imagemagick
-    gemini-cli
-    claude-code
   ];
 
   programs = {

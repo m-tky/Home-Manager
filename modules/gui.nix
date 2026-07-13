@@ -66,7 +66,8 @@ in
     gnome-control-center
     glib
     heroic
-    antigravity
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-ide
     zoom-us
     myObsidian
     anki-bin
