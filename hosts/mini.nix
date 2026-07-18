@@ -24,7 +24,7 @@ let
           "-DGGML_F16C=ON"
         ];
       });
-  customJan = pkgs.callPackage ../modules/jan.nix { };
+  customJan = pkgs.callPackage ../features/desktop/jan.nix { };
 in
 {
   # services.ollama = {
@@ -34,16 +34,9 @@ in
   #     OLLAMA_HOST = "0.0.0.0:11434";
   #   };
   # };
-  programs.home-manager.enable = true;
-  systemd.user.startServices = true;
   imports = [
-    ../modules/cli.nix
-    ../modules/editor/default.nix
-    ../modules/gui.nix
-    ../modules/localization/fcitx5.nix
-    ../modules/theme/default.nix
-    ../modules/wayland/core.nix
-    ../modules/wayland/niri/default.nix
+    ../profiles/desktop.nix
+    ../features/wayland/niri/default.nix
   ];
   home.packages = with pkgs; [
     pandoc

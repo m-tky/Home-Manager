@@ -214,18 +214,18 @@ return config";
     # ];
     file = {
       ".config/swaync" = {
-        source = ../config/swaync;
+        source = ../../assets/swaync;
         recursive = true;
       };
       ".config/foot/foot.ini" = {
-        source = ../config/foot/foot.ini;
+        source = ../../assets/foot/foot.ini;
       };
       # ".config/fuzzel" = {
       #   source = ../config/fuzzel;
       #   recursive = true;
       # };
       ".config/fontconfig" = {
-        source = ../config/fontconfig;
+        source = ../../assets/fontconfig;
         recursive = true;
       };
     };

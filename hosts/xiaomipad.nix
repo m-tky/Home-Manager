@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    ../modules/cli.nix
+    ../features/common/cli/default.nix
     inputs.nixCats-nvim.homeModules.default
   ];
   nixCats = {

@@ -33,11 +33,7 @@ let
   };
 in
 {
-  imports = [
-    inputs.codex-desktop-linux.homeManagerModules.default
-  ];
   programs = {
-    codexDesktopLinux.enable = true;
     firefox.enable = true;
     chromium = {
       enable = true;
@@ -59,11 +55,8 @@ in
   home.packages = with pkgs; [
     czkawka
     baobab
-    streamcontroller
-    planify
     readest
-    vesktop
-    gnome-control-center
+    discord
     glib
     heroic
     inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -72,7 +65,6 @@ in
     myObsidian
     anki-bin
     spotify
-    # vesktop
     slack
     bitwarden-cli
     calibre
@@ -80,7 +72,6 @@ in
     mpv
     zathura
     qalculate-gtk
-    bottles
     ffmpegthumbnailer
     android-file-transfer
     kdePackages.isoimagewriter
@@ -140,6 +131,6 @@ in
   };
   # Optional: Set up a desktop entry for Obsidian
   home.file = {
-    ".config/zathura/zathurarc".source = ./config/zathura/zathurarc;
+    ".config/zathura/zathurarc".source = ../../assets/zathura/zathurarc;
   };
 }

@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1783497076,
-        "narHash": "sha256-NMMOfgLJPZU6yimIOVk8LnM5+SZlWwz6XG9zdDbZ/2c=",
+        "lastModified": 1784187957,
+        "narHash": "sha256-Gy9JIkPCiVfZsxXm1YGlELihpM5otVn9Fxs1fBwMj4g=",
         "owner": "jacopone",
         "repo": "antigravity-nix",
-        "rev": "4f034162ad799768a372e4ce32bc6a95f7d056d5",
+        "rev": "3fcc09ec2f8cada7fc2e5ea6de1e8a70c6a207bf",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1783639878,
-        "narHash": "sha256-abnrDpUkNg+/xm859m+9BOfjGDPmnAztQvBaR3596Ps=",
+        "lastModified": 1784171300,
+        "narHash": "sha256-LiWzndOW88994z4SCnenv+2rKe/ryEgvWSsBjFpNvrc=",
         "owner": "sadjow",
         "repo": "codex-cli-nix",
-        "rev": "77438a11367ee33190afe5c6cdf22634eced8e77",
+        "rev": "c4b3fc9d761797a813b5f8b1d38a9a81cdba6e45",
         "type": "github"
       },
       "original": {
@@ -44,14 +44,18 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "path": "./vendor/codex-desktop-linux",
-        "type": "path"
+        "lastModified": 1784299507,
+        "narHash": "sha256-ZisHTLxkU83+MHLpbttpRKe4T1Xw8ha+EI4LmhIslGE=",
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "rev": "f3037182a21be79a12785758f064b24f05af366a",
+        "type": "github"
       },
       "original": {
-        "path": "./vendor/codex-desktop-linux",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "ilysenko",
+        "repo": "codex-desktop-linux",
+        "type": "github"
+      }
     },
     "crane": {
       "locked": {
@@ -235,11 +239,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783618078,
-        "narHash": "sha256-F43DGcBoIO8xOZFAfodg3jy0VghB9NGdb6xbTYAIx1A=",
+        "lastModified": 1784129366,
+        "narHash": "sha256-N5JiyICSeQF14x+OQebNyPpYowOT9Rs1iKyeCylSzOA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "144f4e36d0186195037da9fce80a727108978070",
+        "rev": "165228b0efefc3e635e5174020c40ea64271dc25",
         "type": "github"
       },
       "original": {
@@ -256,11 +260,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783614438,
-        "narHash": "sha256-kKb2CyrWeJP5hUujY+l4eqPbjBikt6G+xjdGKRL2vSs=",
+        "lastModified": 1784300898,
+        "narHash": "sha256-H/3gNYeBbz0wV7u2FLpwRAjvpU7NO2QXGn0p2jlefpc=",
         "owner": "ikawrakow",
         "repo": "ik_llama.cpp",
-        "rev": "c32c3819f73dea793711479ce458675be4495df4",
+        "rev": "fbcc743c70391e63fba74a16740f8157b469feeb",
         "type": "github"
       },
       "original": {
@@ -274,11 +278,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1781409941,
-        "narHash": "sha256-QSGPOgRzeS6EHTqsp4AAd3RwS8SjWtsOvfi88Z0ggZg=",
+        "lastModified": 1784301013,
+        "narHash": "sha256-nJbuEb4smus+wCuPBAn0acrLuB+IXEGzVJEinUkCDU8=",
         "owner": "m-tky",
         "repo": "jovian.nvim",
-        "rev": "ec6160255186dfb0af563c53da07cc122b336593",
+        "rev": "4d80a008711d61b38c005333ec8b9d56965e2e8b",
         "type": "github"
       },
       "original": {
@@ -303,22 +307,6 @@
       "original": {
         "owner": "m-tky",
         "repo": "jupynvim",
-        "type": "github"
-      }
-    },
-    "jupytext-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712342824,
-        "narHash": "sha256-LBBRZOSqn70qruSA/vbPMTzS7y05F/z4EqC+5JlU6NM=",
-        "owner": "GCBallesteros",
-        "repo": "jupytext.nvim",
-        "rev": "c8baf3ad344c59b3abd461ecc17fc16ec44d0f7b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "GCBallesteros",
-        "repo": "jupytext.nvim",
         "type": "github"
       }
     },
@@ -430,18 +418,17 @@
       "inputs": {
         "jovian": "jovian",
         "jupynvim": "jupynvim",
-        "jupytext-nvim": "jupytext-nvim",
         "marp-nvim": "marp-nvim",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_7",
         "nvim-treesitter-textobjects": "nvim-treesitter-textobjects"
       },
       "locked": {
-        "lastModified": 1783702062,
-        "narHash": "sha256-SPJvwXp+qcnpD3a3kCMpITgKT8wg0O8FA3q4pkoKFGo=",
+        "lastModified": 1784363795,
+        "narHash": "sha256-3xgV9hrq5bCrlJSg+PMoie1JK6M6hrSpeh6SeTq4qiQ=",
         "owner": "m-tky",
         "repo": "Nixcats",
-        "rev": "34bc975955568c4a00955a4df393b88473dde856",
+        "rev": "5f4056e0cd13d60940baec963c9dde107c1a187c",
         "type": "github"
       },
       "original": {
@@ -514,11 +501,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1783279667,
-        "narHash": "sha256-/NAkDSsve+GNM0Bt6tleJdCGfsTlK89nPjkVOzZMo0s=",
+        "lastModified": 1784115452,
+        "narHash": "sha256-BoYPdqk6jlKXy+DyUzyGV/CtRGfAhk2MmIgBhsemTGI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f205b5574fd0cb7da5b702a2da51507b7f4fdd1b",
+        "rev": "35d3407a3816f3b341d8cf1d60abaf2b7b8166ac",
         "type": "github"
       },
       "original": {
@@ -610,11 +597,11 @@
     },
     "nixpkgs_8": {
       "locked": {
-        "lastModified": 1783279667,
-        "narHash": "sha256-/NAkDSsve+GNM0Bt6tleJdCGfsTlK89nPjkVOzZMo0s=",
+        "lastModified": 1784210874,
+        "narHash": "sha256-x8i+HYAulduMlM63oxWJj5tAm+Sc/W756wUzcV5p24w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f205b5574fd0cb7da5b702a2da51507b7f4fdd1b",
+        "rev": "59682e0069f0ed0a452e2179a7f4c1f247027b9e",
         "type": "github"
       },
       "original": {
@@ -647,11 +634,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783618499,
-        "narHash": "sha256-UwLxkIz9HDiARFVocKnGR6OAMs9XAuFRke+InNBmL1A=",
+        "lastModified": 1784300625,
+        "narHash": "sha256-ecj01vDgjNL1Fn7EYKr0vmJ4wKDfSbUx6D+p7K0JvNk=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "313732302e6432d7ce41a9ce2334fdaca879dcd7",
+        "rev": "185f53b51f235a1e60f14da81cdd85f0770f7e67",
         "type": "github"
       },
       "original": {
@@ -906,11 +893,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782989899,
-        "narHash": "sha256-4c7jpWqdqOslXv9D6v1/E9+dRUUtd7xJtNCHlXfZCtc=",
+        "lastModified": 1784267302,
+        "narHash": "sha256-VzYx1nGPWwRr9iq6TBLYIpVnn5ij2MPaa8MwNif15lQ=",
         "owner": "michel-kraemer",
         "repo": "zsh-patina",
-        "rev": "5a0f7889343c1c14ca2b49372a973c7975033e40",
+        "rev": "c0bfffbaf1d9dd7b70a4348b98dcb1cab0f92702",
         "type": "github"
       },
       "original": {

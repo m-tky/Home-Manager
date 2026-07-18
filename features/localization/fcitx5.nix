@@ -52,12 +52,12 @@
   '';
 
   # fcitx5 personal config (hotkeys, default IM, skk.conf etc.) sourced
-  # from this repo's modules/config/fcitx5/. `recursive = true` symlinks
+  # from this repo's assets/fcitx5/. `recursive = true` symlinks
   # each file individually so other home-manager modules (skk-mozc,
   # input-method overlays, theming addons, …) can add their own files
   # under ~/.config/fcitx5/* without colliding with this directory.
   xdg.configFile."fcitx5" = {
-    source = ../config/fcitx5;
+    source = ../../assets/fcitx5;
     recursive = true;
   };
 }

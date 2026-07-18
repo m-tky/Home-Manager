@@ -40,7 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codex-desktop-linux = {
-      url = "path:./vendor/codex-desktop-linux";
+      url = "github:ilysenko/codex-desktop-linux";
     };
     codex-cli-nix = {
       url = "github:sadjow/codex-cli-nix";
@@ -59,37 +59,37 @@
       # 各マシンごとに設定（system, path, username, homeDirectory）を指定
       userMachines = {
         m75q = {
-          path = ./home/m75q.nix;
+          path = ./hosts/m75q.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";
         };
         nixos = {
-          path = ./home/nixos.nix;
+          path = ./hosts/nixos.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";
         };
         thinkpad = {
-          path = ./home/thinkpad.nix;
+          path = ./hosts/thinkpad.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";
         };
         mini = {
-          path = ./home/mini.nix;
+          path = ./hosts/mini.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";
         };
         xiaomipad = {
-          path = ./home/xiaomipad.nix;
+          path = ./hosts/xiaomipad.nix;
           system = "aarch64-linux";
           username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
         };
         minawa = {
-          path = ./home/minawa.nix;
+          path = ./hosts/minawa.nix;
           system = "x86_64-linux";
           username = "takuya";
           homeDirectory = "/home/takuya";
@@ -98,7 +98,7 @@
         # WSL (Ubuntu) 上で使う、GUI 非依存の開発環境。
         # WSL の Linux ユーザー名を変えた場合は、ここだけ更新する。
         gmo = {
-          path = ./home/gmo.nix;
+          path = ./hosts/gmo.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";

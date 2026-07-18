@@ -6,26 +6,7 @@
 }:
 
 {
-  # 両方のOSで使うパッケージ
-  home.packages = with pkgs; [
-    (python3.withPackages (ps: with ps; [ numpy ]))
-    inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
-    inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
-    typst
-    rustc
-    cargo
-    clippy
-    rustfmt
-    gh
-    jq
-    tree
-    tesseract
-    delta
-    unzip
-    python3Packages.jupytext
-    imagemagick
-  ];
+  imports = [ ./tools.nix ];
 
   programs = {
     rclone = {
@@ -138,7 +119,7 @@
           ];
         };
       };
-      initLua = ./config/yazi/init.lua;
+      initLua = ../../../assets/yazi/init.lua;
     };
 
     zellij = {
@@ -300,7 +281,7 @@
 
   # place lazygit configfile
   xdg.configFile = {
-    "zsh-patina/nightfox.toml".source = ./config/zsh-patina/nightfox.toml;
-    "zsh-patina/config.toml".source = ./config/zsh-patina/config.toml;
+    "zsh-patina/nightfox.toml".source = ../../../assets/zsh-patina/nightfox.toml;
+    "zsh-patina/config.toml".source = ../../../assets/zsh-patina/config.toml;
   };
 }

@@ -46,19 +46,12 @@ let
         + (old.preConfigure or "");
       });
 
-  customJan = pkgs.callPackage ../modules/jan.nix { };
+  customJan = pkgs.callPackage ../features/desktop/jan.nix { };
 in
 {
-  programs.home-manager.enable = true;
-  systemd.user.startServices = true;
   imports = [
-    ../modules/cli.nix
-    ../modules/editor/default.nix
-    ../modules/gui.nix
-    ../modules/localization/fcitx5.nix
-    ../modules/theme/default.nix
-    ../modules/wayland/core.nix
-    ../modules/wayland/niri/default.nix
+    ../profiles/desktop.nix
+    ../features/wayland/niri/default.nix
   ];
 
   programs = {

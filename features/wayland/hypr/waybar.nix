@@ -15,7 +15,7 @@
     ".local/bin/playerctl.sh".source = ../scripts/playerctl.sh;
   };
   xdg.configFile."waybar" = {
-    source = ../../config/waybar;
+    source = ../../../assets/waybar;
     recursive = true;
   };
 }
