@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -9,7 +8,7 @@
   # Linux GUI アプリケーションを持ち込まず、CLI の開発環境だけを管理する。
   imports = [
     inputs.nixCats-nvim.homeModules.default
-    ../features/common/cli/default.nix
+    ../features/common/cli/config.nix
   ];
 
   home.packages = with pkgs; [
@@ -26,18 +25,6 @@
     rsync
     shellcheck
     ripgrep
-    fd
-    fzf
-    bat
-    eza
-    bottom
-    lazygit
-    yazi
-    zellij
-    zoxide
-    starship
-    direnv
-    zsh
     jq
     yq-go
     tree
@@ -52,11 +39,6 @@
 
   programs = {
     home-manager.enable = true;
-    git.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
   };
 
   # 既存の各 Linux 環境と同じ NixCats ベースの Neovim を提供する。
@@ -67,10 +49,8 @@
 
   home = {
     sessionVariables = {
-      EDITOR = "vim";
       VISUAL = "vim";
       GIT_EDITOR = "vim";
     };
-    sessionPath = [ "$HOME/.local/bin" ];
   };
 }
