@@ -54,7 +54,7 @@
       bold_font = "family=\"Moralerspace Argon\" style=\"Bold\"";
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
       bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
-      font_size = "10";
+      font_size = "10.5";
       background_opacity = "0.75";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";
@@ -112,8 +112,49 @@
     enable = true;
     enableZshIntegration = true;
     extraConfig = "local config = wezterm.config_builder()
-config.color_scheme = 'Catppuccin Mocha'
-config.font_size = 11
+
+-- Keep WezTerm visually aligned with the Kitty configuration above.
+config.colors = {
+  foreground = '#cdcecf',
+  background = '#192330',
+  cursor_bg = '#cdcecf',
+  cursor_fg = '#192330',
+  cursor_border = '#cdcecf',
+  selection_bg = '#2b3b51',
+  selection_fg = '#cdcecf',
+  ansi = {
+    '#393b44', '#c94f6d', '#81b29a', '#dbc074',
+    '#719cd6', '#9d79d6', '#63cdcf', '#dfdfe0',
+  },
+  brights = {
+    '#575860', '#d16983', '#8ebaa4', '#e0c989',
+    '#86abdc', '#baa1e2', '#7ad5d6', '#e4e4e5',
+  },
+  tab_bar = {
+    background = '#192330',
+    active_tab = {
+      bg_color = '#719cd6',
+      fg_color = '#131a24',
+    },
+    inactive_tab = {
+      bg_color = '#2b3b51',
+      fg_color = '#738091',
+    },
+    inactive_tab_hover = {
+      bg_color = '#39506d',
+      fg_color = '#cdcecf',
+    },
+    new_tab = {
+      bg_color = '#2b3b51',
+      fg_color = '#738091',
+    },
+    new_tab_hover = {
+      bg_color = '#39506d',
+      fg_color = '#cdcecf',
+    },
+  },
+}
+config.font_size = 10
 config.font = wezterm.font_with_fallback({'Moralerspace Argon'}, { weight = 'Regular', style = 'Normal'})
 config.font_rules = {
   -- Bold
@@ -135,6 +176,11 @@ config.font_rules = {
     font = wezterm.font(\"Moralerspace Radon\", { weight = \"Bold\", italic = true }),
   },
 }
+
+config.window_background_opacity = 0.75
+
+-- Enable the Kitty graphics protocol for applications such as yazi and neovim.
+config.enable_kitty_graphics = true
 
 -- about tabbar
 config.hide_tab_bar_if_only_one_tab = true

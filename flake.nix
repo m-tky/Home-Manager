@@ -95,10 +95,8 @@
           homeDirectory = "/home/takuya";
           cudaSupport = true;
         };
-        # WSL (Ubuntu) 上で使う、GUI 非依存の開発環境。
-        # WSL の Linux ユーザー名を変えた場合は、ここだけ更新する。
-        gmo = {
-          path = ./hosts/gmo.nix;
+        wsl = {
+          path = ./hosts/wsl.nix;
           system = "x86_64-linux";
           username = "user";
           homeDirectory = "/home/user";

@@ -36,28 +36,18 @@
     tree
     killall
     translate-shell
-    wiki-tui
     unzip
     zip
     gnutar
     gnused
     gnugrep
     findutils
-    gnumake
-    gcc
     pkg-config
     openssl
-    (python3.withPackages (ps: with ps; [ numpy ]))
-    python3Packages.jupytext
     uv
-    nodejs_22
-    pnpm
     rustc
-    cargo
     clippy
     rustfmt
-    typst
-    tesseract
     delta
     imagemagick
   ];
