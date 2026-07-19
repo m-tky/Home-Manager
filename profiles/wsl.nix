@@ -1,15 +1,18 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # WSL は Windows 側のターミナル／GUI を使うため、Wayland や
   # Linux GUI アプリケーションを持ち込まず、CLI の開発環境だけを管理する。
   imports = [
     inputs.nixCats-nvim.homeModules.default
+    ../features/common/cli/default.nix
   ];
 
   home.packages = with pkgs; [
-    curl
-    wget
-    git
     gh
     (writeShellScriptBin "nvim" ''
       exec ${inputs.nixCats-nvim.packages.${pkgs.stdenv.hostPlatform.system}.nixCats}/bin/nixCats "$@"
@@ -17,6 +20,11 @@
     inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
+    curl
+    file
+    openssh
+    rsync
+    shellcheck
     ripgrep
     fd
     fzf
@@ -29,25 +37,15 @@
     zoxide
     starship
     direnv
-    rclone
     zsh
     jq
     yq-go
     tree
     killall
-    translate-shell
     unzip
     zip
-    gnutar
-    gnused
-    gnugrep
     findutils
     pkg-config
-    openssl
-    uv
-    rustc
-    clippy
-    rustfmt
     delta
     imagemagick
   ];
@@ -69,9 +67,9 @@
 
   home = {
     sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      GIT_EDITOR = "nvim";
+      EDITOR = "vim";
+      VISUAL = "vim";
+      GIT_EDITOR = "vim";
     };
     sessionPath = [ "$HOME/.local/bin" ];
   };

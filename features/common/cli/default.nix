@@ -16,6 +16,15 @@
     git = {
       enable = true;
       settings = {
+        user = {
+          name = "m-tky";
+          email = "takuya.mukai@gmail.com";
+        };
+        init.defaultBranch = "main";
+        pull.rebase = true;
+        push.autoSetupRemote = true;
+        core.editor = "vim";
+        diff.colorMoved = "default";
         aliases = {
           lg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all";
           l = "log --oneline --graph --decorate --all";
@@ -264,9 +273,9 @@
     #   ".zsh/zsh-syntax-highlighting.zsh".source = ./config/zsh-syntax-highlighting.zsh;
     # };
     sessionVariables = {
-      BROWSER = "firefox"; # zen-browserは別途インストールが必要
+      BROWSER = "firefox";
       EDITOR = "vim";
-      TERMINAL = "kitty"; # footは別途インストールが必要
+      TERMINAL = "kitty";
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
       GDK_BACKEND = "wayland";
       CODEX_CLI_PATH = "${
