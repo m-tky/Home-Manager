@@ -11,7 +11,10 @@
     git = {
       enable = true;
       settings = {
-        user = { name = "m-tky"; email = "takuya.mukai@gmail.com"; };
+        user = {
+          name = "m-tky";
+          email = "takuya.mukai@gmail.com";
+        };
         init.defaultBranch = "main";
         pull.rebase = true;
         push.autoSetupRemote = true;
@@ -23,7 +26,10 @@
         };
         core.pager = "delta --side-by-side";
         interactive.diffFilter = "delta --color-only";
-        delta = { navigate = true; light = false; };
+        delta = {
+          navigate = true;
+          light = false;
+        };
       };
     };
     lazygit = {
@@ -31,9 +37,15 @@
       settings = {
         theme = {
           "241" = [ "#bf68d9" ];
-          activeBorderColor = [ "#8ebd6b" "bold" ];
+          activeBorderColor = [
+            "#8ebd6b"
+            "bold"
+          ];
           inactiveBorderColor = [ "#535965" ];
-          searchingActiveBorderColor = [ "#8ebd6b" "bold" ];
+          searchingActiveBorderColor = [
+            "#8ebd6b"
+            "bold"
+          ];
           optionsTextColor = [ "#4fa6ed" ];
           selectedLineBgColor = [ "#323641" ];
           cherryPickedCommitFgColor = [ "#4fa6ed" ];
@@ -49,18 +61,26 @@
             "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' --"
           ];
           branchLogCmd = "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' $branchName --";
-          pagers = [{
-            colorArg = "always";
-            pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
-          }];
+          pagers = [
+            {
+              colorArg = "always";
+              pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+            }
+          ];
           log.showWholeGraph = true;
           disableMerging = false;
           disableRebasing = false;
         };
       };
     };
-    zoxide = { enable = true; enableZshIntegration = true; };
-    fzf = { enable = true; enableZshIntegration = true; };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     bottom.enable = true;
     eza = {
       enable = true;
@@ -78,8 +98,18 @@
         full-border = pkgs.yaziPlugins.full-border;
       };
       settings.plugin.prepend_fetchers = [
-        { url = "*"; name = "*"; run = "git"; group = "git"; }
-        { url = "*"; name = "*/"; run = "git"; group = "git"; }
+        {
+          url = "*";
+          name = "*";
+          run = "git";
+          group = "git";
+        }
+        {
+          url = "*";
+          name = "*/";
+          run = "git";
+          group = "git";
+        }
       ];
       initLua = ../../../assets/yazi/init.lua;
     };
@@ -90,25 +120,56 @@
         theme = "nightfox";
         themes = {
           onedarkpro = {
-            fg = "#abb2bf"; bg = "#282c34"; black = "#282c34"; red = "#e06c75";
-            green = "#98c379"; yellow = "#e5c07b"; blue = "#61afef"; magenta = "#c678dd";
-            cyan = "#56b6c2"; white = "#abb2bf"; orange = "#d19a66";
+            fg = "#abb2bf";
+            bg = "#282c34";
+            black = "#282c34";
+            red = "#e06c75";
+            green = "#98c379";
+            yellow = "#e5c07b";
+            blue = "#61afef";
+            magenta = "#c678dd";
+            cyan = "#56b6c2";
+            white = "#abb2bf";
+            orange = "#d19a66";
           };
           onedarkpro-darker = {
-            fg = "#a0a8b7"; bg = "#1f2329"; black = "#1f2329"; red = "#e55561";
-            green = "#8ebd6b"; yellow = "#e2b86b"; blue = "#4fa6ed"; magenta = "#bf68d9";
-            cyan = "#48b0bd"; white = "#a0a8b7"; orange = "#cc9057";
+            fg = "#a0a8b7";
+            bg = "#1f2329";
+            black = "#1f2329";
+            red = "#e55561";
+            green = "#8ebd6b";
+            yellow = "#e2b86b";
+            blue = "#4fa6ed";
+            magenta = "#bf68d9";
+            cyan = "#48b0bd";
+            white = "#a0a8b7";
+            orange = "#cc9057";
           };
           nightfox = {
-            bg = "#2b3b51"; fg = "#cdcecf"; red = "#c94f6d"; green = "#81b29a";
-            blue = "#719cd6"; yellow = "#dbc074"; magenta = "#9d79d6"; orange = "#f4a261";
-            cyan = "#63cdcf"; black = "#29394f"; white = "#aeafb0";
+            bg = "#2b3b51";
+            fg = "#cdcecf";
+            red = "#c94f6d";
+            green = "#81b29a";
+            blue = "#719cd6";
+            yellow = "#dbc074";
+            magenta = "#9d79d6";
+            orange = "#f4a261";
+            cyan = "#63cdcf";
+            black = "#29394f";
+            white = "#aeafb0";
           };
         };
       };
     };
-    starship = { enable = true; enableZshIntegration = true; };
-    direnv = { enable = true; enableZshIntegration = true; nix-direnv.enable = true; };
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     zsh = {
       enable = true;
       autosuggestion.enable = true;
@@ -119,15 +180,25 @@
         save = 1000;
       };
       shellAliases = {
+        win11-viewer = "virt-viewer --connect qemu:///system --domain-name \"win11\"";
         grep = "grep --color=auto";
         ei = "eza -G --icons --git --group-directories-first --sort=type";
         ea = "eza -G -a --icons --git --group-directories-first --sort=type";
         ee = "eza -G -aahl --icons --git --group-directories-first --sort=type";
-        ls = "ei"; la = "ea"; ll = "ee"; l = "clear && ls";
+        ls = "ei";
+        la = "ea";
+        ll = "ee";
+        l = "clear && ls";
       };
       plugins = [
-        { name = "zsh-completions"; src = pkgs.zsh-completions; }
-        { name = "zsh-history-substring-search"; src = pkgs.zsh-history-substring-search; }
+        {
+          name = "zsh-completions";
+          src = pkgs.zsh-completions;
+        }
+        {
+          name = "zsh-history-substring-search";
+          src = pkgs.zsh-history-substring-search;
+        }
       ];
       initContent = ''
         hms() {
@@ -156,7 +227,9 @@
         fi
         bindkey -M vicmd 'k' history-substring-search-up
         bindkey -M vicmd 'j' history-substring-search-down
-        eval "$( ${inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/zsh-patina activate)"
+        eval "$( ${
+          inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/bin/zsh-patina activate)"
       '';
     };
   };
@@ -168,7 +241,9 @@
       TERMINAL = "kitty";
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
       GDK_BACKEND = "wayland";
-      CODEX_CLI_PATH = "${inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/codex";
+      CODEX_CLI_PATH = "${
+        inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      }/bin/codex";
     };
     sessionPath = [ "$HOME/.local/bin" ];
   };

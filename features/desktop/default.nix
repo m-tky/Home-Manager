@@ -53,6 +53,7 @@ in
     };
   };
   home.packages = with pkgs; [
+    koreader
     czkawka
     baobab
     readest
