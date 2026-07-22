@@ -180,6 +180,12 @@
         save = 1000;
       };
       shellAliases = {
+        mkipynb = ''
+          function mkipynb
+            set filename (test -n "$argv[1]"; and echo "$argv[1]"; or echo "new.ipynb")
+            printf '{"cells":[],"metadata":{},"nbformat":4,"nbformat_minor":5}\n' > "$filename"
+          end
+        '';
         win11-viewer = "virt-viewer --connect qemu:///system --domain-name \"win11\"";
         grep = "grep --color=auto";
         ei = "eza -G --icons --git --group-directories-first --sort=type";
