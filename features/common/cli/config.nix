@@ -180,12 +180,6 @@
         save = 1000;
       };
       shellAliases = {
-        mkipynb = ''
-          function mkipynb
-            set filename (test -n "$argv[1]"; and echo "$argv[1]"; or echo "new.ipynb")
-            printf '{"cells":[],"metadata":{},"nbformat":4,"nbformat_minor":5}\n' > "$filename"
-          end
-        '';
         win11-viewer = "virt-viewer --connect qemu:///system --domain-name \"win11\"";
         grep = "grep --color=auto";
         ei = "eza -G --icons --git --group-directories-first --sort=type";
@@ -207,10 +201,21 @@
         }
       ];
       initContent = ''
+        mkipynb() {
+          local filename="''${1:-new}"
+
+          [[ "$filename" == *.ipynb ]] || filename="''${filename}.ipynb"
+
+          printf '%s\n' \
+            '{"cells":[],"metadata":{},"nbformat":4,"nbformat_minor":5}' \
+            > "$filename"
+        }
+
         hms() {
           local host=$(hostname | cut -d. -f1)
           home-manager switch --flake "/home/user/.config/home-manager/#$(whoami)@$host"
         }
+
         autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'l:|=* r:|=*'
         zstyle ':completion:*' menu select=1
