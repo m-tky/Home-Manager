@@ -55,6 +55,9 @@
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
       bold_italic_font = "family=\"Moralerspace Radon\" style=\"Bold\"";
       font_size = "10.5";
+      # Moralerspace's `calt` texture-healing changes glyphs contextually
+      # (for example the `w` in `_w` and `.w`), which is undesirable in code.
+      disable_ligatures = "always";
       background_opacity = "0.75";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";

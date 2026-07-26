@@ -17,6 +17,7 @@
       exec ${inputs.nixCats-nvim.packages.${pkgs.stdenv.hostPlatform.system}.nixCats}/bin/nixCats "$@"
     '')
     inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
     curl

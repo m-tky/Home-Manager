@@ -174,6 +174,9 @@
       enable = true;
       autosuggestion.enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
+      # Avoid running compaudit for every shell.  It is costly with the many
+      # completion directories exposed through the Nix profile.
+      completionInit = "autoload -Uz compinit && compinit -C";
       history = {
         size = 1000;
         path = "${config.xdg.dataHome}/zsh/history";
@@ -216,7 +219,6 @@
           home-manager switch --flake "/home/user/.config/home-manager/#$(whoami)@$host"
         }
 
-        autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} r:|[._-]=** r:|=**' 'l:|=* r:|=*'
         zstyle ':completion:*' menu select=1
         if [ -x /usr/bin/dircolors ]; then
