@@ -1,26 +1,7 @@
-{ inputs, pkgs, ... }:
+{ ... }:
 {
-  imports = [
-    ../features/common/cli/default.nix
-    inputs.nixCats-nvim.homeModules.default
-  ];
-  nixCats = {
-    enable = true;
-    packageNames = [ "androidCats" ];
-  };
+  # nix-on-droid は Termux の端末だけを使うため、デスクトップ機能を含めない。
+  imports = [ ../profiles/nix-on-droid.nix ];
+
   systemd.user.startServices = false;
-  programs.home-manager.enable = true;
-  services.ssh-agent.enable = true;
-  programs.git.enable = true;
-  home.packages = with pkgs; [
-    openssh
-    gdown
-    ripgrep
-    curl
-    wget
-    gnused
-    gnugrep
-    findutils
-    unzip
-  ];
 }

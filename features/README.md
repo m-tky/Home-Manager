@@ -4,8 +4,9 @@
 
 - `profiles/desktop.nix`: 通常の Linux デスクトップ共通設定
 - `profiles/wsl.nix`: WSL の開発環境
+- `profiles/nix-on-droid.nix`: Termux 上の nix-on-droid 用、CLI 専用の軽量開発環境
 
-- `common/`: GUI を前提としない、すべての Linux 環境で共有する CLI とシェル設定。`cli/tools.nix` は共通ツール群、`cli/config.nix` は各ツールの設定、`cli/default.nix` はその両方を読み込む通常 Linux 向けの入口
+- `common/`: GUI を前提としない、すべての Linux 環境で共有する CLI とシェル設定。`cli/development-tools.nix` は PC・WSL・nix-on-droid 共通の開発 CLI、`cli/tools.nix` は通常 Linux 専用の追加ツール、`cli/config.nix` は各ツールの設定、`cli/default.nix` はその両方を読み込む通常 Linux 向けの入口
 - `development/`: エディタ、言語・クラウド開発向けの設定
 - `desktop/`: ブラウザー、同期、デスクトップアプリケーション、CAD などの GUI 設定
 - `localization/`: 入力メソッドと言語設定

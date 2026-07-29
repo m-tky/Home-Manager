@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./zsh-patina.nix ];
+
   programs = {
     rclone.enable = true;
     bat.enable = true;
@@ -240,9 +242,6 @@
         fi
         bindkey -M vicmd 'k' history-substring-search-up
         bindkey -M vicmd 'j' history-substring-search-down
-        eval "$( ${
-          inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
-        }/bin/zsh-patina activate)"
       '';
     };
   };
@@ -261,8 +260,4 @@
     sessionPath = [ "$HOME/.local/bin" ];
   };
 
-  xdg.configFile = {
-    "zsh-patina/nightfox.toml".source = ../../../assets/zsh-patina/nightfox.toml;
-    "zsh-patina/config.toml".source = ../../../assets/zsh-patina/config.toml;
-  };
 }
