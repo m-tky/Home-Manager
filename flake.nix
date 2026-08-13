@@ -27,10 +27,6 @@
       url = "github:ikawrakow/ik_llama.cpp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zsh-patina = {
-      url = "github:michel-kraemer/zsh-patina";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     skk-mozc = {
       url = "github:m-tky/skk-mozc";
       inputs.nixpkgs.follows = "nixpkgs";

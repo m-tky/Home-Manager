@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.zsh-patina.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zsh-patina
     gh
     delta
     openssh
