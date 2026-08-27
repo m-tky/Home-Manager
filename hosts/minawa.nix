@@ -5,48 +5,37 @@
   ...
 }:
 let
-  llama-cuda =
-    (inputs.ik-llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-      useVulkan = false;
-      useCuda = true;
-    }).overrideAttrs
-      (old: {
-        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or [ ]) ++ [
-          "-march=native"
-          "-mtune=native"
-          "-O3"
-          "-fno-math-errno"
-          "-fno-trapping-math"
-        ];
+  llama-cuda = inputs.llama-cpp.packages.${pkgs.stdenv.hostPlatform.system}.cuda.overrideAttrs (old: {
+    NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or [ ]) ++ [
+      "-march=native"
+      "-mtune=native"
+      "-O3"
+      "-fno-math-errno"
+      "-fno-trapping-math"
+    ];
 
-        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
-          "-DGGML_NATIVE=ON"
-          "-DGGML_OPENMP=ON"
+    cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+      "-DGGML_NATIVE=ON"
+      "-DGGML_OPENMP=ON"
 
-          # Intel Core Ultra 7 265 / Arrow Lake 向け。
-          # AVX2/FMA/F16C は有効、AVX512 は基本OFFでよい。
-          "-DGGML_AVX2=ON"
-          "-DGGML_FMA=ON"
-          "-DGGML_F16C=ON"
-          "-DGGML_AVX512=OFF"
+      # Core Ultra 7 265
+      "-DGGML_AVX2=ON"
+      "-DGGML_FMA=ON"
+      "-DGGML_F16C=ON"
+      "-DGGML_AVX512=OFF"
 
-          # RTX 2000 Ada Generation = Ada Lovelace, compute capability 8.9
-          "-DGGML_CUDA=ON"
-          "-DCMAKE_CUDA_ARCHITECTURES=89"
+      # RTX 2000 Ada = compute capability 8.9
+      "-DCMAKE_CUDA_ARCHITECTURES=89"
 
-          # BLASはGPU推論メインなら不要寄り
-          "-DGGML_BLAS=OFF"
+      "-DGGML_BLAS=OFF"
+      "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
+    ];
 
-          "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
-        ];
-
-        preConfigure = ''
-          export NIX_ENFORCE_NO_NATIVE=0
-        ''
-        + (old.preConfigure or "");
-      });
-
-  customJan = pkgs.callPackage ../features/desktop/jan.nix { };
+    preConfigure = ''
+      export NIX_ENFORCE_NO_NATIVE=0
+    ''
+    + (old.preConfigure or "");
+  });
 in
 {
   imports = [
@@ -64,4 +53,36 @@ in
     llama-cuda
   ];
   xdg.enable = true;
+
+  systemd.user.services.llama-server = {
+    description = "llama.cpp Model Router";
+
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+
+    serviceConfig = {
+      Type = "simple";
+      User = "user";
+
+      ExecStart = ''
+        ${llama-cuda}/bin/llama-server \
+          --models-dir /var/lib/llama/models \
+          --models-max 1 \
+          --models-autoload \
+          --host 0.0.0.0 \
+          --port 8080 \
+          --ctx-size 16384 \
+          --gpu-layers all \
+          --flash-attn on \
+          --cache-type-k q8_0 \
+          --cache-type-v q8_0 \
+          --jinja \
+          --sleep-idle-seconds 300
+      '';
+
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+  };
 }

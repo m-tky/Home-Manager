@@ -34,6 +34,9 @@
       maxCandidates = 20;
     };
     debug = true; # ~/.cache/skk-mozc/log にログを書き出す
+    extraSkkDictionaries = [
+      "${pkgs.skkDictionaries.jinmei}/share/skk/SKK-JISYO.jinmei"
+    ];
   };
 
   home.sessionVariables = {
@@ -43,13 +46,6 @@
     DefaultIMModule = "fcitx";
     NIXOS_OZONE_WL = "1";
   };
-
-  # SKK system dictionaries. skk-mozc reads this file the standard
-  # fcitx5-skk way; the dictionary contents themselves are pure SKK.
-  home.file.".local/share/fcitx5/skk/dictionary_list".text = with pkgs; ''
-    file=${skkDictionaries.l}/share/skk/SKK-JISYO.L,mode=readonly,type=file
-    file=${skkDictionaries.jinmei}/share/skk/SKK-JISYO.jinmei,mode=readonly,type=file
-  '';
 
   # fcitx5 personal config (hotkeys, default IM, skk.conf etc.) sourced
   # from this repo's assets/fcitx5/. `recursive = true` symlinks

@@ -44,6 +44,7 @@
     claude-code-nix = {
       url = "github:sadjow/claude-code-nix";
     };
+    llama-cpp.url = "github:ggml-org/llama.cpp";
   };
 
   outputs =
