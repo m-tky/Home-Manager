@@ -55,19 +55,18 @@ in
   xdg.enable = true;
 
   systemd.user.services.llama-server = {
-    description = "llama.cpp Model Router";
+    Unit = {
+      Description = "llama.cpp Model Router";
+      After = [ "network-online.target" ];
+      Wants = [ "network-online.target" ];
+    };
 
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
-
-    serviceConfig = {
+    Service = {
       Type = "simple";
-      User = "user";
 
       ExecStart = ''
         ${llama-cuda}/bin/llama-server \
-          --models-dir /var/lib/llama/models \
+          --models-dir %h/.local/share/llama/models \
           --models-max 1 \
           --models-autoload \
           --host 0.0.0.0 \
@@ -83,6 +82,10 @@ in
 
       Restart = "on-failure";
       RestartSec = 3;
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 }

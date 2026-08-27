@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nix eval *)",
+      "Bash(home-manager --version)",
+      "Bash(home-manager switch *)",
+      "Bash(nix log *)"
+    ]
+  }
+}
