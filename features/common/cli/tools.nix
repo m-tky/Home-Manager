@@ -1,6 +1,9 @@
 { inputs, pkgs, ... }:
 {
-  imports = [ ./development-tools.nix ];
+  imports = [
+    ./development-tools.nix
+    ./llm-tools.nix
+  ];
 
   # GUI に依存しない共通ツール。
   home.packages = with pkgs; [

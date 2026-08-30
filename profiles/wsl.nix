@@ -16,7 +16,6 @@
     (writeShellScriptBin "nvim" ''
       exec ${inputs.nixCats-nvim.packages.${pkgs.stdenv.hostPlatform.system}.nixCats}/bin/nixCats "$@"
     '')
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     killall
     findutils
     pkg-config

@@ -63,10 +63,10 @@
             "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' --"
           ];
           branchLogCmd = "git log --graph --color=always --abbrev-commit --pretty=format:'%C(#bf68d9)%h%Creset %C(#e2b86b)%d%Creset %C(#a0a8b7 bold)%s%Creset %C(#535965)- %an (%cr)%Creset' $branchName --";
-          pagers = [
+          diffRenderers = [
             {
               colorArg = "always";
-              pager = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+              command = "delta --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
             }
           ];
           log.showWholeGraph = true;
