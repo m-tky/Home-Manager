@@ -220,42 +220,53 @@ return config";
         # PATHに fzf, pulseaudio, gawk, gnused を通す
         PATH=${pkgs.pulseaudio}/bin:${pkgs.fzf}/bin:${pkgs.gawk}/bin:${pkgs.gnused}/bin:$PATH
 
-        # 1. 既存のモジュールをアンロード
-        EXISTING_ID=$(pactl list short modules | grep module-echo-cancel | cut -f1)
-        if [ -n "$EXISTING_ID" ]; then
-          echo "🔄 既存の設定(ID: $EXISTING_ID)を解除しました"
-          pactl unload-module "$EXISTING_ID"
-        fi
-
-        # 2. スピーカー選択 (fzfを使用)
+        # 1. スピーカー選択 (fzfを使用)
         echo "🔊 choose your speaker device to cancel:"
         # awkで名前だけ抽出して fzf に流し込む
-        SINK_NAME=$(pactl list short sinks | awk '{print $2}' | fzf --prompt="Speaker > " --height=20% --layout=reverse --border)
+        SINK_NAME=$(pactl list short sinks | awk '$2 != "EchoCancel_Speaker" {print $2}' | fzf --prompt="Speaker > " --height=20% --layout=reverse --border)
 
         # キャンセルされたら終了
         if [ -z "$SINK_NAME" ]; then echo "canceled"; exit 1; fi
 
-        # 3. マイク選択 (fzfを使用)
+        # 2. マイク選択 (fzfを使用)
         echo "🎤 choose your mic:"
-        SOURCE_NAME=$(pactl list short sources | grep -v "\.monitor" | awk '{print $2}' | fzf --prompt="Mic > " --height=20% --layout=reverse --border)
+        SOURCE_NAME=$(pactl list short sources | awk '$2 !~ /\.monitor$/ && $2 != "EchoCancel_Mic" {print $2}' | fzf --prompt="Mic > " --height=20% --layout=reverse --border)
 
         if [ -z "$SOURCE_NAME" ]; then echo "canceled"; exit 1; fi
+
+        # 3. 選択完了後に既存モジュールをアンロード
+        EXISTING_IDS=$(pactl list short modules | awk '$2 == "module-echo-cancel" {print $1}')
+        for id in $EXISTING_IDS; do
+          echo "🔄 既存の設定(ID: $id)を解除しました"
+          pactl unload-module "$id"
+        done
+
+        # 再生中のストリームを後で仮想スピーカーへ移すために保存
+        SINK_ID=$(pactl list short sinks | awk -v name="$SINK_NAME" '$2 == name {print $1; exit}')
+        STREAM_IDS=$(pactl list short sink-inputs | awk -v sink_id="$SINK_ID" '$2 == sink_id {print $1}')
 
         # 4. 適用
         echo "🚀 applying echo cancellation with:"
         echo "   Speaker: $SINK_NAME"
         echo "   Mic    : $SOURCE_NAME"
 
-        pactl load-module module-echo-cancel \
+        MODULE_ID=$(pactl load-module module-echo-cancel \
           use_master_format=1 \
           aec_method=webrtc \
           source_master="$SOURCE_NAME" \
           sink_master="$SINK_NAME" \
           source_name=EchoCancel_Mic \
           sink_name=EchoCancel_Speaker \
-          aec_args="webrtc.gain_control=1 webrtc.extended_filter=1 webrtc.drift_compensation=1" > /dev/null
+          aec_args="webrtc.gain_control=1 webrtc.extended_filter=1 webrtc.drift_compensation=1") || exit 1
 
-        echo "Done! choose 'EchoCancel_Mic' as your input device."
+        pactl set-default-sink EchoCancel_Speaker
+        pactl set-default-source EchoCancel_Mic
+
+        for id in $STREAM_IDS; do
+          pactl move-sink-input "$id" EchoCancel_Speaker 2>/dev/null || true
+        done
+
+        echo "Done! EchoCancel_Speaker and EchoCancel_Mic are now the defaults (module ID: $MODULE_ID)."
       '')
     ];
     # ++ [
