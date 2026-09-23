@@ -41,6 +41,7 @@ in
     };
   };
   services = {
+    gnome-keyring.enable = true;
     syncthing = {
       enable = true;
       tray = {
@@ -53,6 +54,8 @@ in
     };
   };
   home.packages = with pkgs; [
+    inputs.hermes-agent.packages.${pkgs.system}.desktop
+    element-desktop
     koreader
     czkawka
     baobab
@@ -60,8 +63,6 @@ in
     discord
     glib
     heroic
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-ide
     zoom-us
     myObsidian
     anki-bin

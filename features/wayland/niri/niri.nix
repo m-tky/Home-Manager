@@ -5,6 +5,7 @@
   ...
 }:
 {
+  # Use the NixOS-provided package for config validation; HM does not install it.
   programs.niri.package = pkgs.niri;
   programs.hyprlock.enable = true;
   services = {
@@ -24,9 +25,6 @@
     ".local/bin/tm.sh".source = ../scripts/tm.sh;
   };
   programs.niri.settings = {
-    includes = lib.mkAfter [
-      (./blur.kdl)
-    ];
     prefer-no-csd = true;
     # 入力設定
     input = {

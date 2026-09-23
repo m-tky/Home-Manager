@@ -88,7 +88,6 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
       GIT_EDITOR = "nvim";
-      CODEX_CLI_PATH = "${inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/codex";
     };
     sessionPath = [ "$HOME/.local/bin" ];
   };

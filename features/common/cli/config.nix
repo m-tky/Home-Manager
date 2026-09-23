@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   pkgs,
   ...
@@ -253,9 +252,6 @@
       TERMINAL = "kitty";
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
       GDK_BACKEND = "wayland";
-      CODEX_CLI_PATH = "${
-        inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-      }/bin/codex";
     };
     sessionPath = [ "$HOME/.local/bin" ];
   };

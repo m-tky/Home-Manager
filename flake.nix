@@ -13,15 +13,9 @@
     nixCats-nvim = {
       url = "github:m-tky/Nixcats";
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake/very-refactor";
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
     };
     ik-llama-cpp = {
       url = "github:ikawrakow/ik_llama.cpp";
@@ -35,16 +29,17 @@
       url = "github:m-tky/alarme-conky";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    codex-desktop-linux = {
-      url = "github:ilysenko/codex-desktop-linux";
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    codex-cli-nix = {
-      url = "github:sadjow/codex-cli-nix";
-    };
-    claude-code-nix = {
-      url = "github:sadjow/claude-code-nix";
+    omp = {
+      url = "github:can1357/oh-my-pi";
     };
     llama-cpp.url = "github:ggml-org/llama.cpp";
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent/fix/desktop-electron-headers";
+    };
   };
 
   outputs =
@@ -52,7 +47,6 @@
       nixpkgs,
       home-manager,
       noctalia,
-      antigravity-nix,
       ...
     }@inputs:
     let
@@ -120,19 +114,9 @@
                 allowUnfree = true;
                 cudaSupport = cfg.cudaSupport or false;
               };
-              overlays = [
-                (_: prev: {
-                  gnome-control-center = prev.gnome-control-center.overrideAttrs {
-                    doCheck = false;
-                  };
-                  openldap = prev.openldap.overrideAttrs {
-                    doCheck = false;
-                  };
-                })
-              ];
             };
             modules = [
-              inputs.niri-flake.homeModules.niri
+              inputs.niri-flake.homeModules.config
               cfg.path
               {
                 home = {
@@ -145,7 +129,6 @@
             extraSpecialArgs = {
               inherit
                 inputs
-                antigravity-nix
                 noctalia
                 ;
               hostName = machine;
