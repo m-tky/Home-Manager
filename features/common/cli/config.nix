@@ -247,13 +247,19 @@
 
   home = {
     sessionVariables = {
+      BUN_OPTIONS = "--use-system-ca";
+      NODE_USE_SYSTEM_CA = "1";
       BROWSER = "firefox";
       EDITOR = "vim";
       TERMINAL = "kitty";
       TESSDATA_PREFIX = "${pkgs.tesseract}/share/tessdata";
       GDK_BACKEND = "wayland";
     };
-    sessionPath = [ "$HOME/.local/bin" ];
+    sessionPath = [
+      "${config.home.homeDirectory}/.local/share/pi-node/current/bin"
+      "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.cache/.bun/bin"
+    ];
   };
 
 }

@@ -2,6 +2,7 @@
 {
   # GUI を必要としない、PC・WSL・nix-on-droid で共用する開発ツール。
   home.packages = with pkgs; [
+    bun
     zsh-patina
     gh
     delta
