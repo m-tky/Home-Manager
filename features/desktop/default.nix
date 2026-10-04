@@ -3,6 +3,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 let
@@ -101,6 +102,11 @@ in
       ];
     })
   ];
+  # Preserve GUI-managed MIME defaults; register only SMB links.
+  # Thunar: Ctrl+L, then smb://server/share (GVfs is enabled by NixOS).
+  home.activation.thunarSmb = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run ${pkgs.xdg-utils}/bin/xdg-mime default thunar.desktop x-scheme-handler/smb
+  '';
   # Enable the GUI applications to run in the home-manager environment
   xdg = {
     enable = true;

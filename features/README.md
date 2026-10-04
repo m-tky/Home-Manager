@@ -15,3 +15,12 @@
 - `config/`: 上記モジュールから参照する設定ファイル・アセット
 
 各 `home/<host>.nix` は、対象マシンに必要なカテゴリだけを import する。
+
+## Thunar で SMB 共有に接続
+
+NixOS 側で `services.gvfs.enable = true` を設定する。デスクトップ設定は
+`smb://` リンクを Thunar に関連付け、既存の GUI アプリの MIME 関連付けは保持する。
+
+Thunar で `Ctrl+L` を押し、`smb://サーバー名/共有名` を入力する。
+Atlas の NAS は `smb://atlas/nas`。認証画面では Samba サーバー側のユーザー名と
+パスワードを使用する。ネットワーク一覧に表示されなくても URL で直接接続できる。
