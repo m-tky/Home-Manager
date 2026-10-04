@@ -4,6 +4,25 @@
   lib,
   ...
 }:
+let
+  focusOrOpenSteward = pkgs.writeShellApplication {
+    name = "focus-or-open-steward";
+    runtimeInputs = [
+      pkgs.niri
+      pkgs.jq
+      pkgs.kitty
+      pkgs.zellij
+    ];
+    text = ''
+      window_id=$(niri msg --json windows | jq -r '[.[] | select(.app_id == "zellij-steward")][0].id // empty')
+      if [[ -n "$window_id" ]]; then
+        niri msg action focus-window --id "$window_id"
+      else
+        exec kitty --class zellij-steward -e zellij attach steward
+      fi
+    '';
+  };
+in
 {
   # Use the NixOS-provided package for config validation; HM does not install it.
   programs.niri.package = pkgs.niri;
@@ -211,6 +230,7 @@
       "Super+Shift+Slash".action.show-hotkey-overlay = [ ];
 
       "Mod+T".action.spawn = "kitty";
+      "Mod+S".action.spawn = lib.getExe focusOrOpenSteward;
       "Mod+D".action.spawn = [
         "noctalia"
         "msg"
