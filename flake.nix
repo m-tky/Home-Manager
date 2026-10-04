@@ -33,9 +33,6 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    omp = {
-      url = "github:can1357/oh-my-pi";
-    };
     llama-cpp.url = "github:ggml-org/llama.cpp";
     hermes-agent = {
       url = "github:NousResearch/hermes-agent/fix/desktop-electron-headers";
