@@ -3,6 +3,9 @@
   pkgs,
   ...
 }:
+let
+  fzfFiles = "fd --type f --hidden --exclude '.*/'";
+in
 {
   imports = [ ./zsh-patina.nix ];
 
@@ -81,6 +84,14 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      # 通常の fzf
+      defaultCommand = fzfFiles;
+
+      # Ctrl+T でファイル検索
+      fileWidget.command = fzfFiles;
+
+      # Alt+C でディレクトリ移動
+      changeDirWidget.command = "fd --type d --exclude '.*/'";
     };
     bottom.enable = true;
     eza = {

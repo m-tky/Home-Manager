@@ -45,11 +45,19 @@
     };
   };
 
+  # Keep shader sources declarative alongside kitty.conf (kitty >= 0.49).
+  xdg.configFile."kitty/shaders" = {
+    source = ../../assets/kitty/shaders;
+    recursive = true;
+  };
+
   programs.kitty = {
     enable = true;
+    package = inputs.kitty-soft-fork.packages.${pkgs.stdenv.hostPlatform.system}.kitty;
     enableGitIntegration = true;
     shellIntegration.enableZshIntegration = true;
     settings = {
+      background_blur = 1;
       font_family = "family=\"Moralerspace Argon\" style=\"Regular\"";
       bold_font = "family=\"Moralerspace Argon\" style=\"Bold\"";
       italic_font = "family=\"Moralerspace Radon\" style=\"Regular\"";
@@ -58,7 +66,8 @@
       # Moralerspace's `calt` texture-healing changes glyphs contextually
       # (for example the `w` in `_w` and `.w`), which is undesirable in code.
       disable_ligatures = "always";
-      background_opacity = "0.75";
+      background_opacity = "0.80";
+      background_opacity_all_colors = "yes";
       allow_remote_control = "yes";
       enabled_layouts = "splits:split_axis=horizontal";
       enable_audio_bell = "no";
@@ -74,6 +83,12 @@
       # uncomment for reverse background
       # cursor none
       cursor = "#cdcecf";
+      # Antialiased motion blur with standard decay/distance settings; no second built-in trail is drawn
+      # when the shader subscribes to cursor-trail-move.
+      cursor_trail = 1;
+      cursor_trail_decay = "0.1 0.4";
+      cursor_trail_start_threshold = 2;
+      custom_shaders = "focus-line cursor-trail-motion-blur find-cursor";
 
       # Border
       active_border_color = "#719cd6";
@@ -273,6 +288,11 @@ return config";
     #   pkgsStable.libsForQt5.xwaylandvideobridge
     # ];
     file = {
+      "Pictures/Wallpapers/mojave.png" = {
+        source = ../../assets/wallpapers/mojave.png;
+        # Replace the existing unmanaged copy with the same image.
+        force = true;
+      };
       ".config/swaync" = {
         source = ../../assets/swaync;
         recursive = true;

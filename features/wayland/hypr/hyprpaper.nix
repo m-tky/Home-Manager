@@ -13,16 +13,4 @@
     "Pictures/Wallpapers/1725_mountains-mountain-peaks_3440x1440.jpg".source =
       ../../../assets/hypr/backgrounds/1725_mountains-mountain-peaks_3440x1440.jpg;
   };
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      wallpaper = [
-        {
-          monitor = "";
-          path = "${../../../assets/hypr/backgrounds/Small-memory-sunrise.jpg}";
-          fit_mode = "cover";
-        }
-      ];
-    };
-  };
 }

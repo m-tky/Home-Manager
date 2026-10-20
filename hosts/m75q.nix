@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -48,31 +47,6 @@ in
     environmentVariables = {
       OLLAMA_LLM_LIBRARY = "cpu";
       OLLAMA_HOST = "0.0.0.0:11434";
-    };
-  };
-  systemd.user = {
-    services."obsidianDocs-sync" = {
-      Unit = {
-        Description = "Sync Obsidian Docs to WebDAV";
-      };
-      Service = {
-        Type = "Oneshot";
-        ExecStart = "${config.home.homeDirectory}/.local/bin/rcloneObsidianDocuments.sh";
-      };
-    };
-    timers."obsidianDocs-sync" = {
-      Unit = {
-        Description = "Timer to sync Obsidian Docs to WebDAV every 15 minutes";
-      };
-      Timer = {
-        OnBootSec = "5min";
-        OnUnitActiveSec = "15min";
-        AccuracySec = "1min";
-        Persistent = true;
-      };
-      Install = {
-        WantedBy = [ "timers.target" ];
-      };
     };
   };
   imports = [

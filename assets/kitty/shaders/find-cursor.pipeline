@@ -1,0 +1,7 @@
+startgroup
+    animation_start cursor-trail-stop | os-window-focus-in | window-focus-in
+    animation_stop cursor-trail-move | os-window-focus-out | window-focus-out | tab-change | 3600000
+    animation_curve linear
+    animation_step 32
+    shaders find-cursor
+endgroup

@@ -1,0 +1,7 @@
+startgroup
+    animation_start cursor-trail-move
+    animation_stop os-window-focus-out | window-focus-out | tab-change | 450
+    animation_curve linear
+    animation_step 16
+    shaders focus-line
+endgroup

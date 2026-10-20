@@ -10,7 +10,7 @@ let
     runtimeInputs = [
       pkgs.niri
       pkgs.jq
-      pkgs.kitty
+      config.programs.kitty.package
       pkgs.zellij
     ];
     text = ''
@@ -39,9 +39,6 @@ in
     ".local/bin/raycast.sh".source = ../scripts/raycast.sh;
     ".local/bin/findfile.sh".source = ../scripts/findfile.sh;
     ".local/bin/findcontent.sh".source = ../scripts/findcontent.sh;
-    ".local/bin/rcloneObsidianDocuments.sh".source = ../scripts/rcloneObsidianDocuments.sh;
-    ".local/bin/toggle_blur.sh".source = ../scripts/toggle_blur.sh;
-    ".local/bin/tm.sh".source = ../scripts/tm.sh;
   };
   programs.niri.settings = {
     prefer-no-csd = true;
@@ -175,28 +172,9 @@ in
 
     # ウィンドウ・レイヤールール
     window-rules = [
+      # 共通設定
       {
         draw-border-with-background = false;
-      }
-      {
-        matches = [
-          {
-            app-id = "^org\\.wezfurlong\\.wezterm$";
-          }
-        ];
-        default-column-width = { };
-      }
-      {
-        matches = [
-          {
-            app-id = "firefox$";
-            title = "^Picture-in-Picture$";
-          }
-        ];
-        open-floating = false;
-      }
-      {
-        # geometry-corner-radius = 6;
         geometry-corner-radius = {
           top-left = 6.0;
           top-right = 6.0;
@@ -205,14 +183,56 @@ in
         };
         clip-to-geometry = true;
       }
+      # kitty以外：非アクティブ時にDim、透過なし
+      {
+        matches = [
+          { is-focused = false; }
+        ];
+        excludes = [
+          { app-id = "^(kitty|zellij-steward)$"; }
+        ];
+
+        opacity = 0.90;
+
+        shadow = {
+          enable = true;
+          draw-behind-window = true;
+          softness = 0;
+          spread = 0;
+          offset = {
+            x = 0;
+            y = 0;
+          };
+          color = "#000000ff";
+          inactive-color = "#000000ff";
+        };
+      }
+
+      # kitty：非アクティブ時にDim、透過を維持
       {
         matches = [
           {
-            app-id = "Matplotlib";
+            app-id = "^(kitty|zellij-steward)$";
+            is-focused = false;
           }
         ];
-        open-floating = true;
+
+        opacity = 0.85;
+
+        shadow = {
+          enable = true;
+          draw-behind-window = true;
+          softness = 0;
+          spread = 0;
+          offset = {
+            x = 0;
+            y = 0;
+          };
+          color = "#00000050";
+          inactive-color = "#00000050";
+        };
       }
+
     ];
     layer-rules = [
       {

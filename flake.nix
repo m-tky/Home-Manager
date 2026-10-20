@@ -3,10 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Zotero still requires ESR 140; current nixpkgs supplies incompatible ESR 153.
+    # Remove this pin once Zotero supports the Firefox ESR used by nixpkgs.
+    nixpkgs-zotero.url = "github:NixOS/nixpkgs/b6c98e9e6633ee64753b594ff4a5febf0367fc00";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    meetily.url = "github:m-tky/meetily";
+
+    kitty-soft-fork.url = "github:m-tky/kitty";
 
     xremap-flake.url = "github:xremap/nix-flake";
 
@@ -25,10 +32,10 @@
       url = "github:m-tky/skk-mozc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    wayland-conky = {
-      url = "github:m-tky/alarme-conky";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # wayland-conky = {
+    #   url = "github:m-tky/alarme-conky";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -66,6 +66,7 @@ in
     heroic
     zoom-us
     myObsidian
+    inputs.nixpkgs-zotero.legacyPackages.${pkgs.system}.zotero
     anki-bin
     spotify
     slack
