@@ -265,11 +265,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1792490275,
-        "narHash": "sha256-uZw9WOA8bY0EXXpWHTokfxFnkweUgB94C8euH6v0Qyw=",
+        "lastModified": 1792765179,
+        "narHash": "sha256-rsvgHbrXMCySscaURfa51BIkIDOduotN5JmAeYvxMWQ=",
         "owner": "m-tky",
         "repo": "meetily",
-        "rev": "252cf6fae69c6073082aef4887dc095f8a741f4c",
+        "rev": "6d478c412ad4932e57704dbd3962729f638c2890",
         "type": "github"
       },
       "original": {
