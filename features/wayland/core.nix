@@ -4,19 +4,24 @@
   inputs,
   ...
 }:
-# let
-#   # python3 を PATH に含めたカスタムパッケージを作成
-#   wrappedNoctalia = pkgs.symlinkJoin {
-#     name = "noctalia-shell-wrapped";
-#     # inputs.noctalia からビルドされた元のパッケージを指定
-#     paths = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-#     buildInputs = [ pkgs.makeWrapper ];
-#     postBuild = ''
-#       wrapProgram $out/bin/noctalia-shell \
-#         --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.python3 ]}
-#     '';
-#   };
-# in
+let
+  # Read user input through stdin, never through an interpolated shell command.
+  webSearch = pkgs.writeShellScript "noctalia-web-search" ''
+    query=$(noctalia dmenu --prompt "Search the Web:" </dev/null) || exit 0
+    [ -n "$query" ] || exit 0
+    encoded=$(printf '%s' "$query" | ${pkgs.python3}/bin/python3 -c \
+      'import sys, urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')
+    exec ${pkgs.xdg-utils}/bin/xdg-open "https://www.google.com/search?q=$encoded"
+  '';
+  findFile = pkgs.writeShellScript "noctalia-find-file" ''
+    exec ${pkgs.kitty}/bin/kitty --class FindFile -e \
+      ${pkgs.zsh}/bin/zsh ${./scripts/findfile.sh} "$HOME"
+  '';
+  findContent = pkgs.writeShellScript "noctalia-find-content" ''
+    exec ${pkgs.kitty}/bin/kitty --class FindContent -e \
+      ${pkgs.zsh}/bin/zsh ${./scripts/findcontent.sh} "$HOME"
+  '';
+in
 
 {
   imports = [
@@ -313,6 +318,70 @@ return config";
   programs.noctalia = {
     enable = true;
     systemd.enable = true;
+    settings = {
+      theme = {
+        mode = "dark";
+        source = "custom";
+        custom_palette = "Nightfox";
+      };
+      shell.launcher = {
+        layout = "full";
+        width = 760;
+        search_position = "top";
+        app_grid = false;
+        provider_prefix = "/";
+        providers.calculator.global = true;
+      };
+    };
+  };
+  # Desktop entries make existing tools searchable without an extra menu/plugin.
+  xdg.desktopEntries = {
+    noctalia-web-search = {
+      name = "Web Search";
+      settings."Name[ja]" = "Web検索";
+      comment = "Search Google using a Noctalia prompt";
+      exec = "${webSearch}";
+      icon = "system-search";
+      categories = [ "Utility" ];
+      settings.Keywords = "web;google;search;ブラウザ;検索;";
+    };
+    noctalia-find-file = {
+      name = "Find File by Name";
+      comment = "Search filenames in your home directory";
+      exec = "${findFile}";
+      icon = "folder-saved-search";
+      categories = [ "Utility" ];
+      settings.Keywords = "file;filename;find;ファイル;検索;";
+    };
+    noctalia-find-content = {
+      name = "Find File by Content";
+      comment = "Search file contents with ripgrep and fzf";
+      exec = "${findContent}";
+      icon = "text-x-generic";
+      categories = [ "Utility" ];
+      settings.Keywords = "content;grep;ripgrep;ファイル;全文;検索;";
+    };
+  };
+  # Nightfox is not a built-in Noctalia palette.
+  xdg.configFile."noctalia/palettes/Nightfox.json".text = builtins.toJSON {
+    dark = {
+      mPrimary = "#719cd6";
+      mOnPrimary = "#192330";
+      mSecondary = "#81b29a";
+      mOnSecondary = "#192330";
+      mTertiary = "#9d79d6";
+      mOnTertiary = "#192330";
+      mError = "#c94f6d";
+      mOnError = "#192330";
+      mSurface = "#192330";
+      mOnSurface = "#cdcecf";
+      mSurfaceVariant = "#212e3f";
+      mOnSurfaceVariant = "#aeafb0";
+      mOutline = "#39506d";
+      mShadow = "#131a24";
+      mHover = "#2b3b51";
+      mOnHover = "#cdcecf";
+    };
   };
   xdg.portal = {
     enable = true;

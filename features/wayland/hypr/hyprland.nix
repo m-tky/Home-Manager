@@ -34,7 +34,7 @@
       # 変数定義
       "$terminal" = "kitty";
       "$fileManager" = "thunar";
-      "$menu" = "fuzzel";
+      "$menu" = "noctalia msg panel-toggle launcher";
       "$browser" = "firefox";
       "$mainMod" = "SUPER";
 

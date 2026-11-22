@@ -26,10 +26,28 @@ in
 {
   # Use the NixOS-provided package for config validation; HM does not install it.
   programs.niri.package = pkgs.niri;
-  programs.hyprlock.enable = true;
-  services = {
-    hypridle.enable = true;
-  };
+
+  # Validate the Nix-managed settings before adding the mutable monitor include.
+  # The included file lives outside the store and is managed by nwg-displays.
+  xdg.configFile.niri-config.source = lib.mkForce (
+    pkgs.runCommand "niri-config-with-monitors.kdl"
+      {
+        configText = config.programs.niri.finalConfig;
+        passAsFile = [ "configText" ];
+      }
+      ''
+        ${lib.getExe config.programs.niri.package} validate -c "$configTextPath"
+        cp "$configTextPath" "$out"
+        printf '\ninclude "monitor.kdl"\n' >> "$out"
+      ''
+  );
+
+  home.activation.niriMonitorConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p ${lib.escapeShellArg "${config.xdg.configHome}/niri"}
+    if [ ! -e ${lib.escapeShellArg "${config.xdg.configHome}/niri/monitor.kdl"} ]; then
+      run touch ${lib.escapeShellArg "${config.xdg.configHome}/niri/monitor.kdl"}
+    fi
+  '';
   home.file = {
     ".local/bin/translate.sh".source = ../scripts/translate.sh;
     ".local/bin/select_language.sh".source = ../scripts/select_language.sh;
@@ -127,19 +145,7 @@ in
     # 各種設定
     overview.zoom = 0.3;
     spawn-at-startup = [
-      {
-        command = [
-          "swayidle"
-          "-w"
-          "timeout"
-          "300"
-          "niri msg action power-off-monitors"
-          "resume"
-          "niri msg action power-on-monitors"
-        ];
-      }
       { command = [ "udiskie" ]; }
-      { command = [ "hypridle" ]; }
       {
         command = [
           "nm-applet"
@@ -249,16 +255,29 @@ in
     binds = {
       "Super+Shift+Slash".action.show-hotkey-overlay = [ ];
 
+      "Mod+T".hotkey-overlay.title = "Open terminal";
       "Mod+T".action.spawn = "kitty";
+      "Mod+S".hotkey-overlay.title = "Open or focus Steward";
       "Mod+S".action.spawn = lib.getExe focusOrOpenSteward;
+      "Mod+D".hotkey-overlay.title = "Open Noctalia launcher";
       "Mod+D".action.spawn = [
         "noctalia"
         "msg"
         "panel-toggle"
         "launcher"
       ];
-      "Super+Alt+L".action.spawn = "hyprlock";
+      "Super+Alt+Escape".hotkey-overlay.title = "Lock screen (Noctalia)";
+      "Super+Alt+Escape".action.spawn = [
+        (lib.getExe config.programs.noctalia.package)
+        "msg"
+        "session"
+        "lock"
+      ];
+      "Mod+P".hotkey-overlay.title = "Configure displays";
+      "Mod+P".action.spawn = lib.getExe pkgs.nwg-displays;
+      "Mod+B".hotkey-overlay.title = "Open browser";
       "Mod+B".action.spawn = "firefox";
+      "Mod+Ctrl+Space".hotkey-overlay.title = "Open Noctalia launcher";
       "Mod+Ctrl+Space".action.spawn = [
         "sh"
         "-c"
@@ -334,15 +353,23 @@ in
       "Mod+Ctrl+Home".action.move-column-to-first = [ ];
       "Mod+Ctrl+End".action.move-column-to-last = [ ];
 
+      "Mod+Shift+H".hotkey-overlay.title = "Focus monitor left";
       "Mod+Shift+H".action.focus-monitor-left = [ ];
+      "Mod+Shift+J".hotkey-overlay.title = "Focus monitor down";
       "Mod+Shift+J".action.focus-monitor-down = [ ];
+      "Mod+Shift+K".hotkey-overlay.title = "Focus monitor up";
       "Mod+Shift+K".action.focus-monitor-up = [ ];
+      "Mod+Shift+L".hotkey-overlay.title = "Focus monitor right";
       "Mod+Shift+L".action.focus-monitor-right = [ ];
 
-      "Mod+Shift+Ctrl+H".action.move-column-to-monitor-left = [ ];
-      "Mod+Shift+Ctrl+J".action.move-column-to-monitor-down = [ ];
-      "Mod+Shift+Ctrl+K".action.move-column-to-monitor-up = [ ];
-      "Mod+Shift+Ctrl+L".action.move-column-to-monitor-right = [ ];
+      "Mod+Alt+H".hotkey-overlay.title = "Move window to monitor left";
+      "Mod+Alt+H".action.move-window-to-monitor-left = [ ];
+      "Mod+Alt+J".hotkey-overlay.title = "Move window to monitor down";
+      "Mod+Alt+J".action.move-window-to-monitor-down = [ ];
+      "Mod+Alt+K".hotkey-overlay.title = "Move window to monitor up";
+      "Mod+Alt+K".action.move-window-to-monitor-up = [ ];
+      "Mod+Alt+L".hotkey-overlay.title = "Move window to monitor right";
+      "Mod+Alt+L".action.move-window-to-monitor-right = [ ];
 
       "Mod+U".action.focus-workspace-down = [ ];
       "Mod+I".action.focus-workspace-up = [ ];

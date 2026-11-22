@@ -17,4 +17,5 @@ IFS=: read -rA selected < <(
     --layout=reverse \
     --preview-window 'right,70%,border-left,+{2}/3'
 )
-[ -n "${selected[0]}" ] && $EDITOR "${selected[0]}" "+${selected[1]}"
+# Zsh arrays are 1-indexed: path, line, column, matched text.
+[ -n "${selected[1]}" ] && $EDITOR "${selected[1]}" "+${selected[2]}"

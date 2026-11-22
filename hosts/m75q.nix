@@ -36,7 +36,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    openscad
+    freecad
     ryubing
     arduino-ide
     customJan

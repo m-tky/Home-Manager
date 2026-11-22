@@ -55,7 +55,7 @@ in
     };
   };
   home.packages = with pkgs; [
-    inputs.hermes-agent.packages.${pkgs.system}.desktop
+    inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.desktop
     element-desktop
     koreader
     czkawka
@@ -66,7 +66,7 @@ in
     heroic
     zoom-us
     myObsidian
-    inputs.nixpkgs-zotero.legacyPackages.${pkgs.system}.zotero
+    inputs.nixpkgs-zotero.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zotero
     anki-bin
     spotify
     slack
@@ -92,16 +92,6 @@ in
     xournalpp
     scrcpy
 
-    (pkgs.makeDesktopItem {
-      name = "Messenger";
-      desktopName = "Messenger";
-      exec = "${pkgs.google-chrome}/bin/google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform-hint=wayland --wayland-text-input-version=3 --enable-wayland-ime --app=https://messenger.com";
-      icon = "fbmessenger";
-      categories = [
-        "Network"
-        "InstantMessaging"
-      ];
-    })
   ];
   # Preserve GUI-managed MIME defaults; register only SMB links.
   # Thunar: Ctrl+L, then smb://server/share (GVfs is enabled by NixOS).
