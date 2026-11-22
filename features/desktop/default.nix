@@ -9,7 +9,11 @@
 let
   myObsidian = pkgs.symlinkJoin {
     name = "obsidian-with-flags";
-    paths = [ pkgs.obsidian ];
+    paths = [
+      (pkgs.obsidian.override {
+        commandLineArgs = "--password-store=gnome-libsecret";
+      })
+    ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/obsidian \
@@ -56,7 +60,9 @@ in
   };
   home.packages = with pkgs; [
     inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.desktop
-    element-desktop
+    (element-desktop.override {
+      commandLineArgs = "--password-store=gnome-libsecret";
+    })
     koreader
     czkawka
     baobab

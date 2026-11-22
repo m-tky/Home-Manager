@@ -32,6 +32,7 @@ in
   services = {
     xremap = {
       enable = true;
+      watch = true;
       config.modmap = [
         {
           name = "Global";
